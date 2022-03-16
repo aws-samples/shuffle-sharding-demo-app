@@ -42,15 +42,15 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.vpc = new aws_ec2.Vpc(this, 'vpc');
 
-    this.createALB(); // New ALB and https listener
+    this.createALB();
 
-    const instances: aws_ec2.Instance[] = this.createWorkers(8); // Array of EC2 Instances
+    const instances: aws_ec2.Instance[] = this.createWorkers(8);
 
     const numberOfGroups = this.createGroups(instances, {
       sharding: { enabled: true, shuffle: true },
     });
 
-    this.createDist(numberOfGroups); // New CloudFront Distribution with CloudFront Function to redirect clients to random group/shard
+    this.createDist(numberOfGroups);
   }
 
   createDist(number: number) {
