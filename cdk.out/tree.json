@@ -1,0 +1,4379 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.88"
+        }
+      },
+      "ShuffleShardingDemoSummit2022": {
+        "id": "ShuffleShardingDemoSummit2022",
+        "path": "ShuffleShardingDemoSummit2022",
+        "children": {
+          "vpc": {
+            "id": "vpc",
+            "path": "ShuffleShardingDemoSummit2022/vpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/vpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.14.0"
+                }
+              },
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.0.0/18",
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPublicSubnet1RouteTable48A2DF9B"
+                        },
+                        "subnetId": {
+                          "Ref": "vpcPublicSubnet1Subnet2E65531E"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPublicSubnet1RouteTable48A2DF9B"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "vpcIGWE57CBDCA"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "vpcPublicSubnet1Subnet2E65531E"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "vpcPublicSubnet1EIPDA49DCBE",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.14.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.64.0/18",
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPublicSubnet2RouteTableEB40D4CB"
+                        },
+                        "subnetId": {
+                          "Ref": "vpcPublicSubnet2Subnet009B674F"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPublicSubnet2RouteTableEB40D4CB"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "vpcIGWE57CBDCA"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "vpcPublicSubnet2Subnet009B674F"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "vpcPublicSubnet2EIP9B3743B1",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.14.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.128.0/18",
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            0,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPrivateSubnet1RouteTableB41A48CC"
+                        },
+                        "subnetId": {
+                          "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPrivateSubnet1RouteTableB41A48CC"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "vpcPublicSubnet1NATGateway9C16659E"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.14.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.192.0/18",
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "availabilityZone": {
+                          "Fn::Select": [
+                            1,
+                            {
+                              "Fn::GetAZs": ""
+                            }
+                          ]
+                        },
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPrivateSubnet2RouteTable7280F23E"
+                        },
+                        "subnetId": {
+                          "Ref": "vpcPrivateSubnet2Subnet7031C2BA"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPrivateSubnet2RouteTable7280F23E"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "vpcPublicSubnet2NATGateway9B8AE11A"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.14.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "ShuffleShardingDemoSummit2022/vpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/vpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.14.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "ShuffleShardingDemoSummit2022/vpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "vpcIGWE57CBDCA"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.14.0"
+            }
+          },
+          "AppLoadBalancer": {
+            "id": "AppLoadBalancer",
+            "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                  "aws:cdk:cloudformation:props": {
+                    "loadBalancerAttributes": [
+                      {
+                        "key": "deletion_protection.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "scheme": "internet-facing",
+                    "securityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "AppLoadBalancerSecurityGroupC44CD584",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnets": [
+                      {
+                        "Ref": "vpcPublicSubnet1Subnet2E65531E"
+                      },
+                      {
+                        "Ref": "vpcPublicSubnet2Subnet009B674F"
+                      }
+                    ],
+                    "type": "application"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
+                  "version": "2.14.0"
+                }
+              },
+              "SecurityGroup": {
+                "id": "SecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "Automatically created Security Group for ELB ShuffleShardingDemoSummit2022AppLoadBalancer55EF14E6",
+                        "securityGroupIngress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 80,
+                            "toPort": 80,
+                            "description": "Allow from anyone on port 80"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "to ShuffleShardingDemoSummit2022Worker1InstanceSecurityGroup8148D3A9:80": {
+                    "id": "to ShuffleShardingDemoSummit2022Worker1InstanceSecurityGroup8148D3A9:80",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker1InstanceSecurityGroup8148D3A9:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "to ShuffleShardingDemoSummit2022Worker1InstanceSecurityGroup8148D3A9:80",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "Worker1InstanceSecurityGroup59622567",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 80,
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "to ShuffleShardingDemoSummit2022Worker2InstanceSecurityGroup1B729959:80": {
+                    "id": "to ShuffleShardingDemoSummit2022Worker2InstanceSecurityGroup1B729959:80",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker2InstanceSecurityGroup1B729959:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "to ShuffleShardingDemoSummit2022Worker2InstanceSecurityGroup1B729959:80",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "Worker2InstanceSecurityGroup23BD1914",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 80,
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "to ShuffleShardingDemoSummit2022Worker3InstanceSecurityGroup5AB6ED35:80": {
+                    "id": "to ShuffleShardingDemoSummit2022Worker3InstanceSecurityGroup5AB6ED35:80",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker3InstanceSecurityGroup5AB6ED35:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "to ShuffleShardingDemoSummit2022Worker3InstanceSecurityGroup5AB6ED35:80",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "Worker3InstanceSecurityGroup8D987E06",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 80,
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "to ShuffleShardingDemoSummit2022Worker4InstanceSecurityGroup299E234E:80": {
+                    "id": "to ShuffleShardingDemoSummit2022Worker4InstanceSecurityGroup299E234E:80",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker4InstanceSecurityGroup299E234E:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "to ShuffleShardingDemoSummit2022Worker4InstanceSecurityGroup299E234E:80",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "Worker4InstanceSecurityGroupAB185FF0",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 80,
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "to ShuffleShardingDemoSummit2022Worker5InstanceSecurityGroupF3FF94B5:80": {
+                    "id": "to ShuffleShardingDemoSummit2022Worker5InstanceSecurityGroupF3FF94B5:80",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker5InstanceSecurityGroupF3FF94B5:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "to ShuffleShardingDemoSummit2022Worker5InstanceSecurityGroupF3FF94B5:80",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "Worker5InstanceSecurityGroup75CD5E34",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 80,
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "to ShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA:80": {
+                    "id": "to ShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA:80",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "to ShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA:80",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "Worker6InstanceSecurityGroup44BEAA0F",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 80,
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "AppMainListener": {
+                "id": "AppMainListener",
+                "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                      "aws:cdk:cloudformation:props": {
+                        "defaultActions": [
+                          {
+                            "type": "fixed-response",
+                            "fixedResponseConfig": {
+                              "statusCode": "400",
+                              "messageBody": "Invalid Request. Please include customer name in the request."
+                            }
+                          }
+                        ],
+                        "loadBalancerArn": {
+                          "Ref": "AppLoadBalancer0268F95E"
+                        },
+                        "port": 80,
+                        "protocol": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker1-Worker2Rule": {
+                    "id": "Worker1-Worker2Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker2Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker2Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker1Worker204A96BDA"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "1"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 1
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker1-Worker3Rule": {
+                    "id": "Worker1-Worker3Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker3Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker3Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker1Worker3FEF5AB85"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "2"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 2
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker1-Worker4Rule": {
+                    "id": "Worker1-Worker4Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker4Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker4Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker1Worker4E3E6D1E8"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "3"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 3
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker1-Worker5Rule": {
+                    "id": "Worker1-Worker5Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker5Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker5Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker1Worker5ED99ED05"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "4"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 4
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker1-Worker6Rule": {
+                    "id": "Worker1-Worker6Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker6Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker6Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker1Worker6DD3E9B3E"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "5"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 5
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker2-Worker3Rule": {
+                    "id": "Worker2-Worker3Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker3Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker3Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker2Worker3B75B2CCD"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "6"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 6
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker2-Worker4Rule": {
+                    "id": "Worker2-Worker4Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker4Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker4Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker2Worker48BEA5717"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "7"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 7
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker2-Worker5Rule": {
+                    "id": "Worker2-Worker5Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker5Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker5Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker2Worker5AF7004C9"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "8"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 8
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker2-Worker6Rule": {
+                    "id": "Worker2-Worker6Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker6Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker6Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker2Worker619605E89"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "9"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 9
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker3-Worker4Rule": {
+                    "id": "Worker3-Worker4Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker4Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker4Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker3Worker4B1041CD7"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "10"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 10
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker3-Worker5Rule": {
+                    "id": "Worker3-Worker5Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker5Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker5Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker3Worker50D930F13"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "11"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 11
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker3-Worker6Rule": {
+                    "id": "Worker3-Worker6Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker6Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker6Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker3Worker641AC8F3F"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "12"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 12
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker4-Worker5Rule": {
+                    "id": "Worker4-Worker5Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker5Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker5Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker4Worker587924F2A"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "13"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 13
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker4-Worker6Rule": {
+                    "id": "Worker4-Worker6Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker6Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker6Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker4Worker63E31F49B"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "14"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 14
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Worker5-Worker6Rule": {
+                    "id": "Worker5-Worker6Rule",
+                    "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker6Rule",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker6Rule/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+                          "aws:cdk:cloudformation:props": {
+                            "actions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "Worker5Worker641006A7B"
+                                }
+                              }
+                            ],
+                            "conditions": [
+                              {
+                                "field": "query-string",
+                                "queryStringConfig": {
+                                  "values": [
+                                    {
+                                      "key": "name",
+                                      "value": "15"
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "listenerArn": {
+                              "Ref": "AppLoadBalancerAppMainListener100632E2"
+                            },
+                            "priority": 15
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1": {
+            "id": "Worker1",
+            "path": "ShuffleShardingDemoSummit2022/Worker1",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/Worker1/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker1/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "ShuffleShardingDemoSummit2022/Worker1/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": {
+                    "id": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "path": "ShuffleShardingDemoSummit2022/Worker1/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "Worker1InstanceSecurityGroup59622567",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "ShuffleShardingDemoSummit2022/Worker1/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker1/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "Worker1readTagsDFE7409E"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "ShuffleShardingDemoSummit2022/Worker1/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "Worker1InstanceRoleC8F05946"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/sda1",
+                        "ebs": {
+                          "volumeSize": 50,
+                          "volumeType": "gp3"
+                        }
+                      }
+                    ],
+                    "iamInstanceProfile": {
+                      "Ref": "Worker1InstanceProfileED7A1457"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t3.medium",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "Worker1InstanceSecurityGroup59622567",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/Worker1"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.14.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "path": "ShuffleShardingDemoSummit2022/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.14.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "path": "ShuffleShardingDemoSummit2022/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1readTags": {
+            "id": "Worker1readTags",
+            "path": "ShuffleShardingDemoSummit2022/Worker1readTags",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1readTags/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "",
+                    "path": "/"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "Worker2": {
+            "id": "Worker2",
+            "path": "ShuffleShardingDemoSummit2022/Worker2",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/Worker2/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker2/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "ShuffleShardingDemoSummit2022/Worker2/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": {
+                    "id": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "path": "ShuffleShardingDemoSummit2022/Worker2/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "Worker2InstanceSecurityGroup23BD1914",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "ShuffleShardingDemoSummit2022/Worker2/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker2/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "Worker2readTags643E321C"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "ShuffleShardingDemoSummit2022/Worker2/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "Worker2InstanceRole4CE57811"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker2/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/sda1",
+                        "ebs": {
+                          "volumeSize": 50,
+                          "volumeType": "gp3"
+                        }
+                      }
+                    ],
+                    "iamInstanceProfile": {
+                      "Ref": "Worker2InstanceProfile7D1FBEB1"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t3.medium",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "Worker2InstanceSecurityGroup23BD1914",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/Worker2"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.14.0"
+            }
+          },
+          "Worker2readTags": {
+            "id": "Worker2readTags",
+            "path": "ShuffleShardingDemoSummit2022/Worker2readTags",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker2readTags/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "",
+                    "path": "/"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "Worker3": {
+            "id": "Worker3",
+            "path": "ShuffleShardingDemoSummit2022/Worker3",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/Worker3/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker3/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "ShuffleShardingDemoSummit2022/Worker3/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker3"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": {
+                    "id": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "path": "ShuffleShardingDemoSummit2022/Worker3/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "Worker3InstanceSecurityGroup8D987E06",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "ShuffleShardingDemoSummit2022/Worker3/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker3/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "Worker3readTags6E2C7F22"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "ShuffleShardingDemoSummit2022/Worker3/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "Worker3InstanceRoleE786E787"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker3/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/sda1",
+                        "ebs": {
+                          "volumeSize": 50,
+                          "volumeType": "gp3"
+                        }
+                      }
+                    ],
+                    "iamInstanceProfile": {
+                      "Ref": "Worker3InstanceProfile302920F9"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t3.medium",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "Worker3InstanceSecurityGroup8D987E06",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/Worker3"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.14.0"
+            }
+          },
+          "Worker3readTags": {
+            "id": "Worker3readTags",
+            "path": "ShuffleShardingDemoSummit2022/Worker3readTags",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker3readTags/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "",
+                    "path": "/"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "Worker4": {
+            "id": "Worker4",
+            "path": "ShuffleShardingDemoSummit2022/Worker4",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/Worker4/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker4/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "ShuffleShardingDemoSummit2022/Worker4/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker4"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": {
+                    "id": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "path": "ShuffleShardingDemoSummit2022/Worker4/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "Worker4InstanceSecurityGroupAB185FF0",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "ShuffleShardingDemoSummit2022/Worker4/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker4/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "Worker4readTags9AD8236D"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker4"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "ShuffleShardingDemoSummit2022/Worker4/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "Worker4InstanceRoleA8AACB09"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker4/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/sda1",
+                        "ebs": {
+                          "volumeSize": 50,
+                          "volumeType": "gp3"
+                        }
+                      }
+                    ],
+                    "iamInstanceProfile": {
+                      "Ref": "Worker4InstanceProfileEAEB7A34"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t3.medium",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "Worker4InstanceSecurityGroupAB185FF0",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/Worker4"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.14.0"
+            }
+          },
+          "Worker4readTags": {
+            "id": "Worker4readTags",
+            "path": "ShuffleShardingDemoSummit2022/Worker4readTags",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker4readTags/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "",
+                    "path": "/"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "Worker5": {
+            "id": "Worker5",
+            "path": "ShuffleShardingDemoSummit2022/Worker5",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker5"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": {
+                    "id": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "path": "ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "Worker5InstanceSecurityGroup75CD5E34",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "ShuffleShardingDemoSummit2022/Worker5/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker5/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "Worker5readTags4B6556EF"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker5"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "ShuffleShardingDemoSummit2022/Worker5/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "Worker5InstanceRoleF26F9FDC"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker5/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/sda1",
+                        "ebs": {
+                          "volumeSize": 50,
+                          "volumeType": "gp3"
+                        }
+                      }
+                    ],
+                    "iamInstanceProfile": {
+                      "Ref": "Worker5InstanceProfile3F156510"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t3.medium",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "Worker5InstanceSecurityGroup75CD5E34",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/Worker5"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.14.0"
+            }
+          },
+          "Worker5readTags": {
+            "id": "Worker5readTags",
+            "path": "ShuffleShardingDemoSummit2022/Worker5readTags",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker5readTags/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "",
+                    "path": "/"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "Worker6": {
+            "id": "Worker6",
+            "path": "ShuffleShardingDemoSummit2022/Worker6",
+            "children": {
+              "InstanceSecurityGroup": {
+                "id": "InstanceSecurityGroup",
+                "path": "ShuffleShardingDemoSummit2022/Worker6/InstanceSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker6/InstanceSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "ShuffleShardingDemoSummit2022/Worker6/InstanceSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker6"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": {
+                    "id": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "path": "ShuffleShardingDemoSummit2022/Worker6/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "Worker6InstanceSecurityGroup44BEAA0F",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "AppLoadBalancerSecurityGroupC44CD584",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "ShuffleShardingDemoSummit2022/Worker6/InstanceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ShuffleShardingDemoSummit2022/Worker6/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "ec2.",
+                                      {
+                                        "Ref": "AWS::URLSuffix"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "Worker6readTags043E8CE4"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/Worker6"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "ShuffleShardingDemoSummit2022/Worker6/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "Worker6InstanceRole078C756F"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker6/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": {
+                      "Fn::Select": [
+                        0,
+                        {
+                          "Fn::GetAZs": ""
+                        }
+                      ]
+                    },
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/sda1",
+                        "ebs": {
+                          "volumeSize": 50,
+                          "volumeType": "gp3"
+                        }
+                      }
+                    ],
+                    "iamInstanceProfile": {
+                      "Ref": "Worker6InstanceProfile9140A7D6"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t3.medium",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "Worker6InstanceSecurityGroup44BEAA0F",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": {
+                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                    },
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "ShuffleShardingDemoSummit2022/Worker6"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.14.0"
+            }
+          },
+          "Worker6readTags": {
+            "id": "Worker6readTags",
+            "path": "ShuffleShardingDemoSummit2022/Worker6readTags",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker6readTags/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "",
+                    "path": "/"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1-Worker2": {
+            "id": "Worker1-Worker2",
+            "path": "ShuffleShardingDemoSummit2022/Worker1-Worker2",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1-Worker2/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker1C6282B125756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker1-Worker2": {
+            "id": "LoadBalancerEndpoint-Worker1-Worker2",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker2",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1-Worker3": {
+            "id": "Worker1-Worker3",
+            "path": "ShuffleShardingDemoSummit2022/Worker1-Worker3",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1-Worker3/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker1C6282B125756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker1-Worker3": {
+            "id": "LoadBalancerEndpoint-Worker1-Worker3",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker3",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1-Worker4": {
+            "id": "Worker1-Worker4",
+            "path": "ShuffleShardingDemoSummit2022/Worker1-Worker4",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1-Worker4/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker1C6282B125756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker1-Worker4": {
+            "id": "LoadBalancerEndpoint-Worker1-Worker4",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker4",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1-Worker5": {
+            "id": "Worker1-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/Worker1-Worker5",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1-Worker5/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker1C6282B125756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker1-Worker5": {
+            "id": "LoadBalancerEndpoint-Worker1-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker5",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker1-Worker6": {
+            "id": "Worker1-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/Worker1-Worker6",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker1-Worker6/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker1C6282B125756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker1-Worker6": {
+            "id": "LoadBalancerEndpoint-Worker1-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker6",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker2-Worker3": {
+            "id": "Worker2-Worker3",
+            "path": "ShuffleShardingDemoSummit2022/Worker2-Worker3",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker2-Worker3/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker2-Worker3": {
+            "id": "LoadBalancerEndpoint-Worker2-Worker3",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker3",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker2-Worker4": {
+            "id": "Worker2-Worker4",
+            "path": "ShuffleShardingDemoSummit2022/Worker2-Worker4",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker2-Worker4/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker2-Worker4": {
+            "id": "LoadBalancerEndpoint-Worker2-Worker4",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker4",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker2-Worker5": {
+            "id": "Worker2-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/Worker2-Worker5",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker2-Worker5/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker2-Worker5": {
+            "id": "LoadBalancerEndpoint-Worker2-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker5",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker2-Worker6": {
+            "id": "Worker2-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/Worker2-Worker6",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker2-Worker6/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker2-Worker6": {
+            "id": "LoadBalancerEndpoint-Worker2-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker6",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker3-Worker4": {
+            "id": "Worker3-Worker4",
+            "path": "ShuffleShardingDemoSummit2022/Worker3-Worker4",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker3-Worker4/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker3-Worker4": {
+            "id": "LoadBalancerEndpoint-Worker3-Worker4",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker4",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker3-Worker5": {
+            "id": "Worker3-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/Worker3-Worker5",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker3-Worker5/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker3-Worker5": {
+            "id": "LoadBalancerEndpoint-Worker3-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker5",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker3-Worker6": {
+            "id": "Worker3-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/Worker3-Worker6",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker3-Worker6/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker3-Worker6": {
+            "id": "LoadBalancerEndpoint-Worker3-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker6",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker4-Worker5": {
+            "id": "Worker4-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/Worker4-Worker5",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker4-Worker5/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker4-Worker5": {
+            "id": "LoadBalancerEndpoint-Worker4-Worker5",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker5",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker4-Worker6": {
+            "id": "Worker4-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/Worker4-Worker6",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker4-Worker6/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker4-Worker6": {
+            "id": "LoadBalancerEndpoint-Worker4-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker6",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "Worker5-Worker6": {
+            "id": "Worker5-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/Worker5-Worker6",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/Worker5-Worker6/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckEnabled": true,
+                    "healthCheckIntervalSeconds": 5,
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "healthCheckTimeoutSeconds": 2,
+                    "healthyThresholdCount": 2,
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targets": [
+                      {
+                        "id": {
+                          "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      },
+                      {
+                        "id": {
+                          "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+                        },
+                        "port": 80
+                      }
+                    ],
+                    "targetType": "instance",
+                    "unhealthyThresholdCount": 2,
+                    "vpcId": {
+                      "Ref": "vpcA2121C38"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.14.0"
+            }
+          },
+          "LoadBalancerEndpoint-Worker5-Worker6": {
+            "id": "LoadBalancerEndpoint-Worker5-Worker6",
+            "path": "ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker5-Worker6",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "redirectLogic": {
+            "id": "redirectLogic",
+            "path": "ShuffleShardingDemoSummit2022/redirectLogic",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/redirectLogic/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "name": "redirectToRandomShard",
+                    "autoPublish": true,
+                    "functionCode": "function handler(event) {\n        var request = event.request;\n        var querystring = request.querystring;\n        if (!querystring['name']){\n          var newUri;\n          var randomkey = getRndInteger(1, 15);\n          newUri = '/?name=' + randomkey;\n          var response = {\n            statusCode: 302,\n            statusDescription: 'Found',\n            headers: {\n              location: { value: newUri },\n            },\n          };\n          return response;\n        }\n        return request;\n      }\n\n      function getRndInteger(min, max) {\n        min = Math.ceil(min); // rounds a number up to the next largest integer\n        max = Math.floor(max); // returns the largest integer less than or equal to a given number\n        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive\n      }\n",
+                    "functionConfig": {
+                      "comment": "Function to redirect all incoming requests to /?name= + Random Number (i.e: /?name=1)",
+                      "runtime": "cloudfront-js-1.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CfnFunction",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudfront.Function",
+              "version": "2.14.0"
+            }
+          },
+          "policy": {
+            "id": "policy",
+            "path": "ShuffleShardingDemoSummit2022/policy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/policy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::OriginRequestPolicy",
+                  "aws:cdk:cloudformation:props": {
+                    "originRequestPolicyConfig": {
+                      "name": "ShuffleShardingDemoSummit2022policy61EA8E81",
+                      "cookiesConfig": {
+                        "cookieBehavior": "none"
+                      },
+                      "headersConfig": {
+                        "headerBehavior": "none"
+                      },
+                      "queryStringsConfig": {
+                        "queryStringBehavior": "all"
+                      }
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CfnOriginRequestPolicy",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudfront.OriginRequestPolicy",
+              "version": "2.14.0"
+            }
+          },
+          "CloudFront": {
+            "id": "CloudFront",
+            "path": "ShuffleShardingDemoSummit2022/CloudFront",
+            "children": {
+              "Origin1": {
+                "id": "Origin1",
+                "path": "ShuffleShardingDemoSummit2022/CloudFront/Origin1",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.88"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ShuffleShardingDemoSummit2022/CloudFront/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                  "aws:cdk:cloudformation:props": {
+                    "distributionConfig": {
+                      "enabled": true,
+                      "origins": [
+                        {
+                          "domainName": {
+                            "Fn::GetAtt": [
+                              "AppLoadBalancer0268F95E",
+                              "DNSName"
+                            ]
+                          },
+                          "id": "ShuffleShardingDemoSummit2022CloudFrontOrigin1C1A871C7",
+                          "customOriginConfig": {
+                            "originSslProtocols": [
+                              "TLSv1.2"
+                            ],
+                            "originProtocolPolicy": "http-only"
+                          }
+                        }
+                      ],
+                      "defaultCacheBehavior": {
+                        "pathPattern": "*",
+                        "targetOriginId": "ShuffleShardingDemoSummit2022CloudFrontOrigin1C1A871C7",
+                        "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                        "compress": true,
+                        "originRequestPolicyId": {
+                          "Ref": "policyE16B4B70"
+                        },
+                        "viewerProtocolPolicy": "allow-all",
+                        "functionAssociations": [
+                          {
+                            "functionArn": {
+                              "Fn::GetAtt": [
+                                "redirectLogic8024F0FE",
+                                "FunctionARN"
+                              ]
+                            },
+                            "eventType": "viewer-request"
+                          }
+                        ]
+                      },
+                      "httpVersion": "http2",
+                      "ipv6Enabled": true
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.CfnDistribution",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+              "version": "2.14.0"
+            }
+          },
+          "CloudfrontURL": {
+            "id": "CloudfrontURL",
+            "path": "ShuffleShardingDemoSummit2022/CloudfrontURL",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "ShuffleShardingDemoSummit2022/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "ShuffleShardingDemoSummit2022/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.14.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "ShuffleShardingDemoSummit2022/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.88"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.14.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.14.0"
+    }
+  }
+}
