@@ -46,8 +46,9 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     const instances: aws_ec2.Instance[] = this.createWorkers(6); // Array of EC2 Instances
 
-    // const numberOfGroups = this.createGroups(instances);
-    const numberOfGroups = this.createGroups(instances, { shuffle: false });
+    const numberOfGroups = this.createGroups(instances, {
+      sharding: { enabled: false, shuffle: false },
+    });
 
     this.createDist(numberOfGroups); // New CloudFront Distribution with CloudFront Function to redirect clients to random group/shard
   }
@@ -182,11 +183,14 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     return instance;
   }
 
-  createGroups(instances: aws_ec2.Instance[], sharding?: { shuffle: boolean }) {
+  createGroups(
+    instances: aws_ec2.Instance[],
+    options: { sharding: { enabled: boolean; shuffle: boolean } }
+  ) {
     var numberOfGroups = 0;
-    if (sharding) {
+    if (options.sharding.enabled) {
       const shards: [aws_ec2.Instance, aws_ec2.Instance][] = [];
-      if (sharding.shuffle) {
+      if (options.sharding.shuffle) {
         for (let a = 0; a < instances.length; a++) {
           for (let b = a + 1; b < instances.length; b++) {
             numberOfGroups += 1;
