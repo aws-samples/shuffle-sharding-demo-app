@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/de40aaefc5a8b1d32ae215edb55d426c8b91b9c60132304f97fcefc33f2ca044.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/351a0ddac995d4e46ac2bfb62ced983da4cf4496063e27164f2fbc3b3b74cc46.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -237,82 +237,10 @@
             "data": "AppLoadBalancerAppMainListenerWorker1Worker2Rule60B444E5"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker3Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker3RuleFB3F93E8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker4Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker4RuleB76D6B7A"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker5Rule907034C9"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker6Rule137B1663"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker3Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker3Rule98EF9A72"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker4Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker4Rule7B936722"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker5Rule1333F564"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker6Rule15F2984F"
-          }
-        ],
         "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker4Rule/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AppLoadBalancerAppMainListenerWorker3Worker4Rule02549A56"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker3Worker5Rule2907BF1E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker3Worker6Rule33FA5A3E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker4Worker5Rule58935595"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker4Worker6Rule5639EABC"
           }
         ],
         "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker6Rule/Resource": [
@@ -555,102 +483,6 @@
             "data": "LoadBalancerEndpointWorker1Worker2"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker3FEF5AB85"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker3": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker3"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker4E3E6D1E8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker4": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker4"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker5ED99ED05"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker6DD3E9B3E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker3B75B2CCD"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker3": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker3"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker48BEA5717"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker4": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker4"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker5AF7004C9"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker619605E89"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker6"
-          }
-        ],
         "/ShuffleShardingDemoSummit2022/Worker3-Worker4/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -661,54 +493,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "LoadBalancerEndpointWorker3Worker4"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker3-Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker3Worker50D930F13"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker3Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker3-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker3Worker641AC8F3F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker3Worker6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker4-Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker4Worker587924F2A"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker4Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker4-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker4Worker63E31F49B"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker4Worker6"
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker5-Worker6/Resource": [

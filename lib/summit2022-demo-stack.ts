@@ -36,6 +36,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   listener: ApplicationListener;
   alb: ApplicationLoadBalancer;
   readonly vpc: aws_ec2.Vpc;
+  readonly stringParameter = 'number';
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -45,9 +46,10 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     const instances: aws_ec2.Instance[] = this.createWorkers(6); // Array of EC2 Instances
 
-    const numberOfShards = this.createSharding(instances, { shuffle: true });
+    // const numberOfGroups = this.createGroups(instances);
+    const numberOfGroups = this.createGroups(instances, { shuffle: false });
 
-    this.createDist(numberOfShards); // New CloudFront Distribution with CloudFront Function to redirect clients to random shard
+    this.createDist(numberOfGroups); // New CloudFront Distribution with CloudFront Function to redirect clients to random group/shard
   }
 
   createDist(number: number) {
@@ -56,10 +58,10 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         `function handler(event) {
         var request = event.request;
         var querystring = request.querystring;
-        if (!querystring['name']){
+        if (!querystring['${this.stringParameter}']){
           var newUri;
           var randomkey = getRndInteger(1, ${number});
-          newUri = '/?name=' + randomkey;
+          newUri = '/${this.stringParameter}=' + randomkey;
           var response = {
             statusCode: 302,
             statusDescription: 'Found',
@@ -80,8 +82,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 `
       ),
       functionName: 'redirectToRandomShard',
-      comment:
-        'Function to redirect all incoming requests to /?name= + Random Number (i.e: /?name=1)',
+      comment: `Function to redirect all incoming requests to /?${this.stringParameter}= + Random Number (i.e: /?${this.stringParameter}=1)`,
     });
 
     const cloudfront = new aws_cloudfront.Distribution(this, 'CloudFront', {
@@ -181,48 +182,64 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     return instance;
   }
 
-  createSharding(instances: aws_ec2.Instance[], options: { shuffle: boolean }) {
-    var combinationNumber = 0;
-    const shards: [aws_ec2.Instance, aws_ec2.Instance][] = [];
-    if (options.shuffle) {
-      for (let a = 0; a < instances.length; a++) {
-        for (let b = a + 1; b < instances.length; b++) {
-          combinationNumber += 1;
-          shards.push([instances[a], instances[b]]);
+  createGroups(instances: aws_ec2.Instance[], sharding?: { shuffle: boolean }) {
+    var numberOfGroups = 0;
+    if (sharding) {
+      const shards: [aws_ec2.Instance, aws_ec2.Instance][] = [];
+      if (sharding.shuffle) {
+        for (let a = 0; a < instances.length; a++) {
+          for (let b = a + 1; b < instances.length; b++) {
+            numberOfGroups += 1;
+            shards.push([instances[a], instances[b]]);
+            console.log(
+              `Combination number ${numberOfGroups} : ${instances[a].node.id} & ${instances[b].node.id}`
+            );
+          }
+        }
+      } else {
+        for (let a = 0; a < instances.length; a = a + 2) {
+          numberOfGroups += 1;
+          shards.push([instances[a], instances[a + 1]]);
           console.log(
-            `Combination number ${combinationNumber} : ${instances[a].node.id} & ${instances[b].node.id}`
+            `Combination number ${numberOfGroups} : ${instances[a].node.id} & ${
+              instances[a + 1].node.id
+            }`
           );
         }
       }
-    } else {
-      for (let a = 0; a < instances.length; a = a + 2) {
-        combinationNumber += 1;
-        shards.push([instances[a], instances[a + 1]]);
+      var shardNumber = 0;
+
+      shards.forEach((shard) => {
+        shardNumber += 1;
+        const shardName = `${shard[0].node.id}-${shard[1].node.id}`;
         console.log(
-          `Combination number ${combinationNumber} : ${
-            instances[a].node.id
-          } & ${instances[a + 1].node.id}`
+          `Adding shard: ${shardName} to ALB at /?${this.stringParameter}=${shardNumber}`
         );
-      }
+        const target = [
+          new InstanceTarget(shard[0], 80),
+          new InstanceTarget(shard[1], 80),
+        ];
+        this.addTargetsToALB(shardName, target, shardNumber);
+      });
+    } else {
+      instances.forEach((instance) => {
+        numberOfGroups += 1;
+        const shardName = `ec2-${instance.node.id}`;
+        console.log(
+          `Adding shard: ${shardName} to ALB at /?${this.stringParameter}=${numberOfGroups}`
+        );
+        this.addTargetsToALB(
+          shardName,
+          [new InstanceTarget(instance, 80)],
+          numberOfGroups
+        );
+      });
     }
-    console.log(`Total of ${combinationNumber} combinations`);
+    console.log(`Total of ${numberOfGroups} combinations`);
 
-    var shardNumber = 0;
-
-    shards.forEach((shard) => {
-      shardNumber += 1;
-      const shardName = `${shard[0].node.id}-${shard[1].node.id}`;
-      console.log(`Adding shard: ${shardName} to ALB at /?name=${shardNumber}`);
-      const target = [
-        new InstanceTarget(shard[0], 80),
-        new InstanceTarget(shard[1], 80),
-      ];
-      this.addTargetsToALB(shardName, target, shardNumber);
-    });
-
-    const blastRadius = 100 / combinationNumber;
+    const blastRadius = 100 / numberOfGroups;
     console.log(`Blast radius is ${blastRadius.toFixed(2)}%`);
-    return shardNumber;
+    return numberOfGroups;
   }
 
   addTargetsToALB(
@@ -246,7 +263,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       },
     });
 
-    const queryStrings = { key: 'name', value: `${priority}` };
+    const queryStrings = { key: this.stringParameter, value: `${priority}` };
 
     this.listener.addAction(name, {
       action: ListenerAction.forward([targetGroup]),
@@ -255,7 +272,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     });
 
     new CfnOutput(this, `LoadBalancerEndpoint-${name}`, {
-      value: `http://${this.alb.loadBalancerDnsName}/?name=${priority}`,
+      value: `http://${this.alb.loadBalancerDnsName}/?${this.stringParameter}=${priority}`,
     });
   }
 }
