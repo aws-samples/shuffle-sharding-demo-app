@@ -653,6 +653,54 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA:80"
       }
     },
+    "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker7InstanceSecurityGroupE8F87D4A80554C94A6": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AppLoadBalancerSecurityGroupC44CD584",
+            "GroupId"
+          ]
+        },
+        "IpProtocol": "tcp",
+        "Description": "to ShuffleShardingDemoSummit2022Worker7InstanceSecurityGroupE8F87D4A:80",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "Worker7InstanceSecurityGroup7AC82168",
+            "GroupId"
+          ]
+        },
+        "FromPort": 80,
+        "ToPort": 80
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker7InstanceSecurityGroupE8F87D4A:80"
+      }
+    },
+    "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker8InstanceSecurityGroupB04DB74C806E9F18F0": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AppLoadBalancerSecurityGroupC44CD584",
+            "GroupId"
+          ]
+        },
+        "IpProtocol": "tcp",
+        "Description": "to ShuffleShardingDemoSummit2022Worker8InstanceSecurityGroupB04DB74C:80",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "Worker8InstanceSecurityGroup1482F9A6",
+            "GroupId"
+          ]
+        },
+        "FromPort": 80,
+        "ToPort": 80
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker8InstanceSecurityGroupB04DB74C:80"
+      }
+    },
     "AppLoadBalancerAppMainListener100632E2": {
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
       "Properties": {
@@ -708,13 +756,13 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker2Rule/Resource"
       }
     },
-    "AppLoadBalancerAppMainListenerWorker3Worker4Rule02549A56": {
+    "AppLoadBalancerAppMainListenerWorker1Worker3RuleFB3F93E8": {
       "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
       "Properties": {
         "Actions": [
           {
             "TargetGroupArn": {
-              "Ref": "Worker3Worker4B1041CD7"
+              "Ref": "Worker1Worker3FEF5AB85"
             },
             "Type": "forward"
           }
@@ -738,16 +786,16 @@
         "Priority": 2
       },
       "Metadata": {
-        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker4Rule/Resource"
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker3Rule/Resource"
       }
     },
-    "AppLoadBalancerAppMainListenerWorker5Worker6RuleD773B1B8": {
+    "AppLoadBalancerAppMainListenerWorker1Worker4RuleB76D6B7A": {
       "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
       "Properties": {
         "Actions": [
           {
             "TargetGroupArn": {
-              "Ref": "Worker5Worker641006A7B"
+              "Ref": "Worker1Worker4E3E6D1E8"
             },
             "Type": "forward"
           }
@@ -771,7 +819,832 @@
         "Priority": 3
       },
       "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker4Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker1Worker5Rule907034C9": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker1Worker5ED99ED05"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "4"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 4
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker5Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker1Worker6Rule137B1663": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker1Worker6DD3E9B3E"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "5"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 5
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker6Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker1Worker7Rule8DE768B7": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker1Worker779211DA2"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "6"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 6
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker7Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker1Worker8RuleE223408D": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker1Worker8D5AFAE63"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "7"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 7
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker8Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker2Worker3Rule98EF9A72": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker2Worker3B75B2CCD"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "8"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 8
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker3Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker2Worker4Rule7B936722": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker2Worker48BEA5717"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "9"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 9
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker4Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker2Worker5Rule1333F564": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker2Worker5AF7004C9"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "10"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 10
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker5Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker2Worker6Rule15F2984F": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker2Worker619605E89"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "11"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 11
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker6Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker2Worker7Rule98071AAD": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker2Worker796A220FC"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "12"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 12
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker7Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker2Worker8Rule0D3C3BEA": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker2Worker82B324B42"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "13"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 13
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker8Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker3Worker4Rule02549A56": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker3Worker4B1041CD7"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "14"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 14
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker4Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker3Worker5Rule2907BF1E": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker3Worker50D930F13"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "15"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 15
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker5Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker3Worker6Rule33FA5A3E": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker3Worker641AC8F3F"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "16"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 16
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker6Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker3Worker7Rule78F94994": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker3Worker760686153"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "17"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 17
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker7Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker3Worker8RuleCADA011F": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker3Worker89C0D19B2"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "18"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 18
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker8Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker4Worker5Rule58935595": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker4Worker587924F2A"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "19"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 19
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker5Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker4Worker6Rule5639EABC": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker4Worker63E31F49B"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "20"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 20
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker6Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker4Worker7RuleF937CD37": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker4Worker7199003A4"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "21"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 21
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker7Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker4Worker8Rule64D2D7E0": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker4Worker894321B5F"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "22"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 22
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker8Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker5Worker6RuleD773B1B8": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker5Worker641006A7B"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "23"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 23
+      },
+      "Metadata": {
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker6Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker5Worker7RuleD767507E": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker5Worker7FAB29F68"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "24"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 24
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker7Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker5Worker8RuleBDABC5FD": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker5Worker8474B8514"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "25"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 25
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker8Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker6Worker7Rule971BD14A": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker6Worker7B4E384DE"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "26"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 26
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker6-Worker7Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker6Worker8RuleB77C08FD": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker6Worker8BF3DDCC7"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "27"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 27
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker6-Worker8Rule/Resource"
+      }
+    },
+    "AppLoadBalancerAppMainListenerWorker7Worker8Rule0FBE6D93": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "Worker7Worker82850D095"
+            },
+            "Type": "forward"
+          }
+        ],
+        "Conditions": [
+          {
+            "Field": "query-string",
+            "QueryStringConfig": {
+              "Values": [
+                {
+                  "Key": "number",
+                  "Value": "28"
+                }
+              ]
+            }
+          }
+        ],
+        "ListenerArn": {
+          "Ref": "AppLoadBalancerAppMainListener100632E2"
+        },
+        "Priority": 28
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker7-Worker8Rule/Resource"
       }
     },
     "Worker1InstanceSecurityGroup59622567": {
@@ -1914,6 +2787,386 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker6readTags/Resource"
       }
     },
+    "Worker7InstanceSecurityGroup7AC82168": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "ShuffleShardingDemoSummit2022/Worker7/InstanceSecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "ShuffleShardingDemoSummit2022/Worker7"
+          }
+        ],
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7/InstanceSecurityGroup/Resource"
+      }
+    },
+    "Worker7InstanceSecurityGroupfromShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA4542480A4D9FE57": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+        "FromPort": 80,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "Worker7InstanceSecurityGroup7AC82168",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "AppLoadBalancerSecurityGroupC44CD584",
+            "GroupId"
+          ]
+        },
+        "ToPort": 80
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80"
+      }
+    },
+    "Worker7InstanceRoleCC51AD6B": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "ec2.",
+                      {
+                        "Ref": "AWS::URLSuffix"
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+              ]
+            ]
+          },
+          {
+            "Ref": "Worker7readTagsB5DD0B5E"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "ShuffleShardingDemoSummit2022/Worker7"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7/InstanceRole/Resource"
+      }
+    },
+    "Worker7InstanceProfile5317ACEF": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "Worker7InstanceRoleCC51AD6B"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7/InstanceProfile"
+      }
+    },
+    "Worker7A4F526855756e0f615c1f3fd": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+              "VolumeSize": 50,
+              "VolumeType": "gp3"
+            }
+          }
+        ],
+        "IamInstanceProfile": {
+          "Ref": "Worker7InstanceProfile5317ACEF"
+        },
+        "ImageId": {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+        },
+        "InstanceType": "t3.medium",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "Worker7InstanceSecurityGroup7AC82168",
+              "GroupId"
+            ]
+          }
+        ],
+        "SubnetId": {
+          "Ref": "vpcPrivateSubnet1Subnet934893E8"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "ShuffleShardingDemoSummit2022/Worker7"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+        }
+      },
+      "DependsOn": [
+        "Worker7InstanceRoleCC51AD6B"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7/Resource"
+      }
+    },
+    "Worker7readTagsB5DD0B5E": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ec2:DescribeTags",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Description": "",
+        "Path": "/"
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7readTags/Resource"
+      }
+    },
+    "Worker8InstanceSecurityGroup1482F9A6": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "ShuffleShardingDemoSummit2022/Worker8/InstanceSecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "ShuffleShardingDemoSummit2022/Worker8"
+          }
+        ],
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker8/InstanceSecurityGroup/Resource"
+      }
+    },
+    "Worker8InstanceSecurityGroupfromShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA454248033E6A058": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "IpProtocol": "tcp",
+        "Description": "from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80",
+        "FromPort": 80,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "Worker8InstanceSecurityGroup1482F9A6",
+            "GroupId"
+          ]
+        },
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "AppLoadBalancerSecurityGroupC44CD584",
+            "GroupId"
+          ]
+        },
+        "ToPort": 80
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker8/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80"
+      }
+    },
+    "Worker8InstanceRoleA3712D02": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "ec2.",
+                      {
+                        "Ref": "AWS::URLSuffix"
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+              ]
+            ]
+          },
+          {
+            "Ref": "Worker8readTags1535FF51"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "ShuffleShardingDemoSummit2022/Worker8"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker8/InstanceRole/Resource"
+      }
+    },
+    "Worker8InstanceProfileD09D452E": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "Worker8InstanceRoleA3712D02"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker8/InstanceProfile"
+      }
+    },
+    "Worker83BF111D75756e0f615c1f3fd": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+              "VolumeSize": 50,
+              "VolumeType": "gp3"
+            }
+          }
+        ],
+        "IamInstanceProfile": {
+          "Ref": "Worker8InstanceProfileD09D452E"
+        },
+        "ImageId": {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+        },
+        "InstanceType": "t3.medium",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "Worker8InstanceSecurityGroup1482F9A6",
+              "GroupId"
+            ]
+          }
+        ],
+        "SubnetId": {
+          "Ref": "vpcPrivateSubnet1Subnet934893E8"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "ShuffleShardingDemoSummit2022/Worker8"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\npip install ec2-metadata\ncurl -o /home/ec2-user/buggy-webserver.py https://aws-well-architected-labs-virginia.s3.amazonaws.com/Reliability/300_Fault_Isolation_with_Shuffle_Sharding/buggy-webserver.py\nnohup python /home/ec2-user/buggy-webserver.py >>/var/log/webserver.log 2>&1 &"
+        }
+      },
+      "DependsOn": [
+        "Worker8InstanceRoleA3712D02"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker8/Resource"
+      }
+    },
+    "Worker8readTags1535FF51": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ec2:DescribeTags",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Description": "",
+        "Path": "/"
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker8readTags/Resource"
+      }
+    },
     "Worker1Worker204A96BDA": {
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
       "Properties": {
@@ -1953,6 +3206,498 @@
       },
       "Metadata": {
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker2/Resource"
+      }
+    },
+    "Worker1Worker3FEF5AB85": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker3/Resource"
+      }
+    },
+    "Worker1Worker4E3E6D1E8": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker4/Resource"
+      }
+    },
+    "Worker1Worker5ED99ED05": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker5/Resource"
+      }
+    },
+    "Worker1Worker6DD3E9B3E": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker6/Resource"
+      }
+    },
+    "Worker1Worker779211DA2": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker7/Resource"
+      }
+    },
+    "Worker1Worker8D5AFAE63": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1-Worker8/Resource"
+      }
+    },
+    "Worker2Worker3B75B2CCD": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2-Worker3/Resource"
+      }
+    },
+    "Worker2Worker48BEA5717": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2-Worker4/Resource"
+      }
+    },
+    "Worker2Worker5AF7004C9": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2-Worker5/Resource"
+      }
+    },
+    "Worker2Worker619605E89": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2-Worker6/Resource"
+      }
+    },
+    "Worker2Worker796A220FC": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2-Worker7/Resource"
+      }
+    },
+    "Worker2Worker82B324B42": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2-Worker8/Resource"
       }
     },
     "Worker3Worker4B1041CD7": {
@@ -1996,6 +3741,334 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3-Worker4/Resource"
       }
     },
+    "Worker3Worker50D930F13": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3-Worker5/Resource"
+      }
+    },
+    "Worker3Worker641AC8F3F": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3-Worker6/Resource"
+      }
+    },
+    "Worker3Worker760686153": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3-Worker7/Resource"
+      }
+    },
+    "Worker3Worker89C0D19B2": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3-Worker8/Resource"
+      }
+    },
+    "Worker4Worker587924F2A": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4-Worker5/Resource"
+      }
+    },
+    "Worker4Worker63E31F49B": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4-Worker6/Resource"
+      }
+    },
+    "Worker4Worker7199003A4": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4-Worker7/Resource"
+      }
+    },
+    "Worker4Worker894321B5F": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4-Worker8/Resource"
+      }
+    },
     "Worker5Worker641006A7B": {
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
       "Properties": {
@@ -2037,12 +4110,217 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker5-Worker6/Resource"
       }
     },
+    "Worker5Worker7FAB29F68": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker5-Worker7/Resource"
+      }
+    },
+    "Worker5Worker8474B8514": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker58AAF5F375756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker5-Worker8/Resource"
+      }
+    },
+    "Worker6Worker7B4E384DE": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker6-Worker7/Resource"
+      }
+    },
+    "Worker6Worker8BF3DDCC7": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker6A13C0CBB5756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker6-Worker8/Resource"
+      }
+    },
+    "Worker7Worker82850D095": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker7A4F526855756e0f615c1f3fd"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker83BF111D75756e0f615c1f3fd"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker7-Worker8/Resource"
+      }
+    },
     "redirectLogic8024F0FE": {
       "Type": "AWS::CloudFront::Function",
       "Properties": {
         "Name": "redirectToRandomShard",
         "AutoPublish": true,
-        "FunctionCode": "function handler(event) {\n        var request = event.request;\n        var querystring = request.querystring;\n        if (!querystring['number']){\n          var newUri;\n          var randomkey = getRndInteger(1, 3);\n          newUri = '/number=' + randomkey;\n          var response = {\n            statusCode: 302,\n            statusDescription: 'Found',\n            headers: {\n              location: { value: newUri },\n            },\n          };\n          return response;\n        }\n        return request;\n      }\n\n      function getRndInteger(min, max) {\n        min = Math.ceil(min); // rounds a number up to the next largest integer\n        max = Math.floor(max); // returns the largest integer less than or equal to a given number\n        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive\n      }\n",
+        "FunctionCode": "function handler(event) {\n        var request = event.request;\n        var querystring = request.querystring;\n        if (!querystring['number']){\n          var newUri;\n          var randomkey = getRndInteger(1, 28);\n          newUri = '/number=' + randomkey;\n          var response = {\n            statusCode: 302,\n            statusDescription: 'Found',\n            headers: {\n              location: { value: newUri },\n            },\n          };\n          return response;\n        }\n        return request;\n      }\n\n      function getRndInteger(min, max) {\n        min = Math.ceil(min); // rounds a number up to the next largest integer\n        max = Math.floor(max); // returns the largest integer less than or equal to a given number\n        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive\n      }\n",
         "FunctionConfig": {
           "Comment": "Function to redirect all incoming requests to /?number= + Random Number (i.e: /?number=1)",
           "Runtime": "cloudfront-js-1.0"
@@ -2162,7 +4440,7 @@
         ]
       }
     },
-    "LoadBalancerEndpointWorker3Worker4": {
+    "LoadBalancerEndpointWorker1Worker3": {
       "Value": {
         "Fn::Join": [
           "",
@@ -2179,7 +4457,7 @@
         ]
       }
     },
-    "LoadBalancerEndpointWorker5Worker6": {
+    "LoadBalancerEndpointWorker1Worker4": {
       "Value": {
         "Fn::Join": [
           "",
@@ -2192,6 +4470,431 @@
               ]
             },
             "/?number=3"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker1Worker5": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=4"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker1Worker6": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=5"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker1Worker7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=6"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker1Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=7"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker2Worker3": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=8"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker2Worker4": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=9"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker2Worker5": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=10"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker2Worker6": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=11"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker2Worker7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=12"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker2Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=13"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker3Worker4": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=14"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker3Worker5": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=15"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker3Worker6": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=16"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker3Worker7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=17"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker3Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=18"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker4Worker5": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=19"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker4Worker6": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=20"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker4Worker7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=21"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker4Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=22"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker5Worker6": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=23"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker5Worker7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=24"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker5Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=25"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker6Worker7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=26"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker6Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=27"
+          ]
+        ]
+      }
+    },
+    "LoadBalancerEndpointWorker7Worker8": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=28"
           ]
         ]
       }

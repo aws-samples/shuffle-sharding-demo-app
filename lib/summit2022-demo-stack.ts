@@ -44,10 +44,10 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.createALB(); // New ALB and https listener
 
-    const instances: aws_ec2.Instance[] = this.createWorkers(6); // Array of EC2 Instances
+    const instances: aws_ec2.Instance[] = this.createWorkers(8); // Array of EC2 Instances
 
     const numberOfGroups = this.createGroups(instances, {
-      sharding: { enabled: false, shuffle: false },
+      sharding: { enabled: true, shuffle: true },
     });
 
     this.createDist(numberOfGroups); // New CloudFront Distribution with CloudFront Function to redirect clients to random group/shard
@@ -196,7 +196,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
             numberOfGroups += 1;
             shards.push([instances[a], instances[b]]);
             console.log(
-              `Combination number ${numberOfGroups} : ${instances[a].node.id} & ${instances[b].node.id}`
+              `New group #${numberOfGroups} : '${instances[a].node.id}' and '${instances[b].node.id}'`
             );
           }
         }
@@ -205,7 +205,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
           numberOfGroups += 1;
           shards.push([instances[a], instances[a + 1]]);
           console.log(
-            `Combination number ${numberOfGroups} : ${instances[a].node.id} & ${
+            `New group #${numberOfGroups} : ${instances[a].node.id} and ${
               instances[a + 1].node.id
             }`
           );
@@ -217,7 +217,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         shardNumber += 1;
         const shardName = `${shard[0].node.id}-${shard[1].node.id}`;
         console.log(
-          `Adding shard: ${shardName} to ALB at /?${this.stringParameter}=${shardNumber}`
+          `New virtual shard: ${shardName} assigned to ALB at /?${this.stringParameter}=${shardNumber}`
         );
         const target = [
           new InstanceTarget(shard[0], 80),
@@ -230,7 +230,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         numberOfGroups += 1;
         const shardName = `ec2-${instance.node.id}`;
         console.log(
-          `Adding shard: ${shardName} to ALB at /?${this.stringParameter}=${numberOfGroups}`
+          `New virtual shard: ${shardName} assigned to ALB at /?${this.stringParameter}=${numberOfGroups}`
         );
         this.addTargetsToALB(
           shardName,
@@ -239,10 +239,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         );
       });
     }
-    console.log(`Total of ${numberOfGroups} combinations`);
+    console.log(
+      `\n♦️ Total of ${instances.length} hosts and ${numberOfGroups} virtual shards ♦️`
+    );
 
     const blastRadius = 100 / numberOfGroups;
-    console.log(`Blast radius is ${blastRadius.toFixed(2)}%`);
+    console.log(`💥 Blast radius is ${blastRadius.toFixed(2)}% 💥\n`);
     return numberOfGroups;
   }
 
