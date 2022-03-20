@@ -42,14 +42,18 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.vpc = new aws_ec2.Vpc(this, 'vpc');
 
-    this.createALB();
+    // Creates ALB and Listener to provided port
+    this.createALB(80);
 
-    const instances: aws_ec2.Instance[] = this.createWorkers(8);
+    // Creates array of EC2 Instances with pre-defined configuration
+    const instances: aws_ec2.Instance[] = this.createWorkers(8, 't3.medium');
 
+    // Creates and configure AutoScaling Target Groups with provided instances array.
     const numberOfGroups = this.createGroups(instances, {
       sharding: { enabled: true, shuffle: true },
     });
 
+    // Creates CloudFront Distribution and Cloud Front Function to redirect each request to one of the shards
     this.createDist(numberOfGroups);
   }
 
@@ -111,13 +115,13 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     });
   }
 
-  createALB() {
+  createALB(port: number) {
     this.alb = new ApplicationLoadBalancer(this, 'AppLoadBalancer', {
       vpc: this.vpc,
       internetFacing: true,
     });
 
-    this.listener = this.alb.addListener('AppMainListener', { port: 80 });
+    this.listener = this.alb.addListener('AppMainListener', { port: port });
 
     this.listener.addAction('DefaultAction', {
       action: ListenerAction.fixedResponse(400, {
@@ -127,7 +131,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     });
   }
 
-  createWorkers(number: number) {
+  createWorkers(number: number, size: string) {
     const userData = fs.readFileSync('./lib/userdata.sh', 'utf8');
 
     // Use Latest Amazon Linux Image
@@ -138,7 +142,9 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     const instances = [];
     for (let index = 0; index < number; index++) {
-      instances.push(this.newInstance(`Worker${index + 1}`, ami, userData));
+      instances.push(
+        this.newInstance(`Worker${index + 1}`, ami, size, userData)
+      );
     }
     return instances;
   }
@@ -146,11 +152,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   newInstance(
     name: string,
     machineImage: aws_ec2.IMachineImage,
+    size: string,
     userdata: string
   ) {
     const instance = new aws_ec2.Instance(this, name, {
       vpc: this.vpc,
-      instanceType: new aws_ec2.InstanceType('t3.medium'),
+      instanceType: new aws_ec2.InstanceType(size),
       machineImage: machineImage,
       blockDevices: [
         {
@@ -240,11 +247,15 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       });
     }
     console.log(
-      `\n♦️ Total of ${instances.length} hosts and ${numberOfGroups} virtual shards ♦️`
+      `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} virtual shards ♦️`
     );
 
     const blastRadius = 100 / numberOfGroups;
-    console.log(`💥 Blast radius is ${blastRadius.toFixed(2)}% 💥\n`);
+    console.log(
+      options.sharding.enabled
+        ? `💥 Blast radius is 0% - ${blastRadius.toFixed(2)}% 💥\n`
+        : `💥 Blast radius is ${blastRadius.toFixed(2)}% 💥\n`
+    );
     return numberOfGroups;
   }
 
