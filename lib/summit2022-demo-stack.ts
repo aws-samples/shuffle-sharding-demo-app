@@ -53,10 +53,10 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.createALB(80);
 
-    const instances: aws_ec2.Instance[] = this.createWorkers(4, 't3.medium');
+    const instances: aws_ec2.Instance[] = this.createWorkers(8, 't3.medium');
 
     const numberOfGroups = this.createGroups(instances, {
-      sharding: { enabled: true, shuffle: false },
+      sharding: { enabled: true, shuffle: true },
     });
     this.createDist(numberOfGroups);
 
@@ -302,12 +302,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} virtual shards ♦️`
     );
 
-    const maxBlastRadius = 100 / numberOfGroups;
-    const minBlastRadius = 100 / instances.length;
+    const maxBlastRadius = (100 / numberOfGroups).toFixed(2);
+    const minBlastRadius = (100 / instances.length).toFixed(2);
     console.log(
-      `💥 Blast radius = ${minBlastRadius.toFixed(2)}%-${maxBlastRadius.toFixed(
-        2
-      )}% 💥\n`
+      options.sharding.shuffle
+        ? `💥 Blast radius = ${maxBlastRadius}% 💥\n`
+        : `💥 Blast radius = ${minBlastRadius}%-${maxBlastRadius}% (Shuffle disabled) 💥\n`
     );
     return numberOfGroups;
   }

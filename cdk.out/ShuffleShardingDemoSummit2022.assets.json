@@ -1,7 +1,7 @@
 {
   "version": "16.0.0",
   "files": {
-    "802e49c78d15b0900050324c08bbc9bca022661258457ff10a66568864e56280": {
+    "1cc025ed4299b97e9df66cc08fc9f16b78c05403abc2b95f4a67d5de3f8e8108": {
       "source": {
         "path": "ShuffleShardingDemoSummit2022.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "802e49c78d15b0900050324c08bbc9bca022661258457ff10a66568864e56280.json",
+          "objectKey": "1cc025ed4299b97e9df66cc08fc9f16b78c05403abc2b95f4a67d5de3f8e8108.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
