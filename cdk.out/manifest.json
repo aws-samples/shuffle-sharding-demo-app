@@ -17,20 +17,20 @@
     },
     "ShuffleShardingDemoSummit2022": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://unknown-account/unknown-region",
+      "environment": "aws://117923233529/us-east-1",
       "properties": {
         "templateFile": "ShuffleShardingDemoSummit2022.template.json",
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1cc025ed4299b97e9df66cc08fc9f16b78c05403abc2b95f4a67d5de3f8e8108.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::117923233529:role/cdk-hnb659fds-deploy-role-117923233529-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::117923233529:role/cdk-hnb659fds-cfn-exec-role-117923233529-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-117923233529-us-east-1/513263b53c521b6d3041830a09704d762c5c7b31edf0839d8a79ae52c04605f1.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "ShuffleShardingDemoSummit2022.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "arn": "arn:${AWS::Partition}:iam::117923233529:role/cdk-hnb659fds-lookup-role-117923233529-us-east-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -117,6 +117,42 @@
             "data": "vpcPublicSubnet2NATGateway9B8AE11A"
           }
         ],
+        "/ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPublicSubnet3Subnet11B92D7C"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPublicSubnet3RouteTableA3C00665"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPublicSubnet3RouteTableAssociationD102D1C4"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPublicSubnet3DefaultRoute3F356A11"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPublicSubnet3EIP2C3B9D91"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPublicSubnet3NATGateway82F6CA9E"
+          }
+        ],
         "/ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
@@ -163,6 +199,30 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "vpcPrivateSubnet2DefaultRouteB0E07F99"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPrivateSubnet3Subnet985AC459"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPrivateSubnet3RouteTable24DA79A0"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPrivateSubnet3RouteTableAssociationC58B3C2C"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "vpcPrivateSubnet3DefaultRoute30C45F47"
           }
         ],
         "/ShuffleShardingDemoSummit2022/vpc/IGW": [
@@ -507,6 +567,36 @@
             "data": "Worker2readTags643E321C"
           }
         ],
+        "/ShuffleShardingDemoSummit2022/Worker3": [
+          {
+            "type": "aws:cdk:error",
+            "data": "Need exactly 1 subnet to match AZ 'us-east-1d', found 0. Use a different availabilityZone.",
+            "trace": [
+              "Annotations.addMessage (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addError (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:58:10)",
+              "new Instance (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/instance.ts:353:30)",
+              "ShuffleShardingDemoSummit2022.newInstance (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:220:22)",
+              "ShuffleShardingDemoSummit2022.createWorkers (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:201:14)",
+              "new ShuffleShardingDemoSummit2022 (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:56:48)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/bin/summit2022-demo.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Module.m._compile (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
         "/ShuffleShardingDemoSummit2022/Worker3/InstanceSecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -531,6 +621,38 @@
             "data": "Worker3InstanceProfile302920F9"
           }
         ],
+        "/ShuffleShardingDemoSummit2022/Worker3/DummySubnet": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 's-notfound'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "new ImportedSubnet (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.ts:2099:28)",
+              "Function.fromSubnetAttributes (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.ts:1578:12)",
+              "new Instance (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/instance.ts:365:23)",
+              "ShuffleShardingDemoSummit2022.newInstance (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:220:22)",
+              "ShuffleShardingDemoSummit2022.createWorkers (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:201:14)",
+              "new ShuffleShardingDemoSummit2022 (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:56:48)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/bin/summit2022-demo.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Module.m._compile (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
         "/ShuffleShardingDemoSummit2022/Worker3/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -541,6 +663,36 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "Worker3readTags6E2C7F22"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/Worker4": [
+          {
+            "type": "aws:cdk:error",
+            "data": "Need exactly 1 subnet to match AZ 'us-east-1e', found 0. Use a different availabilityZone.",
+            "trace": [
+              "Annotations.addMessage (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addError (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:58:10)",
+              "new Instance (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/instance.ts:353:30)",
+              "ShuffleShardingDemoSummit2022.newInstance (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:220:22)",
+              "ShuffleShardingDemoSummit2022.createWorkers (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:201:14)",
+              "new ShuffleShardingDemoSummit2022 (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:56:48)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/bin/summit2022-demo.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Module.m._compile (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker4/InstanceSecurityGroup/Resource": [
@@ -567,6 +719,38 @@
             "data": "Worker4InstanceProfileEAEB7A34"
           }
         ],
+        "/ShuffleShardingDemoSummit2022/Worker4/DummySubnet": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 's-notfound'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "new ImportedSubnet (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.ts:2099:28)",
+              "Function.fromSubnetAttributes (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.ts:1578:12)",
+              "new Instance (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/instance.ts:365:23)",
+              "ShuffleShardingDemoSummit2022.newInstance (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:220:22)",
+              "ShuffleShardingDemoSummit2022.createWorkers (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:201:14)",
+              "new ShuffleShardingDemoSummit2022 (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:56:48)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/bin/summit2022-demo.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Module.m._compile (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
         "/ShuffleShardingDemoSummit2022/Worker4/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -577,6 +761,36 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "Worker4readTags9AD8236D"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/Worker5": [
+          {
+            "type": "aws:cdk:error",
+            "data": "Need exactly 1 subnet to match AZ 'us-east-1f', found 0. Use a different availabilityZone.",
+            "trace": [
+              "Annotations.addMessage (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addError (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:58:10)",
+              "new Instance (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/instance.ts:353:30)",
+              "ShuffleShardingDemoSummit2022.newInstance (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:220:22)",
+              "ShuffleShardingDemoSummit2022.createWorkers (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:201:14)",
+              "new ShuffleShardingDemoSummit2022 (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:56:48)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/bin/summit2022-demo.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Module.m._compile (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup/Resource": [
@@ -601,6 +815,38 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "Worker5InstanceProfile3F156510"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/Worker5/DummySubnet": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 's-notfound'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:99:25)",
+              "Annotations.addWarning (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/core/lib/annotations.ts:38:10)",
+              "new ImportedSubnet (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.ts:2099:28)",
+              "Function.fromSubnetAttributes (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.ts:1578:12)",
+              "new Instance (/Users/dudut/local_code/summit2022-demo/node_modules/aws-cdk-lib/aws-ec2/lib/instance.ts:365:23)",
+              "ShuffleShardingDemoSummit2022.newInstance (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:220:22)",
+              "ShuffleShardingDemoSummit2022.createWorkers (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:201:14)",
+              "new ShuffleShardingDemoSummit2022 (/Users/dudut/local_code/summit2022-demo/lib/summit2022-demo-stack.ts:56:48)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/bin/summit2022-demo.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Module.m._compile (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "main (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/dudut/local_code/summit2022-demo/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1097:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1151:10)",
+              "Module.load (node:internal/modules/cjs/loader:975:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker5/Resource": [
@@ -1963,12 +2209,6 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/CDKMetadata/Condition": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadataAvailable"
           }
         ],
         "/ShuffleShardingDemoSummit2022/BootstrapVersion": [

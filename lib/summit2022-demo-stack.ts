@@ -44,7 +44,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    this.vpc = new aws_ec2.Vpc(this, 'vpc');
+    this.vpc = new aws_ec2.Vpc(this, 'vpc', { maxAzs: 3 });
 
     this.cloudwatchDashboard = new aws_cloudwatch.Dashboard(this, 'cw', {
       dashboardName: 'ShuffleShardingSummit2022',
@@ -185,7 +185,10 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
   createWorkers(number: number, size: string) {
     const userData = fs.readFileSync('./lib/userdata.sh', 'utf8');
-
+    const idOfAzs = Array.from(Array(this.availabilityZones.length).keys());
+    console.log(
+      `🌎 Creating EC2 Instances in ${idOfAzs.length} Availability Zones 🌎 `
+    );
     // Use Latest Amazon Linux Image
     const ami = new aws_ec2.AmazonLinuxImage({
       generation: aws_ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
@@ -195,7 +198,13 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     const instances = [];
     for (let index = 0; index < number; index++) {
       instances.push(
-        this.newInstance(`Worker${index + 1}`, ami, size, userData)
+        this.newInstance(
+          `Worker${index + 1}`,
+          ami,
+          size,
+          userData,
+          idOfAzs[(index + 1) % idOfAzs.length]
+        )
       );
     }
     return instances;
@@ -205,7 +214,8 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     name: string,
     machineImage: aws_ec2.IMachineImage,
     size: string,
-    userdata: string
+    userdata: string,
+    azId: number
   ) {
     const instance = new aws_ec2.Instance(this, name, {
       vpc: this.vpc,
@@ -220,6 +230,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         },
       ],
       userData: aws_ec2.UserData.custom(userdata),
+      availabilityZone: this.availabilityZones[azId],
       userDataCausesReplacement: true,
     });
     instance.connections.allowFrom(this.alb, aws_ec2.Port.tcp(80));

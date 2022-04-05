@@ -53,18 +53,11 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
-                        "cidrBlock": "10.0.0.0/18",
+                        "cidrBlock": "10.0.0.0/19",
                         "vpcId": {
                           "Ref": "vpcA2121C38"
                         },
-                        "availabilityZone": {
-                          "Fn::Select": [
-                            0,
-                            {
-                              "Fn::GetAZs": ""
-                            }
-                          ]
-                        },
+                        "availabilityZone": "us-east-1a",
                         "mapPublicIpOnLaunch": true,
                         "tags": [
                           {
@@ -220,18 +213,11 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
-                        "cidrBlock": "10.0.64.0/18",
+                        "cidrBlock": "10.0.32.0/19",
                         "vpcId": {
                           "Ref": "vpcA2121C38"
                         },
-                        "availabilityZone": {
-                          "Fn::Select": [
-                            1,
-                            {
-                              "Fn::GetAZs": ""
-                            }
-                          ]
-                        },
+                        "availabilityZone": "us-east-1b",
                         "mapPublicIpOnLaunch": true,
                         "tags": [
                           {
@@ -377,6 +363,166 @@
                   "version": "2.14.0"
                 }
               },
+              "PublicSubnet3": {
+                "id": "PublicSubnet3",
+                "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.64.0/19",
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "availabilityZone": "us-east-1c",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPublicSubnet3RouteTableA3C00665"
+                        },
+                        "subnetId": {
+                          "Ref": "vpcPublicSubnet3Subnet11B92D7C"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPublicSubnet3RouteTableA3C00665"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "vpcIGWE57CBDCA"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "vpcPublicSubnet3Subnet11B92D7C"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "vpcPublicSubnet3EIP2C3B9D91",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PublicSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.14.0"
+                }
+              },
               "PrivateSubnet1": {
                 "id": "PrivateSubnet1",
                 "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet1",
@@ -387,18 +533,11 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
-                        "cidrBlock": "10.0.128.0/18",
+                        "cidrBlock": "10.0.96.0/19",
                         "vpcId": {
                           "Ref": "vpcA2121C38"
                         },
-                        "availabilityZone": {
-                          "Fn::Select": [
-                            0,
-                            {
-                              "Fn::GetAZs": ""
-                            }
-                          ]
-                        },
+                        "availabilityZone": "us-east-1a",
                         "mapPublicIpOnLaunch": false,
                         "tags": [
                           {
@@ -506,18 +645,11 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
-                        "cidrBlock": "10.0.192.0/18",
+                        "cidrBlock": "10.0.128.0/19",
                         "vpcId": {
                           "Ref": "vpcA2121C38"
                         },
-                        "availabilityZone": {
-                          "Fn::Select": [
-                            1,
-                            {
-                              "Fn::GetAZs": ""
-                            }
-                          ]
-                        },
+                        "availabilityZone": "us-east-1b",
                         "mapPublicIpOnLaunch": false,
                         "tags": [
                           {
@@ -601,6 +733,118 @@
                         "destinationCidrBlock": "0.0.0.0/0",
                         "natGatewayId": {
                           "Ref": "vpcPublicSubnet2NATGateway9B8AE11A"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.14.0"
+                }
+              },
+              "PrivateSubnet3": {
+                "id": "PrivateSubnet3",
+                "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.160.0/19",
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "availabilityZone": "us-east-1c",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "vpcA2121C38"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPrivateSubnet3RouteTable24DA79A0"
+                        },
+                        "subnetId": {
+                          "Ref": "vpcPrivateSubnet3Subnet985AC459"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ShuffleShardingDemoSummit2022/vpc/PrivateSubnet3/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "vpcPrivateSubnet3RouteTable24DA79A0"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "vpcPublicSubnet3NATGateway82F6CA9E"
                         }
                       }
                     },
@@ -1063,6 +1307,9 @@
                       },
                       {
                         "Ref": "vpcPublicSubnet2Subnet009B674F"
+                      },
+                      {
+                        "Ref": "vpcPublicSubnet3Subnet11B92D7C"
                       }
                     ],
                     "type": "application"
@@ -2901,17 +3148,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -2977,14 +3214,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "us-east-1b",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -3010,7 +3240,7 @@
                       }
                     ],
                     "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                      "Ref": "vpcPrivateSubnet2Subnet7031C2BA"
                     },
                     "tags": [
                       {
@@ -3174,17 +3404,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -3250,14 +3470,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "us-east-1c",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -3283,7 +3496,7 @@
                       }
                     ],
                     "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                      "Ref": "vpcPrivateSubnet3Subnet985AC459"
                     },
                     "tags": [
                       {
@@ -3431,17 +3644,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -3501,20 +3704,21 @@
                   "version": "2.14.0"
                 }
               },
+              "DummySubnet": {
+                "id": "DummySubnet",
+                "path": "ShuffleShardingDemoSummit2022/Worker3/DummySubnet",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.14.0"
+                }
+              },
               "Resource": {
                 "id": "Resource",
                 "path": "ShuffleShardingDemoSummit2022/Worker3/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "az-notfound",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -3539,9 +3743,7 @@
                         ]
                       }
                     ],
-                    "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
-                    },
+                    "subnetId": "s-notfound",
                     "tags": [
                       {
                         "key": "Name",
@@ -3688,17 +3890,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -3758,20 +3950,21 @@
                   "version": "2.14.0"
                 }
               },
+              "DummySubnet": {
+                "id": "DummySubnet",
+                "path": "ShuffleShardingDemoSummit2022/Worker4/DummySubnet",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.14.0"
+                }
+              },
               "Resource": {
                 "id": "Resource",
                 "path": "ShuffleShardingDemoSummit2022/Worker4/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "az-notfound",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -3796,9 +3989,7 @@
                         ]
                       }
                     ],
-                    "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
-                    },
+                    "subnetId": "s-notfound",
                     "tags": [
                       {
                         "key": "Name",
@@ -3945,17 +4136,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -4015,20 +4196,21 @@
                   "version": "2.14.0"
                 }
               },
+              "DummySubnet": {
+                "id": "DummySubnet",
+                "path": "ShuffleShardingDemoSummit2022/Worker5/DummySubnet",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.14.0"
+                }
+              },
               "Resource": {
                 "id": "Resource",
                 "path": "ShuffleShardingDemoSummit2022/Worker5/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "az-notfound",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -4053,9 +4235,7 @@
                         ]
                       }
                     ],
-                    "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
-                    },
+                    "subnetId": "s-notfound",
                     "tags": [
                       {
                         "key": "Name",
@@ -4202,17 +4382,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -4278,14 +4448,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "us-east-1a",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -4459,17 +4622,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -4535,14 +4688,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "us-east-1b",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -4568,7 +4714,7 @@
                       }
                     ],
                     "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                      "Ref": "vpcPrivateSubnet2Subnet7031C2BA"
                     },
                     "tags": [
                       {
@@ -4716,17 +4862,7 @@
                               "Action": "sts:AssumeRole",
                               "Effect": "Allow",
                               "Principal": {
-                                "Service": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "ec2.",
-                                      {
-                                        "Ref": "AWS::URLSuffix"
-                                      }
-                                    ]
-                                  ]
-                                }
+                                "Service": "ec2.amazonaws.com"
                               }
                             }
                           ],
@@ -4792,14 +4928,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
+                    "availabilityZone": "us-east-1c",
                     "blockDeviceMappings": [
                       {
                         "deviceName": "/dev/sda1",
@@ -4825,7 +4954,7 @@
                       }
                     ],
                     "subnetId": {
-                      "Ref": "vpcPrivateSubnet1Subnet934893E8"
+                      "Ref": "vpcPrivateSubnet3Subnet985AC459"
                     },
                     "tags": [
                       {
@@ -5134,15 +5263,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -5514,15 +5635,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -5894,15 +6007,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -6274,15 +6379,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -6654,15 +6751,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -7034,15 +7123,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -7414,15 +7495,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -7794,15 +7867,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -8174,15 +8239,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -8554,15 +8611,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -8934,15 +8983,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -9314,15 +9355,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -9694,15 +9727,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -10074,15 +10099,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -10454,15 +10471,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -10834,15 +10843,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -11214,15 +11215,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -11594,15 +11587,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -11974,15 +11959,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -12354,15 +12331,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -12734,15 +12703,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -13114,15 +13075,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -13494,15 +13447,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -13874,15 +13819,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -14254,15 +14191,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -14634,15 +14563,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -15014,15 +14935,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -15394,15 +15307,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -15857,15 +15762,7 @@
                                         {
                                           "Ref": "AWS::Partition"
                                         },
-                                        ":logs:",
-                                        {
-                                          "Ref": "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                          "Ref": "AWS::AccountId"
-                                        },
-                                        ":log-group:/aws/lambda/cwsyn-*"
+                                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
                                       ]
                                     ]
                                   }
@@ -16004,14 +15901,6 @@
                 "path": "ShuffleShardingDemoSummit2022/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.14.0"
-                }
-              },
-              "Condition": {
-                "id": "Condition",
-                "path": "ShuffleShardingDemoSummit2022/CDKMetadata/Condition",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnCondition",
                   "version": "2.14.0"
                 }
               }
