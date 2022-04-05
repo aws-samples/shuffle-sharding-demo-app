@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e6f0a7c7efd80e4a99ab5cafa243d60576d28b165b4360194a40a30abc0f92f4.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/802e49c78d15b0900050324c08bbc9bca022661258457ff10a66568864e56280.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -177,6 +177,12 @@
             "data": "vpcVPCGW7984C166"
           }
         ],
+        "/ShuffleShardingDemoSummit2022/cw/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "cwD67736ED"
+          }
+        ],
         "/ShuffleShardingDemoSummit2022/AppLoadBalancer/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -213,30 +219,6 @@
             "data": "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker4InstanceSecurityGroup299E234E80D4F99100"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker5InstanceSecurityGroupF3FF94B5:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker5InstanceSecurityGroupF3FF94B580ED7F0D4F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker6InstanceSecurityGroup873FDCEA803CF8E9E6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker7InstanceSecurityGroupE8F87D4A:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker7InstanceSecurityGroupE8F87D4A80554C94A6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/SecurityGroup/to ShuffleShardingDemoSummit2022Worker8InstanceSecurityGroupB04DB74C:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerSecurityGrouptoShuffleShardingDemoSummit2022Worker8InstanceSecurityGroupB04DB74C806E9F18F0"
-          }
-        ],
         "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -249,166 +231,22 @@
             "data": "AppLoadBalancerAppMainListenerWorker1Worker2Rule60B444E5"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker3Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker3RuleFB3F93E8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker4Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker4RuleB76D6B7A"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker5Rule907034C9"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker6Rule137B1663"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker7Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker7Rule8DE768B7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker1-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker1Worker8RuleE223408D"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker3Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker3Rule98EF9A72"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker4Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker4Rule7B936722"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker5Rule1333F564"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker6Rule15F2984F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker7Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker7Rule98071AAD"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker2-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker2Worker8Rule0D3C3BEA"
-          }
-        ],
         "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker4Rule/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AppLoadBalancerAppMainListenerWorker3Worker4Rule02549A56"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker5Rule/Resource": [
+        "/ShuffleShardingDemoSummit2022/activeConnectionsCount/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker3Worker5Rule2907BF1E"
+            "data": "activeConnectionsCount90209303"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker6Rule/Resource": [
+        "/ShuffleShardingDemoSummit2022/totalConnectionsCount/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker3Worker6Rule33FA5A3E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker7Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker3Worker7Rule78F94994"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker3-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker3Worker8RuleCADA011F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker5Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker4Worker5Rule58935595"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker4Worker6Rule5639EABC"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker7Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker4Worker7RuleF937CD37"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker4-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker4Worker8Rule64D2D7E0"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker6Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker5Worker6RuleD773B1B8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker7Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker5Worker7RuleD767507E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker5-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker5Worker8RuleBDABC5FD"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker6-Worker7Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker6Worker7Rule971BD14A"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker6-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker6Worker8RuleB77C08FD"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/AppLoadBalancer/AppMainListener/Worker7-Worker8Rule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "AppLoadBalancerAppMainListenerWorker7Worker8Rule0FBE6D93"
+            "data": "totalConnectionsCount347BE3AF"
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker1/InstanceSecurityGroup/Resource": [
@@ -561,150 +399,6 @@
             "data": "Worker4readTags9AD8236D"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5InstanceSecurityGroup75CD5E34"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5InstanceSecurityGroupfromShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424807BF4B0A2"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5/InstanceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5InstanceRoleF26F9FDC"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5/InstanceProfile": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5InstanceProfile3F156510"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker58AAF5F375756e0f615c1f3fd"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5readTags/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5readTags4B6556EF"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6/InstanceSecurityGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6InstanceSecurityGroup44BEAA0F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6InstanceSecurityGroupfromShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA4542480BEB4722A"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6/InstanceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6InstanceRole078C756F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6/InstanceProfile": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6InstanceProfile9140A7D6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6A13C0CBB5756e0f615c1f3fd"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6readTags/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6readTags043E8CE4"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7/InstanceSecurityGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7InstanceSecurityGroup7AC82168"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7InstanceSecurityGroupfromShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA4542480A4D9FE57"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7/InstanceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7InstanceRoleCC51AD6B"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7/InstanceProfile": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7InstanceProfile5317ACEF"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7A4F526855756e0f615c1f3fd"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7readTags/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7readTagsB5DD0B5E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker8/InstanceSecurityGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker8InstanceSecurityGroup1482F9A6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker8/InstanceSecurityGroup/from ShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA45424:80": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker8InstanceSecurityGroupfromShuffleShardingDemoSummit2022AppLoadBalancerSecurityGroupFAA454248033E6A058"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker8/InstanceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker8InstanceRoleA3712D02"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker8/InstanceProfile": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker8InstanceProfileD09D452E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker83BF111D75756e0f615c1f3fd"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker8readTags/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker8readTags1535FF51"
-          }
-        ],
         "/ShuffleShardingDemoSummit2022/Worker1-Worker2/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -717,148 +411,34 @@
             "data": "LoadBalancerEndpointWorker1Worker2"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker3/Resource": [
+        "/ShuffleShardingDemoSummit2022/canary-1/ArtifactsBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker3FEF5AB85"
+            "data": "canary1ArtifactsBucket33D896F3"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker3": [
+        "/ShuffleShardingDemoSummit2022/canary-1/ArtifactsBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker3"
+            "data": "canary1ArtifactsBucketPolicy07FC42D3"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker4/Resource": [
+        "/ShuffleShardingDemoSummit2022/canary-1/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker4E3E6D1E8"
+            "data": "canary1ServiceRole5838E95C"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker4": [
+        "/ShuffleShardingDemoSummit2022/canary-1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker4"
+            "data": "canary14080B0CD"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker5/Resource": [
+        "/ShuffleShardingDemoSummit2022/alarm-1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker5ED99ED05"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker6DD3E9B3E"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker779211DA2"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker7": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker1-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker1Worker8D5AFAE63"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker1-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker1Worker8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker3/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker3B75B2CCD"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker3": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker3"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker4/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker48BEA5717"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker4": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker4"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker5AF7004C9"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker619605E89"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker796A220FC"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker7": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker2-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker2Worker82B324B42"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker2-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker2Worker8"
+            "data": "alarm11F7E5553"
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker3-Worker4/Resource": [
@@ -873,172 +453,34 @@
             "data": "LoadBalancerEndpointWorker3Worker4"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker3-Worker5/Resource": [
+        "/ShuffleShardingDemoSummit2022/canary-2/ArtifactsBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker3Worker50D930F13"
+            "data": "canary2ArtifactsBucket21016E4A"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker5": [
+        "/ShuffleShardingDemoSummit2022/canary-2/ArtifactsBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker3Worker5"
+            "data": "canary2ArtifactsBucketPolicy8BB17232"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker3-Worker6/Resource": [
+        "/ShuffleShardingDemoSummit2022/canary-2/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker3Worker641AC8F3F"
+            "data": "canary2ServiceRole7902C7AF"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker6": [
+        "/ShuffleShardingDemoSummit2022/canary-2/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker3Worker6"
+            "data": "canary29E18EC3E"
           }
         ],
-        "/ShuffleShardingDemoSummit2022/Worker3-Worker7/Resource": [
+        "/ShuffleShardingDemoSummit2022/alarm-2/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker3Worker760686153"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker7": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker3Worker7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker3-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker3Worker89C0D19B2"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker3-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker3Worker8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker4-Worker5/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker4Worker587924F2A"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker5": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker4Worker5"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker4-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker4Worker63E31F49B"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker4Worker6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker4-Worker7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker4Worker7199003A4"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker7": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker4Worker7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker4-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker4Worker894321B5F"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker4-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker4Worker8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5-Worker6/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5Worker641006A7B"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker5-Worker6": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker5Worker6"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5-Worker7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5Worker7FAB29F68"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker5-Worker7": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker5Worker7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker5-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker5Worker8474B8514"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker5-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker5Worker8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6-Worker7/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6Worker7B4E384DE"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker6-Worker7": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker6Worker7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker6-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker6Worker8BF3DDCC7"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker6-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker6Worker8"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/Worker7-Worker8/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "Worker7Worker82850D095"
-          }
-        ],
-        "/ShuffleShardingDemoSummit2022/LoadBalancerEndpoint-Worker7-Worker8": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "LoadBalancerEndpointWorker7Worker8"
+            "data": "alarm2999D08C3"
           }
         ],
         "/ShuffleShardingDemoSummit2022/redirectLogic/Resource": [
@@ -1063,6 +505,42 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "CloudfrontURL"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/canary-main/ArtifactsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "canarymainArtifactsBucket26B27643"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/canary-main/ArtifactsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "canarymainArtifactsBucketPolicy95B019C1"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/canary-main/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "canarymainServiceRole70CC7F6B"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/canary-main/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "canarymainEB7F983A"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/alarm-main/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "alarmmainB23BFCDF"
+          }
+        ],
+        "/ShuffleShardingDemoSummit2022/Cloudwatch Dashboard URL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudwatchDashboardURL"
           }
         ],
         "/ShuffleShardingDemoSummit2022/CDKMetadata/Default": [

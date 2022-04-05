@@ -1,5 +1,6 @@
 import {
   aws_cloudfront,
+  aws_cloudwatch,
   aws_ec2,
   aws_iam,
   CfnOutput,
@@ -7,6 +8,7 @@ import {
   Stack,
   StackProps,
 } from 'aws-cdk-lib';
+import * as aws_synthetics_alpha from '@aws-cdk/aws-synthetics-alpha';
 import {
   CachePolicy,
   Function,
@@ -35,6 +37,8 @@ import * as fs from 'fs';
 export class ShuffleShardingDemoSummit2022 extends Stack {
   listener: ApplicationListener;
   alb: ApplicationLoadBalancer;
+  cloudwatchDashboard: aws_cloudwatch.Dashboard;
+  cloudwatchWidgets: aws_cloudwatch.AlarmWidget[];
   readonly vpc: aws_ec2.Vpc;
   readonly stringParameter = 'number';
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -42,19 +46,25 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.vpc = new aws_ec2.Vpc(this, 'vpc');
 
-    // Creates ALB and Listener to provided port
+    this.cloudwatchDashboard = new aws_cloudwatch.Dashboard(this, 'cw', {
+      dashboardName: 'ShuffleShardingSummit2022',
+    });
+    this.cloudwatchWidgets = [];
+
     this.createALB(80);
 
-    // Creates array of EC2 Instances with pre-defined configuration
-    const instances: aws_ec2.Instance[] = this.createWorkers(8, 't3.medium');
+    const instances: aws_ec2.Instance[] = this.createWorkers(4, 't3.medium');
 
-    // Creates and configure AutoScaling Target Groups with provided instances array.
     const numberOfGroups = this.createGroups(instances, {
-      sharding: { enabled: true, shuffle: true },
+      sharding: { enabled: true, shuffle: false },
     });
-
-    // Creates CloudFront Distribution and Cloud Front Function to redirect each request to one of the shards
     this.createDist(numberOfGroups);
+
+    this.cloudwatchDashboard.addWidgets(...this.cloudwatchWidgets);
+
+    new CfnOutput(this, 'Cloudwatch Dashboard URL', {
+      value: `https://console.aws.amazon.com/cloudwatch/home?region=${process.env.CDK_DEFAULT_REGION}#dashboards:name=ShuffleShardingSummit2022`,
+    });
   }
 
   createDist(number: number) {
@@ -66,7 +76,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         if (!querystring['${this.stringParameter}']){
           var newUri;
           var randomkey = getRndInteger(1, ${number});
-          newUri = '/${this.stringParameter}=' + randomkey;
+          newUri = '/?${this.stringParameter}=' + randomkey;
           var response = {
             statusCode: 302,
             statusDescription: 'Found',
@@ -110,9 +120,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       },
     });
 
+    const cloudfronturl = `https://${cloudfront.distributionDomainName}`;
     new CfnOutput(this, `CloudfrontURL`, {
-      value: `https://${cloudfront.distributionDomainName}`,
+      value: cloudfronturl,
     });
+
+    this.createCanaryAlarm(cloudfronturl, 'main', 'main (/)');
   }
 
   createALB(port: number) {
@@ -125,10 +138,49 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.listener.addAction('DefaultAction', {
       action: ListenerAction.fixedResponse(400, {
-        messageBody:
-          'Invalid Request. Please include customer name in the request.',
+        messageBody: 'Invalid Request. Please include specific key',
       }),
     });
+
+    const activeConnectionsCount = new aws_cloudwatch.Alarm(
+      this,
+      `activeConnectionsCount`,
+      {
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        threshold: 10,
+        metric: this.alb.metricActiveConnectionCount(),
+        comparisonOperator:
+          aws_cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+      }
+    );
+
+    const activeConnectionsCountWidget = new aws_cloudwatch.AlarmWidget({
+      alarm: activeConnectionsCount,
+      title: `activeConnectionsCount`,
+    });
+
+    this.cloudwatchWidgets.push(activeConnectionsCountWidget);
+
+    const totalConnectionsCount = new aws_cloudwatch.Alarm(
+      this,
+      `totalConnectionsCount`,
+      {
+        evaluationPeriods: 1,
+        datapointsToAlarm: 1,
+        threshold: 10,
+        metric: this.alb.metricRequestCount(),
+        comparisonOperator:
+          aws_cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+      }
+    );
+
+    const totalConnectionsCountWidget = new aws_cloudwatch.AlarmWidget({
+      alarm: totalConnectionsCount,
+      title: `totalConnectionsCount`,
+    });
+
+    this.cloudwatchWidgets.push(totalConnectionsCountWidget);
   }
 
   createWorkers(number: number, size: string) {
@@ -218,19 +270,19 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
           );
         }
       }
-      var shardNumber = 0;
 
-      shards.forEach((shard) => {
-        shardNumber += 1;
+      shards.forEach((shard, index) => {
         const shardName = `${shard[0].node.id}-${shard[1].node.id}`;
         console.log(
-          `New virtual shard: ${shardName} assigned to ALB at /?${this.stringParameter}=${shardNumber}`
+          `New virtual shard: ${shardName} assigned to ALB at /?${
+            this.stringParameter
+          }=${index + 1}`
         );
         const target = [
           new InstanceTarget(shard[0], 80),
           new InstanceTarget(shard[1], 80),
         ];
-        this.addTargetsToALB(shardName, target, shardNumber);
+        this.addTargetsToALB(shardName, target, index + 1);
       });
     } else {
       instances.forEach((instance) => {
@@ -250,11 +302,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} virtual shards ♦️`
     );
 
-    const blastRadius = 100 / numberOfGroups;
+    const maxBlastRadius = 100 / numberOfGroups;
+    const minBlastRadius = 100 / instances.length;
     console.log(
-      options.sharding.enabled
-        ? `💥 Blast radius is 0% - ${blastRadius.toFixed(2)}% 💥\n`
-        : `💥 Blast radius is ${blastRadius.toFixed(2)}% 💥\n`
+      `💥 Blast radius = ${minBlastRadius.toFixed(2)}%-${maxBlastRadius.toFixed(
+        2
+      )}% 💥\n`
     );
     return numberOfGroups;
   }
@@ -288,8 +341,66 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       priority: priority,
     });
 
+    // Endpoint for the specific target group with the specific query string
+    const url = `http://${this.alb.loadBalancerDnsName}/?${this.stringParameter}=${priority}`;
     new CfnOutput(this, `LoadBalancerEndpoint-${name}`, {
-      value: `http://${this.alb.loadBalancerDnsName}/?${this.stringParameter}=${priority}`,
+      value: url,
     });
+
+    this.createCanaryAlarm(
+      url,
+      `${priority}`,
+      `/?${this.stringParameter}=${priority}`
+    );
+  }
+
+  createCanaryAlarm(url: string, id: string, CWtitle: string) {
+    const handler = `
+    const synthetics = require('Synthetics');
+    const log = require('SyntheticsLogger');
+    
+    const pageLoadBlueprint = async function () {
+    const url = '${url}';
+
+    const page = await synthetics.getPage();
+    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // Wait for page to render. Increase or decrease wait time based on endpoint being monitored.
+    await page.waitFor(15000);
+    // This will take a screenshot that will be included in test output artifacts.
+    await synthetics.takeScreenshot('loaded', 'loaded');
+    const pageTitle = await page.title();
+    log.info('Page title: ' + pageTitle);
+    if (response.status() !== 200) {
+      throw 'Failed to load page!';
+    }
+    };
+
+    exports.handler = async () => {
+      return await pageLoadBlueprint();
+    };
+    `;
+
+    const canary = new aws_synthetics_alpha.Canary(this, `canary-${id}`, {
+      schedule: aws_synthetics_alpha.Schedule.rate(Duration.minutes(5)),
+      test: aws_synthetics_alpha.Test.custom({
+        code: aws_synthetics_alpha.Code.fromInline(handler),
+        handler: 'index.handler',
+      }),
+      runtime: aws_synthetics_alpha.Runtime.SYNTHETICS_NODEJS_PUPPETEER_3_4,
+    });
+
+    const canaryAlarm = new aws_cloudwatch.Alarm(this, `alarm-${id}`, {
+      evaluationPeriods: 5,
+      threshold: 90,
+      metric: canary.metricSuccessPercent({ period: Duration.seconds(60) }),
+      comparisonOperator: aws_cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+    });
+
+    const cwWidget = new aws_cloudwatch.AlarmWidget({
+      alarm: canaryAlarm,
+      title: CWtitle,
+    });
+
+    this.cloudwatchWidgets.push(cwWidget);
   }
 }
