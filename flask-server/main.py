@@ -8,12 +8,12 @@ app = Flask("__main__")
 
 @app.route('/')
 def serve():
-    # instance_region = ec2_metadata.region
-    instance_region = "us-east-1" #//local debug
-    instance_id = "i-04a675c038a8b9e8d"  #// local debug
+    instance_region = ec2_metadata.region
+    # instance_region = "us-east-1" #//local debug
+    # instance_id = "i-04a675c038a8b9e8d"  #// local debug
     client = boto3.client('ec2', region_name=instance_region)
     workers = len(client.describe_instances(Filters=[{'Name':'tag:Name','Values':['*Worker*']},{'Name': 'instance-state-name', 'Values': ['running']}])['Reservations'])
-    # instance_id = ec2_metadata.instance_id # comment out locally
+    instance_id = ec2_metadata.instance_id # comment out locally
     instance = client.describe_tags(
     Filters=[
         {
