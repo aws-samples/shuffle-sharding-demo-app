@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/react/css/main.073c9b0a.css",
-    "main.js": "/static/react/js/main.c19af859.js",
+    "main.js": "/static/react/js/main.bde5f26b.js",
     "js/787.59dab4ec.chunk.js": "/static/react/js/787.59dab4ec.chunk.js",
     "media/Res_Amazon-CloudFront_Functions_48_Dark.svg": "/static/react/media/Res_Amazon-CloudFront_Functions_48_Dark.8c925e792b59c6b3ec75e68a2494b6e8.svg",
     "media/Res_Elastic-Load-Balancing_Network-Load-Balancer_48_Dark.svg": "/static/react/media/Res_Elastic-Load-Balancing_Network-Load-Balancer_48_Dark.fd7c4df865ab91506d16f4747181c323.svg",
@@ -10,11 +10,11 @@
     "media/Res_User_48_Dark.svg": "/static/react/media/Res_User_48_Dark.4131db722ac1b4ea1e2f218845af43ce.svg",
     "../../templates/index.html": "/static/react/../../templates/index.html",
     "main.073c9b0a.css.map": "/static/react/css/main.073c9b0a.css.map",
-    "main.c19af859.js.map": "/static/react/js/main.c19af859.js.map",
+    "main.bde5f26b.js.map": "/static/react/js/main.bde5f26b.js.map",
     "787.59dab4ec.chunk.js.map": "/static/react/js/787.59dab4ec.chunk.js.map"
   },
   "entrypoints": [
     "css/main.073c9b0a.css",
-    "js/main.c19af859.js"
+    "js/main.bde5f26b.js"
   ]
 }
