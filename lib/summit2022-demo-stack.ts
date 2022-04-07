@@ -247,6 +247,11 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
             actions: ['ec2:DescribeTags'],
             resources: ['*'],
           }),
+          new aws_iam.PolicyStatement({
+            effect: Effect.ALLOW,
+            actions: ['elasticloadbalancing:DescribeTargetGroups'],
+            resources: ['*'],
+          }),
         ],
       })
     );

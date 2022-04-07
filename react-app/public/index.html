@@ -26,7 +26,10 @@
     -->
     <title>React App</title>
     <script>
-      window.token = '{{flask_token}}';
+      console.log("'{{flask_token}}'");
+      console.log(atob('{{flask_token}}'));
+      console.log(JSON.parse(atob('{{flask_token}}')));
+      window.token = JSON.parse(atob('{{flask_token}}'));
     </script>
   </head>
   <body>

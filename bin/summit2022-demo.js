@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("source-map-support/register");
+const cdk = require("aws-cdk-lib");
+const summit2022_demo_stack_1 = require("../lib/summit2022-demo-stack");
+const app = new cdk.App();
+new summit2022_demo_stack_1.ShuffleShardingDemoSummit2022(app, 'ShuffleShardingDemoSummit2022', {
+    env: { account: '117923233529', region: 'us-east-1' },
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VtbWl0MjAyMi1kZW1vLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3VtbWl0MjAyMi1kZW1vLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUNBLHVDQUFxQztBQUNyQyxtQ0FBbUM7QUFDbkMsd0VBQTZFO0FBRTdFLE1BQU0sR0FBRyxHQUFHLElBQUksR0FBRyxDQUFDLEdBQUcsRUFBRSxDQUFDO0FBQzFCLElBQUkscURBQTZCLENBQUMsR0FBRyxFQUFFLCtCQUErQixFQUFFO0lBQ3RFLEdBQUcsRUFBRSxFQUFFLE9BQU8sRUFBRSxjQUFjLEVBQUUsTUFBTSxFQUFFLFdBQVcsRUFBRTtDQUN0RCxDQUFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIjIS91c3IvYmluL2VudiBub2RlXG5pbXBvcnQgJ3NvdXJjZS1tYXAtc3VwcG9ydC9yZWdpc3Rlcic7XG5pbXBvcnQgKiBhcyBjZGsgZnJvbSAnYXdzLWNkay1saWInO1xuaW1wb3J0IHsgU2h1ZmZsZVNoYXJkaW5nRGVtb1N1bW1pdDIwMjIgfSBmcm9tICcuLi9saWIvc3VtbWl0MjAyMi1kZW1vLXN0YWNrJztcblxuY29uc3QgYXBwID0gbmV3IGNkay5BcHAoKTtcbm5ldyBTaHVmZmxlU2hhcmRpbmdEZW1vU3VtbWl0MjAyMihhcHAsICdTaHVmZmxlU2hhcmRpbmdEZW1vU3VtbWl0MjAyMicsIHtcbiAgZW52OiB7IGFjY291bnQ6ICcxMTc5MjMyMzM1MjknLCByZWdpb246ICd1cy1lYXN0LTEnIH0sXG59KTtcbiJdfQ==

@@ -1,10 +1,10 @@
 #!/bin/bash -x
 yum update -y
 yum install python-pip -y
-pip install flask
-pip install boto3
+pip3 install flask
 yum install git -y
-pip install ec2-metadata
+pip3 install boto3
+pip3 install ec2-metadata
 cd ~
 git clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022
 cd ShuffleShardingDemo-Summit2022
@@ -16,4 +16,4 @@ npm install
 npm run build
 cd ..
 cd flask-server
-nohup python main.py >>/var/log/webserver.log 2>&1 &
+nohup python3 main.py >>/var/log/webserver.log 2>&1 &
