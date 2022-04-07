@@ -34,6 +34,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <p>My Token = {window.token}</p>
         <img id="user" src={user}></img>
         <Xarrow
           start="user"

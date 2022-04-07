@@ -5,10 +5,12 @@ from flask import Flask, render_template
 app = Flask("__main__")
 
 @app.route('/')
-def serve(path):
+def serve():
     instance_region = ec2_metadata.region
+    # instance_region = "us-east-1" //local debug
+    # instance_id = "i-0bbcc05da5fb99f54"  // local debug
     client = boto3.client('ec2', region_name=instance_region)
-    instance_id = ec2_metadata.instance_id
+    instance_id = ec2_metadata.instance_id # comment out locally
     instance = client.describe_tags(
     Filters=[
         {
@@ -26,6 +28,6 @@ def serve(path):
     ]
 )
     response = "<h1>This is " + instance['Tags'][0]['Value'] + "</h1>"
-    return render_template("index.html", flask_token="Hello   world")
+    return render_template("index.html", flask_token=response)
 if __name__ == "__main__":
-    app.run(use_reloader=True, host='0.0.0.0', port=80, threaded=True)
+    app.run(host='0.0.0.0', port=80, threaded=True)

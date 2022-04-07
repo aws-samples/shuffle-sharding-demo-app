@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/react/css/main.073c9b0a.css",
+    "main.js": "/static/react/js/main.d4cd0fde.js",
+    "js/787.59dab4ec.chunk.js": "/static/react/js/787.59dab4ec.chunk.js",
+    "media/Res_Amazon-CloudFront_Functions_48_Dark.svg": "/static/react/media/Res_Amazon-CloudFront_Functions_48_Dark.8c925e792b59c6b3ec75e68a2494b6e8.svg",
+    "media/Res_Elastic-Load-Balancing_Network-Load-Balancer_48_Dark.svg": "/static/react/media/Res_Elastic-Load-Balancing_Network-Load-Balancer_48_Dark.fd7c4df865ab91506d16f4747181c323.svg",
+    "media/Res_Amazon-CloudFront_Download-Distribution_48_Dark.svg": "/static/react/media/Res_Amazon-CloudFront_Download-Distribution_48_Dark.b81e224584ffad157edca19228d3de56.svg",
+    "media/Res_Amazon-EC2_Instance_48_Light.svg": "/static/react/media/Res_Amazon-EC2_Instance_48_Light.7af0c636830e51f8b48821b22cbd4c97.svg",
+    "media/Res_User_48_Dark.svg": "/static/react/media/Res_User_48_Dark.4131db722ac1b4ea1e2f218845af43ce.svg",
+    "../../templates/index.html": "/static/react/../../templates/index.html",
+    "main.073c9b0a.css.map": "/static/react/css/main.073c9b0a.css.map",
+    "main.d4cd0fde.js.map": "/static/react/js/main.d4cd0fde.js.map",
+    "787.59dab4ec.chunk.js.map": "/static/react/js/787.59dab4ec.chunk.js.map"
+  },
+  "entrypoints": [
+    "css/main.073c9b0a.css",
+    "js/main.d4cd0fde.js"
+  ]
+}
