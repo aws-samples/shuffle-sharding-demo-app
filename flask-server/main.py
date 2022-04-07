@@ -9,7 +9,7 @@ app = Flask("__main__")
 def serve():
     instance_region = ec2_metadata.region
     # instance_region = "us-east-1" #//local debug
-    # instance_id = "i-05dfdb583e6866c62"  #// local debug
+    # instance_id = "i-0e6574e4bf3be75fe"  #// local debug
     client = boto3.client('ec2', region_name=instance_region)
     instance_id = ec2_metadata.instance_id # comment out locally
     instance = client.describe_tags(
