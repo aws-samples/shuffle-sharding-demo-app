@@ -1265,7 +1265,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1/InstanceProfile"
       }
     },
-    "Worker1C6282B121f56ff46a48fd9a4": {
+    "Worker1C6282B121f0e67cd28087bfa": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1b",
@@ -1303,7 +1303,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install boto3\npip install flask\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1438,7 +1438,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2/InstanceProfile"
       }
     },
-    "Worker21CDE475D1f56ff46a48fd9a4": {
+    "Worker21CDE475D1f0e67cd28087bfa": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1c",
@@ -1476,7 +1476,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install boto3\npip install flask\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1611,7 +1611,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3/InstanceProfile"
       }
     },
-    "Worker356A1B6C41f56ff46a48fd9a4": {
+    "Worker356A1B6C41f0e67cd28087bfa": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1a",
@@ -1649,7 +1649,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install boto3\npip install flask\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1784,7 +1784,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4/InstanceProfile"
       }
     },
-    "Worker49A67C52E1f56ff46a48fd9a4": {
+    "Worker49A67C52E1f0e67cd28087bfa": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1b",
@@ -1822,7 +1822,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install boto3\npip install flask\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip install flask\npip install boto3\nyum install git -y\npip install ec2-metadata\ncd ~\nmkdir serving_static\ncd serving_static\ncurl -o serve.py https://raw.githubusercontent.com/dudutwizer/ShuffleShardingDemo-Summit2022/main/lib/serve.py\nmkdir react_app\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\nmv -v ./ShuffleShardingDemo-Summit2022/website/shuffle-demo/build/* ./react_app\nnohup python serve.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1872,13 +1872,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker1C6282B121f56ff46a48fd9a4"
+              "Ref": "Worker1C6282B121f0e67cd28087bfa"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker21CDE475D1f56ff46a48fd9a4"
+              "Ref": "Worker21CDE475D1f0e67cd28087bfa"
             },
             "Port": 80
           }
@@ -2148,13 +2148,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker1C6282B121f56ff46a48fd9a4"
+              "Ref": "Worker1C6282B121f0e67cd28087bfa"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker356A1B6C41f56ff46a48fd9a4"
+              "Ref": "Worker356A1B6C41f0e67cd28087bfa"
             },
             "Port": 80
           }
@@ -2424,13 +2424,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker1C6282B121f56ff46a48fd9a4"
+              "Ref": "Worker1C6282B121f0e67cd28087bfa"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker49A67C52E1f56ff46a48fd9a4"
+              "Ref": "Worker49A67C52E1f0e67cd28087bfa"
             },
             "Port": 80
           }
@@ -2700,13 +2700,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker21CDE475D1f56ff46a48fd9a4"
+              "Ref": "Worker21CDE475D1f0e67cd28087bfa"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker356A1B6C41f56ff46a48fd9a4"
+              "Ref": "Worker356A1B6C41f0e67cd28087bfa"
             },
             "Port": 80
           }
@@ -2976,13 +2976,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker21CDE475D1f56ff46a48fd9a4"
+              "Ref": "Worker21CDE475D1f0e67cd28087bfa"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker49A67C52E1f56ff46a48fd9a4"
+              "Ref": "Worker49A67C52E1f0e67cd28087bfa"
             },
             "Port": 80
           }
@@ -3252,13 +3252,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker356A1B6C41f56ff46a48fd9a4"
+              "Ref": "Worker356A1B6C41f0e67cd28087bfa"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker49A67C52E1f56ff46a48fd9a4"
+              "Ref": "Worker49A67C52E1f0e67cd28087bfa"
             },
             "Port": 80
           }

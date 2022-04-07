@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::117923233529:role/cdk-hnb659fds-deploy-role-117923233529-us-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::117923233529:role/cdk-hnb659fds-cfn-exec-role-117923233529-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-117923233529-us-east-1/02fa59c54f3b3fe57c01400cab812f0a4401dfff9d961ff2d9232dcd25ab9536.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-117923233529-us-east-1/88abd94adf8bab054fada5d0efdf2322c6aee028aa209882b5798832fe1d601b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -360,7 +360,7 @@
         "/ShuffleShardingDemoSummit2022/Worker1/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker1C6282B121f56ff46a48fd9a4"
+            "data": "Worker1C6282B121f0e67cd28087bfa"
           }
         ],
         "/ShuffleShardingDemoSummit2022/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
@@ -402,7 +402,7 @@
         "/ShuffleShardingDemoSummit2022/Worker2/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker21CDE475D1f56ff46a48fd9a4"
+            "data": "Worker21CDE475D1f0e67cd28087bfa"
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker2readTags/Resource": [
@@ -438,7 +438,7 @@
         "/ShuffleShardingDemoSummit2022/Worker3/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker356A1B6C41f56ff46a48fd9a4"
+            "data": "Worker356A1B6C41f0e67cd28087bfa"
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker3readTags/Resource": [
@@ -474,7 +474,7 @@
         "/ShuffleShardingDemoSummit2022/Worker4/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "Worker49A67C52E1f56ff46a48fd9a4"
+            "data": "Worker49A67C52E1f0e67cd28087bfa"
           }
         ],
         "/ShuffleShardingDemoSummit2022/Worker4readTags/Resource": [

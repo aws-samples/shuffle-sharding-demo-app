@@ -1,7 +1,7 @@
 {
   "version": "16.0.0",
   "files": {
-    "02fa59c54f3b3fe57c01400cab812f0a4401dfff9d961ff2d9232dcd25ab9536": {
+    "88abd94adf8bab054fada5d0efdf2322c6aee028aa209882b5798832fe1d601b": {
       "source": {
         "path": "ShuffleShardingDemoSummit2022.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "117923233529-us-east-1": {
           "bucketName": "cdk-hnb659fds-assets-117923233529-us-east-1",
-          "objectKey": "02fa59c54f3b3fe57c01400cab812f0a4401dfff9d961ff2d9232dcd25ab9536.json",
+          "objectKey": "88abd94adf8bab054fada5d0efdf2322c6aee028aa209882b5798832fe1d601b.json",
           "region": "us-east-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::117923233529:role/cdk-hnb659fds-file-publishing-role-117923233529-us-east-1"
         }
