@@ -30,4 +30,4 @@ def serve():
     response = "<h1>This is " + instance['Tags'][0]['Value'] + "</h1>"
     return render_template("index.html", flask_token=response)
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, threaded=True)
+    app.run(host='0.0.0.0', port=80)

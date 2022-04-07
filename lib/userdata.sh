@@ -8,9 +8,14 @@ pip install ec2-metadata
 cd ~
 git clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022
 cd ShuffleShardingDemo-Summit2022
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install node
+# get node into yum
+curl --silent --location https://rpm.nodesource.com/setup_17.x | bash -
+# install node (and npm) with yum
+yum -y install nodejs
+npm install typescript -g
+cd react-app
+npm install
 npm run build
+cd..
 cd flask-server
-nohup python serve.py >>/var/log/webserver.log 2>&1 &
+nohup python main.py >>/var/log/webserver.log 2>&1 &
