@@ -8,11 +8,11 @@ app = Flask("__main__")
 
 @app.route('/')
 def serve():
-    # instance_region = ec2_metadata.region
-    instance_region = "us-east-1" #//local debug
-    instance_id = "i-095f05b10ef396a4f"  #// local debug
+    instance_region = ec2_metadata.region
+    # instance_region = "us-east-1" #//local debug
+    # instance_id = "i-095f05b10ef396a4f"  #// local debug
     client = boto3.client('ec2', region_name=instance_region)
-    # instance_id = ec2_metadata.instance_id # comment out locally
+    instance_id = ec2_metadata.instance_id # comment out locally
     instance = client.describe_tags(
     Filters=[
         {
@@ -39,7 +39,7 @@ def serve():
         "instance_name": instance_name,
         "keyname": keyname,
         "keyvalue": value,
-        
+
     }
 
     base64_bytes = base64.b64encode(json.dumps(payload).encode('ascii'))
