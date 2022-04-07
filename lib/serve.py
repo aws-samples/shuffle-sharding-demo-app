@@ -2,7 +2,7 @@ import boto3
 from ec2_metadata import ec2_metadata
 from flask import Flask, request, render_template
 
-app = Flask(__name__, static_folder="build/static", template_folder="build")
+app = Flask(__name__, static_folder="build", template_folder="build")
 
 def shutdown_server():
     func = request.environ.get('werkzeug.server.shutdown')
