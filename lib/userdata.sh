@@ -2,8 +2,8 @@
 yum update -y
 yum install python-pip -y
 pip install boto3
-yum install git -y
 pip install flask
+yum install git -y
 pip install ec2-metadata
 cd ~
 mkdir serving_static

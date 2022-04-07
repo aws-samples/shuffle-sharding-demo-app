@@ -5,9 +5,7 @@ from flask import Flask, send_from_directory
 
 app = Flask(__name__, static_folder='react_app/build')
 
-# Serve React App
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/')
 def serve(path):
     instance_region = ec2_metadata.region
     client = boto3.client('ec2', region_name=instance_region)
