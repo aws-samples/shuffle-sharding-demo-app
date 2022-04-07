@@ -201,9 +201,7 @@ function TargetGroup(props) {
               <img src={Instance}></img>
               <br></br>
               {props.instance_name == data[0] ? (
-                <p style="font-size: 18px; color:#4a54f1, font-weight: bold">
-                  {data[0]}
-                </p>
+                <p style="font-size: 18px;font-weight: bold">{data[0]}</p>
               ) : (
                 <>{data[0]}</>
               )}
@@ -212,7 +210,7 @@ function TargetGroup(props) {
               <img src={Instance}></img>
               <br></br>
               {props.instance_name == data[1] ? (
-                <b>{data[1]}</b>
+                <p style="font-size: 18px;font-weight: bold">{data[1]}</p>
               ) : (
                 <>{data[1]}</>
               )}

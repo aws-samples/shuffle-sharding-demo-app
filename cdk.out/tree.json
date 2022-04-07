@@ -1845,7 +1845,7 @@
                       }
                     ],
                     "userData": {
-                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install ec2-metadata\npip3 install boto3\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
                     }
                   }
                 },
@@ -1890,6 +1890,11 @@
                       "Statement": [
                         {
                           "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        },
+                        {
+                          "Action": "ec2:DescribeInstances",
                           "Effect": "Allow",
                           "Resource": "*"
                         },
@@ -2111,7 +2116,7 @@
                       }
                     ],
                     "userData": {
-                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install ec2-metadata\npip3 install boto3\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
                     }
                   }
                 },
@@ -2140,6 +2145,11 @@
                       "Statement": [
                         {
                           "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        },
+                        {
+                          "Action": "ec2:DescribeInstances",
                           "Effect": "Allow",
                           "Resource": "*"
                         },
@@ -2361,7 +2371,7 @@
                       }
                     ],
                     "userData": {
-                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install ec2-metadata\npip3 install boto3\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
                     }
                   }
                 },
@@ -2390,6 +2400,11 @@
                       "Statement": [
                         {
                           "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        },
+                        {
+                          "Action": "ec2:DescribeInstances",
                           "Effect": "Allow",
                           "Resource": "*"
                         },
@@ -2611,7 +2626,7 @@
                       }
                     ],
                     "userData": {
-                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+                      "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install ec2-metadata\npip3 install boto3\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
                     }
                   }
                 },
@@ -2640,6 +2655,11 @@
                       "Statement": [
                         {
                           "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        },
+                        {
+                          "Action": "ec2:DescribeInstances",
                           "Effect": "Allow",
                           "Resource": "*"
                         },
@@ -2698,25 +2718,25 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker1C6282B125cc29eccbc7e03c8"
+                          "Ref": "Worker1C6282B12b7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
+                          "Ref": "Worker21CDE475Db7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
+                          "Ref": "Worker356A1B6C4b7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
+                          "Ref": "Worker49A67C52Eb7183958ce11b631"
                         },
                         "port": 80
                       }
@@ -3082,13 +3102,13 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker1C6282B125cc29eccbc7e03c8"
+                          "Ref": "Worker1C6282B12b7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
+                          "Ref": "Worker21CDE475Db7183958ce11b631"
                         },
                         "port": 80
                       }
@@ -3454,13 +3474,13 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker1C6282B125cc29eccbc7e03c8"
+                          "Ref": "Worker1C6282B12b7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
+                          "Ref": "Worker356A1B6C4b7183958ce11b631"
                         },
                         "port": 80
                       }
@@ -3826,13 +3846,13 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker1C6282B125cc29eccbc7e03c8"
+                          "Ref": "Worker1C6282B12b7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
+                          "Ref": "Worker49A67C52Eb7183958ce11b631"
                         },
                         "port": 80
                       }
@@ -4198,13 +4218,13 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
+                          "Ref": "Worker21CDE475Db7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
+                          "Ref": "Worker356A1B6C4b7183958ce11b631"
                         },
                         "port": 80
                       }
@@ -4570,13 +4590,13 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
+                          "Ref": "Worker21CDE475Db7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
+                          "Ref": "Worker49A67C52Eb7183958ce11b631"
                         },
                         "port": 80
                       }
@@ -4942,13 +4962,13 @@
                     "targets": [
                       {
                         "id": {
-                          "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
+                          "Ref": "Worker356A1B6C4b7183958ce11b631"
                         },
                         "port": 80
                       },
                       {
                         "id": {
-                          "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
+                          "Ref": "Worker49A67C52Eb7183958ce11b631"
                         },
                         "port": 80
                       }
