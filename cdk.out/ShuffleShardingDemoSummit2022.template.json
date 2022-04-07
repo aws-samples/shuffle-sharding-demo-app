@@ -642,7 +642,18 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=1\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=100\",\"region\":\"",
+              {
+                "Ref": "AWS::Region"
+              },
+              "\",\"annotations\":{\"alarms\":[\"",
+              {
+                "Fn::GetAtt": [
+                  "alarm100648CECB2",
+                  "Arn"
+                ]
+              },
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=1\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -653,7 +664,7 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=2\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=2\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -664,7 +675,7 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=3\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=3\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -675,7 +686,7 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=4\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=4\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -686,7 +697,7 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":12,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=5\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=5\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -697,7 +708,7 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":18,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=6\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":12,\"properties\":{\"view\":\"timeSeries\",\"title\":\"/?number=6\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -708,7 +719,7 @@
                   "Arn"
                 ]
               },
-              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":12,\"properties\":{\"view\":\"timeSeries\",\"title\":\"main (/)\",\"region\":\"",
+              "\"]},\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":12,\"properties\":{\"view\":\"timeSeries\",\"title\":\"main (/)\",\"region\":\"",
               {
                 "Ref": "AWS::Region"
               },
@@ -891,11 +902,10 @@
       "Properties": {
         "DefaultActions": [
           {
-            "FixedResponseConfig": {
-              "MessageBody": "Invalid Request. Please include specific key",
-              "StatusCode": "400"
+            "TargetGroupArn": {
+              "Ref": "RoundRobin8DC08430"
             },
-            "Type": "fixed-response"
+            "Type": "forward"
           }
         ],
         "LoadBalancerArn": {
@@ -1265,7 +1275,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker1/InstanceProfile"
       }
     },
-    "Worker1C6282B12326fba9e808ed4b1": {
+    "Worker1C6282B125cc29eccbc7e03c8": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1b",
@@ -1303,7 +1313,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip3 install flask\nyum install git -y\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1325,6 +1335,11 @@
             },
             {
               "Action": "elasticloadbalancing:DescribeTargetGroups",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "elasticloadbalancing:DescribeLoadBalancers",
               "Effect": "Allow",
               "Resource": "*"
             }
@@ -1443,7 +1458,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker2/InstanceProfile"
       }
     },
-    "Worker21CDE475D326fba9e808ed4b1": {
+    "Worker21CDE475D5cc29eccbc7e03c8": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1c",
@@ -1481,7 +1496,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip3 install flask\nyum install git -y\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1503,6 +1518,11 @@
             },
             {
               "Action": "elasticloadbalancing:DescribeTargetGroups",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "elasticloadbalancing:DescribeLoadBalancers",
               "Effect": "Allow",
               "Resource": "*"
             }
@@ -1621,7 +1641,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker3/InstanceProfile"
       }
     },
-    "Worker356A1B6C4326fba9e808ed4b1": {
+    "Worker356A1B6C45cc29eccbc7e03c8": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1a",
@@ -1659,7 +1679,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip3 install flask\nyum install git -y\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1681,6 +1701,11 @@
             },
             {
               "Action": "elasticloadbalancing:DescribeTargetGroups",
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "elasticloadbalancing:DescribeLoadBalancers",
               "Effect": "Allow",
               "Resource": "*"
             }
@@ -1799,7 +1824,7 @@
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4/InstanceProfile"
       }
     },
-    "Worker49A67C52E326fba9e808ed4b1": {
+    "Worker49A67C52E5cc29eccbc7e03c8": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-east-1b",
@@ -1837,7 +1862,7 @@
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\npip3 install flask\nyum install git -y\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
+          "Fn::Base64": "#!/bin/bash -x\nyum update -y\nyum install python-pip -y\nyum install git -y\npip3 install flask\npip3 install boto3\npip3 install ec2-metadata\ncd ~\ngit clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022\ncd ShuffleShardingDemo-Summit2022\ncurl --silent --location https://rpm.nodesource.com/setup_17.x | bash -\nyum -y install nodejs\nnpm install typescript -g\ncd react-app\nnpm install\nnpm run build\ncd ..\ncd flask-server\nnohup python3 main.py >>/var/log/webserver.log 2>&1 &"
         }
       },
       "DependsOn": [
@@ -1861,6 +1886,11 @@
               "Action": "elasticloadbalancing:DescribeTargetGroups",
               "Effect": "Allow",
               "Resource": "*"
+            },
+            {
+              "Action": "elasticloadbalancing:DescribeLoadBalancers",
+              "Effect": "Allow",
+              "Resource": "*"
             }
           ],
           "Version": "2012-10-17"
@@ -1870,6 +1900,294 @@
       },
       "Metadata": {
         "aws:cdk:path": "ShuffleShardingDemoSummit2022/Worker4readTags/Resource"
+      }
+    },
+    "RoundRobin8DC08430": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckEnabled": true,
+        "HealthCheckIntervalSeconds": 5,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 2,
+        "HealthyThresholdCount": 2,
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false"
+          }
+        ],
+        "Targets": [
+          {
+            "Id": {
+              "Ref": "Worker1C6282B125cc29eccbc7e03c8"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
+            },
+            "Port": 80
+          },
+          {
+            "Id": {
+              "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
+            },
+            "Port": 80
+          }
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "vpcA2121C38"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/RoundRobin/Resource"
+      }
+    },
+    "canary100ArtifactsBucket5206AD58": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "aws:kms"
+              }
+            }
+          ]
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/canary-100/ArtifactsBucket/Resource"
+      }
+    },
+    "canary100ArtifactsBucketPolicyFD70FCDF": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "canary100ArtifactsBucket5206AD58"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "canary100ArtifactsBucket5206AD58",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "canary100ArtifactsBucket5206AD58",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/canary-100/ArtifactsBucket/Policy/Resource"
+      }
+    },
+    "canary100ServiceRoleF63BFBB1": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "s3:ListAllMyBuckets",
+                  "Effect": "Allow",
+                  "Resource": "*"
+                },
+                {
+                  "Action": "s3:GetBucketLocation",
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "canary100ArtifactsBucket5206AD58",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Action": "s3:PutObject",
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        {
+                          "Fn::GetAtt": [
+                            "canary100ArtifactsBucket5206AD58",
+                            "Arn"
+                          ]
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                },
+                {
+                  "Action": "cloudwatch:PutMetricData",
+                  "Condition": {
+                    "StringEquals": {
+                      "cloudwatch:namespace": "CloudWatchSynthetics"
+                    }
+                  },
+                  "Effect": "Allow",
+                  "Resource": "*"
+                },
+                {
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:CreateLogGroup",
+                    "logs:PutLogEvents"
+                  ],
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":logs:us-east-1:117923233529:log-group:/aws/lambda/cwsyn-*"
+                      ]
+                    ]
+                  }
+                }
+              ],
+              "Version": "2012-10-17"
+            },
+            "PolicyName": "canaryPolicy"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/canary-100/ServiceRole/Resource"
+      }
+    },
+    "canary1009865DB21": {
+      "Type": "AWS::Synthetics::Canary",
+      "Properties": {
+        "ArtifactS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "canary100ArtifactsBucket5206AD58"
+              }
+            ]
+          ]
+        },
+        "Code": {
+          "Handler": "index.handler",
+          "Script": {
+            "Fn::Join": [
+              "",
+              [
+                "\n    const synthetics = require('Synthetics');\n    const log = require('SyntheticsLogger');\n    \n    const pageLoadBlueprint = async function () {\n    const url = 'http://",
+                {
+                  "Fn::GetAtt": [
+                    "AppLoadBalancer0268F95E",
+                    "DNSName"
+                  ]
+                },
+                "/?number=100';\n\n    const page = await synthetics.getPage();\n    const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });\n    // Wait for page to render. Increase or decrease wait time based on endpoint being monitored.\n    await page.waitFor(15000);\n    // This will take a screenshot that will be included in test output artifacts.\n    await synthetics.takeScreenshot('loaded', 'loaded');\n    const pageTitle = await page.title();\n    log.info('Page title: ' + pageTitle);\n    if (response.status() !== 200) {\n      throw 'Failed to load page!';\n    }\n    };\n\n    exports.handler = async () => {\n      return await pageLoadBlueprint();\n    };\n    "
+              ]
+            ]
+          }
+        },
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "canary100ServiceRoleF63BFBB1",
+            "Arn"
+          ]
+        },
+        "Name": "shufflesharding047244",
+        "RuntimeVersion": "syn-nodejs-puppeteer-3.4",
+        "Schedule": {
+          "DurationInSeconds": "0",
+          "Expression": "rate(5 minutes)"
+        },
+        "StartCanaryAfterCreation": true
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/canary-100/Resource"
+      }
+    },
+    "alarm100648CECB2": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ComparisonOperator": "LessThanThreshold",
+        "EvaluationPeriods": 5,
+        "Dimensions": [
+          {
+            "Name": "CanaryName",
+            "Value": {
+              "Ref": "canary1009865DB21"
+            }
+          }
+        ],
+        "MetricName": "SuccessPercent",
+        "Namespace": "CloudWatchSynthetics",
+        "Period": 60,
+        "Statistic": "Average",
+        "Threshold": 90
+      },
+      "Metadata": {
+        "aws:cdk:path": "ShuffleShardingDemoSummit2022/alarm-100/Resource"
       }
     },
     "Worker1Worker204A96BDA": {
@@ -1892,13 +2210,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker1C6282B12326fba9e808ed4b1"
+              "Ref": "Worker1C6282B125cc29eccbc7e03c8"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker21CDE475D326fba9e808ed4b1"
+              "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
             },
             "Port": 80
           }
@@ -2168,13 +2486,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker1C6282B12326fba9e808ed4b1"
+              "Ref": "Worker1C6282B125cc29eccbc7e03c8"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker356A1B6C4326fba9e808ed4b1"
+              "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
             },
             "Port": 80
           }
@@ -2444,13 +2762,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker1C6282B12326fba9e808ed4b1"
+              "Ref": "Worker1C6282B125cc29eccbc7e03c8"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker49A67C52E326fba9e808ed4b1"
+              "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
             },
             "Port": 80
           }
@@ -2720,13 +3038,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker21CDE475D326fba9e808ed4b1"
+              "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker356A1B6C4326fba9e808ed4b1"
+              "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
             },
             "Port": 80
           }
@@ -2996,13 +3314,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker21CDE475D326fba9e808ed4b1"
+              "Ref": "Worker21CDE475D5cc29eccbc7e03c8"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker49A67C52E326fba9e808ed4b1"
+              "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
             },
             "Port": 80
           }
@@ -3272,13 +3590,13 @@
         "Targets": [
           {
             "Id": {
-              "Ref": "Worker356A1B6C4326fba9e808ed4b1"
+              "Ref": "Worker356A1B6C45cc29eccbc7e03c8"
             },
             "Port": 80
           },
           {
             "Id": {
-              "Ref": "Worker49A67C52E326fba9e808ed4b1"
+              "Ref": "Worker49A67C52E5cc29eccbc7e03c8"
             },
             "Port": 80
           }
@@ -3533,7 +3851,7 @@
       "Properties": {
         "Name": "redirectToRandomShard",
         "AutoPublish": true,
-        "FunctionCode": "function handler(event) {\n        var request = event.request;\n        var querystring = request.querystring;\n        if (!querystring['number']){\n          var newUri;\n          var randomkey = getRndInteger(1, 6);\n          newUri = '/?number=' + randomkey;\n          var response = {\n            statusCode: 302,\n            statusDescription: 'Found',\n            headers: {\n              location: { value: newUri },\n            },\n          };\n          return response;\n        }\n        return request;\n      }\n\n      function getRndInteger(min, max) {\n        min = Math.ceil(min); // rounds a number up to the next largest integer\n        max = Math.floor(max); // returns the largest integer less than or equal to a given number\n        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive\n      }\n",
+        "FunctionCode": "function handler(event) {\n        var request = event.request;\n        var querystring = request.querystring;\n        var pattern = /static/;\n        if(!pattern.test(request.uri))\n        {\n          if (!querystring['number']){\n            var newUri;\n            var randomkey = getRndInteger(1, 6);\n            newUri = '/?number=' + randomkey;\n            var response = {\n              statusCode: 302,\n              statusDescription: 'Found',\n              headers: {\n                location: { value: newUri },\n              },\n            };\n            return response;\n          }\n        }\n        return request;\n      }\n\n      function getRndInteger(min, max) {\n        min = Math.ceil(min); // rounds a number up to the next largest integer\n        max = Math.floor(max); // returns the largest integer less than or equal to a given number\n        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive\n      }\n",
         "FunctionConfig": {
           "Comment": "Function to redirect all incoming requests to /?number= + Random Number (i.e: /?number=1)",
           "Runtime": "cloudfront-js-1.0"
@@ -3870,6 +4188,23 @@
     }
   },
   "Outputs": {
+    "LoadBalancerEndpointRoundRobin": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "http://",
+            {
+              "Fn::GetAtt": [
+                "AppLoadBalancer0268F95E",
+                "DNSName"
+              ]
+            },
+            "/?number=100"
+          ]
+        ]
+      }
+    },
     "LoadBalancerEndpointWorker1Worker2": {
       "Value": {
         "Fn::Join": [

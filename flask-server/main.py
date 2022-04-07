@@ -8,11 +8,12 @@ app = Flask("__main__")
 
 @app.route('/')
 def serve():
-    instance_region = ec2_metadata.region
-    # instance_region = "us-east-1" #//local debug
-    # instance_id = "i-095f05b10ef396a4f"  #// local debug
+    # instance_region = ec2_metadata.region
+    instance_region = "us-east-1" #//local debug
+    instance_id = "i-04a675c038a8b9e8d"  #// local debug
     client = boto3.client('ec2', region_name=instance_region)
-    instance_id = ec2_metadata.instance_id # comment out locally
+    workers = len(client.describe_instances(Filters=[{'Name':'tag:Name','Values':['*Worker*']},{'Name': 'instance-state-name', 'Values': ['running']}])['Reservations'])
+    # instance_id = ec2_metadata.instance_id # comment out locally
     instance = client.describe_tags(
     Filters=[
         {
@@ -30,7 +31,7 @@ def serve():
     ]
 )
     client = boto3.client('elbv2', region_name=instance_region)
-    targetgroups = len(client.describe_target_groups(LoadBalancerArn="arn:aws:elasticloadbalancing:us-east-1:117923233529:loadbalancer/app/Shuff-AppLo-KDFFDIH6DP1V/82e814eb738b18fc")['TargetGroups'])
+    targetgroups = len(client.describe_target_groups(LoadBalancerArn=client.describe_load_balancers()['LoadBalancers'][0]['LoadBalancerArn'])['TargetGroups'])-1
     instance_name = instance['Tags'][0]['Value']
     keyname = 'number'
     value = request.args.get(keyname)
@@ -39,7 +40,7 @@ def serve():
         "instance_name": instance_name,
         "keyname": keyname,
         "keyvalue": value,
-
+        "number_of_vms": workers
     }
 
     base64_bytes = base64.b64encode(json.dumps(payload).encode('ascii'))

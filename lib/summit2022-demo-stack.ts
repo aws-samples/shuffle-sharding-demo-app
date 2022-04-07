@@ -7,6 +7,7 @@ import {
   Duration,
   Stack,
   StackProps,
+  Tags,
 } from 'aws-cdk-lib';
 import * as aws_synthetics_alpha from '@aws-cdk/aws-synthetics-alpha';
 import {
@@ -55,6 +56,8 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     const instances: aws_ec2.Instance[] = this.createWorkers(4, 't3.medium');
 
+    this.defaultRoundRobing(instances);
+
     const numberOfGroups = this.createGroups(instances, {
       sharding: { enabled: true, shuffle: true },
     });
@@ -73,18 +76,22 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         `function handler(event) {
         var request = event.request;
         var querystring = request.querystring;
-        if (!querystring['${this.stringParameter}']){
-          var newUri;
-          var randomkey = getRndInteger(1, ${number});
-          newUri = '/?${this.stringParameter}=' + randomkey;
-          var response = {
-            statusCode: 302,
-            statusDescription: 'Found',
-            headers: {
-              location: { value: newUri },
-            },
-          };
-          return response;
+        var pattern = /static/;
+        if(!pattern.test(request.uri))
+        {
+          if (!querystring['${this.stringParameter}']){
+            var newUri;
+            var randomkey = getRndInteger(1, ${number});
+            newUri = '/?${this.stringParameter}=' + randomkey;
+            var response = {
+              statusCode: 302,
+              statusDescription: 'Found',
+              headers: {
+                location: { value: newUri },
+              },
+            };
+            return response;
+          }
         }
         return request;
       }
@@ -135,12 +142,6 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     });
 
     this.listener = this.alb.addListener('AppMainListener', { port: port });
-
-    this.listener.addAction('DefaultAction', {
-      action: ListenerAction.fixedResponse(400, {
-        messageBody: 'Invalid Request. Please include specific key',
-      }),
-    });
 
     const activeConnectionsCount = new aws_cloudwatch.Alarm(
       this,
@@ -210,6 +211,15 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     return instances;
   }
 
+  defaultRoundRobing(instances: aws_ec2.Instance[]) {
+    let targets: IApplicationLoadBalancerTarget[] = [];
+    instances.forEach((instance) => {
+      targets.push(new InstanceTarget(instance, 80));
+    });
+    console.log(`New virtual shard for all VMs assigned to ALB at /`);
+    this.addTargetsToALB('RoundRobin', targets, 100, false);
+  }
+
   newInstance(
     name: string,
     machineImage: aws_ec2.IMachineImage,
@@ -249,7 +259,17 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
           }),
           new aws_iam.PolicyStatement({
             effect: Effect.ALLOW,
+            actions: ['ec2:DescribeInstances'],
+            resources: ['*'],
+          }),
+          new aws_iam.PolicyStatement({
+            effect: Effect.ALLOW,
             actions: ['elasticloadbalancing:DescribeTargetGroups'],
+            resources: ['*'],
+          }),
+          new aws_iam.PolicyStatement({
+            effect: Effect.ALLOW,
+            actions: ['elasticloadbalancing:DescribeLoadBalancers'],
             resources: ['*'],
           }),
         ],
@@ -331,7 +351,8 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   addTargetsToALB(
     name: string,
     targets: IApplicationLoadBalancerTarget[],
-    priority: number
+    priority: number,
+    queryStringEnabled?: boolean
   ) {
     const targetGroup = new ApplicationTargetGroup(this, name, {
       vpc: this.vpc,
@@ -348,14 +369,21 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         unhealthyThresholdCount: 2,
       },
     });
+    queryStringEnabled = queryStringEnabled ?? true;
 
     const queryStrings = { key: this.stringParameter, value: `${priority}` };
 
-    this.listener.addAction(name, {
-      action: ListenerAction.forward([targetGroup]),
-      conditions: [ListenerCondition.queryStrings([queryStrings])],
-      priority: priority,
-    });
+    if (queryStringEnabled) {
+      this.listener.addAction(name, {
+        action: ListenerAction.forward([targetGroup]),
+        conditions: [ListenerCondition.queryStrings([queryStrings])],
+        priority: priority,
+      });
+    } else {
+      this.listener.addAction(name, {
+        action: ListenerAction.forward([targetGroup]),
+      });
+    }
 
     // Endpoint for the specific target group with the specific query string
     const url = `http://${this.alb.loadBalancerDnsName}/?${this.stringParameter}=${priority}`;

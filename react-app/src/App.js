@@ -9,17 +9,6 @@ import loadbalancer from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networki
 import Cloudfront from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networking-and-Content-Delivery/Res_48_Dark/Res_Amazon-CloudFront_Download-Distribution_48_Dark.svg';
 import Xarrow from 'react-xarrows';
 
-const ec2 = [
-  {
-    name: 'Worker 1',
-    selected: false,
-  },
-  {
-    name: 'Worker 2',
-    selected: true,
-  },
-];
-
 function App() {
   return (
     <div className="App">
@@ -70,31 +59,43 @@ function SectionComponent(props) {
     let workstation_id = window.token.instance_name.split('/')[1];
     let number_of_target_groups = window.token.targetgroupsSize;
     let my_target_group_id = window.token.keyvalue;
-    console.log(workstation_id, my_target_group_id);
+    let number_of_vms = window.token.number_of_vms;
     let cols = [];
+    let ec2list = [];
 
-    for (let i = 0; i < number_of_target_groups; i++) {
-      if (i + 1 == my_target_group_id) {
+    for (let a = 1; a < number_of_vms + 1; a++) {
+      ec2list.push('Worker' + a);
+    }
+    let array_of_tg = [];
+
+    for (let a = 0; a < number_of_vms; a++) {
+      for (let b = a + 1; b < number_of_vms; b++) {
+        console.log('newGroup', a, b);
+        array_of_tg.push([ec2list[a], ec2list[b]]);
+      }
+    }
+    console.log(array_of_tg);
+    array_of_tg.forEach((shard, index) => {
+      let humenIndex = index + 1;
+      if (humenIndex == my_target_group_id) {
         cols.push(
           <td style={{ padding: 10 }}>
             <TargetGroup
-              data={ec2}
-              title={'Target Group' + (parseInt(i) + 1)}
+              data={shard}
+              title={'Target Group ' + humenIndex}
               selected="true"
+              instance_name={workstation_id}
             />
           </td>
         );
       } else {
         cols.push(
           <td style={{ padding: 10 }}>
-            <TargetGroup
-              data={ec2}
-              title={'Target Group' + (parseInt(i) + 1)}
-            />
+            <TargetGroup data={shard} title={'Target Group ' + humenIndex} />
           </td>
         );
       }
-    }
+    });
     cols.push(
       <Xarrow
         start="user"
@@ -196,15 +197,25 @@ function TargetGroup(props) {
       >
         <table>
           <tr id="selectedtg">
-            <td id={data[0].name}>
+            <td id={data[0]}>
               <img src={Instance}></img>
               <br></br>
-              {data[0].name}
+              {props.instance_name == data[0] ? (
+                <p style="font-size: 18px; color:#4a54f1, font-weight: bold">
+                  {data[0]}
+                </p>
+              ) : (
+                <>{data[0]}</>
+              )}
             </td>
-            <td id={data[1].name}>
+            <td id={data[1]}>
               <img src={Instance}></img>
               <br></br>
-              {data[1].name}
+              {props.instance_name == data[1] ? (
+                <b>{data[1]}</b>
+              ) : (
+                <>{data[1]}</>
+              )}
             </td>
           </tr>
         </table>
@@ -221,12 +232,12 @@ function TargetGroup(props) {
             <td>
               <img src={Instance}></img>
               <br></br>
-              {data[0].name}
+              {data[0]}
             </td>
             <td>
               <img src={Instance}></img>
               <br></br>
-              {data[1].name}
+              {data[1]}
             </td>
           </tr>
         </table>

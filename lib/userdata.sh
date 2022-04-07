@@ -1,8 +1,8 @@
 #!/bin/bash -x
 yum update -y
 yum install python-pip -y
-pip3 install flask
 yum install git -y
+pip3 install flask
 pip3 install boto3
 pip3 install ec2-metadata
 cd ~
