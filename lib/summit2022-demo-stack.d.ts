@@ -12,6 +12,7 @@ export declare class ShuffleShardingDemoSummit2022 extends Stack {
     createDist(number: number): void;
     createALB(port: number): void;
     createWorkers(number: number, size: string): aws_ec2.Instance[];
+    defaultRoundRobing(instances: aws_ec2.Instance[]): void;
     newInstance(name: string, machineImage: aws_ec2.IMachineImage, size: string, userdata: string, azId: number): aws_ec2.Instance;
     createGroups(instances: aws_ec2.Instance[], options: {
         sharding: {
@@ -19,6 +20,6 @@ export declare class ShuffleShardingDemoSummit2022 extends Stack {
             shuffle: boolean;
         };
     }): number;
-    addTargetsToALB(name: string, targets: IApplicationLoadBalancerTarget[], priority: number): void;
+    addTargetsToALB(name: string, targets: IApplicationLoadBalancerTarget[], priority: number, queryStringEnabled?: boolean): void;
     createCanaryAlarm(url: string, id: string, CWtitle: string): void;
 }

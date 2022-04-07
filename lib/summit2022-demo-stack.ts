@@ -391,11 +391,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       value: url,
     });
 
-    this.createCanaryAlarm(
-      url,
-      `${priority}`,
-      `/?${this.stringParameter}=${priority}`
-    );
+    // enable canary for each key only for heavy load testing
+    // this.createCanaryAlarm(
+    //   url,
+    //   `${priority}`,
+    //   `/?${this.stringParameter}=${priority}`
+    // );
   }
 
   createCanaryAlarm(url: string, id: string, CWtitle: string) {
