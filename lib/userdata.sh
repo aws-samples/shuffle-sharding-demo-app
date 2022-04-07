@@ -16,6 +16,6 @@ npm install typescript -g
 cd react-app
 npm install
 npm run build
-cd..
+cd ..
 cd flask-server
 nohup python main.py >>/var/log/webserver.log 2>&1 &

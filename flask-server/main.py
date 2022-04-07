@@ -4,7 +4,8 @@ from flask import Flask, render_template
 
 app = Flask("__main__")
 
-@app.route('/')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 def serve():
     instance_region = ec2_metadata.region
     # instance_region = "us-east-1" //local debug
