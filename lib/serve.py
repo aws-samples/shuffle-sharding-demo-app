@@ -34,4 +34,4 @@ def serve(path):
     else:
         return send_from_directory(app.static_folder, 'index.html')
 if __name__ == "__main__":
-    app.run(use_reloader=True, host='0.0.0.0', port=80, threaded=True))
+    app.run(use_reloader=True, host='0.0.0.0', port=80, threaded=True)
