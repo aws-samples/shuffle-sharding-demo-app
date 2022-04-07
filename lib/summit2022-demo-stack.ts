@@ -53,7 +53,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.createALB(80);
 
-    const instances: aws_ec2.Instance[] = this.createWorkers(8, 't3.medium');
+    const instances: aws_ec2.Instance[] = this.createWorkers(4, 't3.medium');
 
     const numberOfGroups = this.createGroups(instances, {
       sharding: { enabled: true, shuffle: true },
@@ -185,7 +185,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
   createWorkers(number: number, size: string) {
     const userData = fs.readFileSync('./lib/userdata.sh', 'utf8');
-    const idOfAzs = Array.from(Array(this.availabilityZones.length).keys());
+    const idOfAzs = Array.from(Array(this.vpc.availabilityZones.length).keys());
     console.log(
       `🌎 Creating EC2 Instances in ${idOfAzs.length} Availability Zones 🌎 `
     );
