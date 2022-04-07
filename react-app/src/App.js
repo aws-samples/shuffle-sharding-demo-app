@@ -1,7 +1,7 @@
 import './App.css';
 import Instance from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Compute/Res_48_Light/Res_Amazon-EC2_Instance_48_Light.svg';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import cloudfrontFunction from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networking-and-Content-Delivery/Res_48_Dark/Res_Amazon-CloudFront_Functions_48_Dark.svg';
 import user from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_General-Icons/Res_48_Dark/Res_User_48_Dark.svg';
@@ -21,20 +21,11 @@ const ec2 = [
 ];
 
 function App() {
-  const [totalReactPackages, setTotalReactPackages] = useState(null);
-
-  useEffect(() => {
-    // GET request using fetch inside useEffect React hook
-    fetch('https://api.npms.io/v2/search?q=react')
-      .then((response) => response.json())
-      .then((data) => setTotalReactPackages(data.total));
-
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
   return (
     <div className="App">
       <header className="App-header">
-        <p>My Token = {window.token}</p>
+        <p>targetGroupSize = {window.token}</p>
+        <p>instanceName = {window.token}</p>
         <img id="user" src={user}></img>
         <Xarrow
           start="user"

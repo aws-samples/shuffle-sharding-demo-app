@@ -8,9 +8,7 @@ pip install ec2-metadata
 cd ~
 git clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022
 cd ShuffleShardingDemo-Summit2022
-# get node into yum
 curl --silent --location https://rpm.nodesource.com/setup_17.x | bash -
-# install node (and npm) with yum
 yum -y install nodejs
 npm install typescript -g
 cd react-app
