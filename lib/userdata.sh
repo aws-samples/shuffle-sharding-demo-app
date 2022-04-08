@@ -2,9 +2,9 @@
 yum update -y
 yum install python-pip -y
 yum install git -y
+pip3 install boto3
 pip3 install flask
 pip3 install ec2-metadata
-pip3 install boto3
 cd ~
 git clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022
 cd ShuffleShardingDemo-Summit2022
