@@ -1,0 +1,3 @@
+boto3
+ec2-metadata
+Flask

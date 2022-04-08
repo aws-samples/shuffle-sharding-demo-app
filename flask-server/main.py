@@ -9,36 +9,38 @@ app = Flask("__main__")
 @app.route('/')
 def serve():
     notlocal = False
-    try:
-        client = boto3.client('ec2', region_name=instance_region)
-        instance_region = ec2_metadata.region
-        workers = len(client.describe_instances(Filters=[{'Name':'tag:Name','Values':['*Worker*']},{'Name': 'instance-state-name', 'Values': ['running']}])['Reservations'])
-        notlocal = True
-    except Exception as e:
-        print("no boto, working locally")
-    if(notlocal):
-        instance_id = ec2_metadata.instance_id # comment out locally
-        instance = client.describe_tags(
-        Filters=[
-            {
-                'Name': 'resource-id',
-                'Values': [
-                    instance_id
-                ]
-            },
-            {
-                'Name': 'key',
-                'Values': [
-                    'Name'
-                ]
-            }
-        ]
-    )
-        client = boto3.client('elbv2', region_name=instance_region)
-        targetgroups = len(client.describe_target_groups(LoadBalancerArn=client.describe_load_balancers()['LoadBalancers'][0]['LoadBalancerArn'])['TargetGroups'])-1
-        instance_name = instance['Tags'][0]['Value']
-        keyname = 'number'
-        value = request.args.get(keyname)
+    keyname = 'number'
+    value = request.args.get(keyname)
+    if(value is not None):
+        try:
+            instance_region = ec2_metadata.region
+            client = boto3.client('ec2', region_name=instance_region)
+            workers = len(client.describe_instances(Filters=[{'Name':'tag:Name','Values':['*Worker*']},{'Name': 'instance-state-name', 'Values': ['running']}])['Reservations'])
+            notlocal = True
+        except Exception as e:
+            print("no boto, working locally")
+        if(notlocal):
+            instance_id = ec2_metadata.instance_id # comment out locally
+            instance = client.describe_tags(
+            Filters=[
+                {
+                    'Name': 'resource-id',
+                    'Values': [
+                        instance_id
+                    ]
+                },
+                {
+                    'Name': 'key',
+                    'Values': [
+                        'Name'
+                    ]
+                }
+            ]
+            )
+            client = boto3.client('elbv2', region_name=instance_region)
+            targetgroups = len(client.describe_target_groups(LoadBalancerArn=client.describe_load_balancers()['LoadBalancers'][0]['LoadBalancerArn'])['TargetGroups'])-1
+            instance_name = instance['Tags'][0]['Value']
+            value = request.args.get(keyname)
     else:
         targetgroups = 6
         instance_name = "/Worker1"
