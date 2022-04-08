@@ -60,6 +60,7 @@ ShuffleShardingDemoSummit2022
 ## Deployment
 
 ```bash
+git clone <repo url>
 cd <repo folder name>
 npm install
 cdk deploy ShuffleShardingDemoSummit2022
