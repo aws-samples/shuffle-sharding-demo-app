@@ -1,12 +1,13 @@
 # Shuffle Sharding Demo for Tel-Aviv Summit 2022
 
+This project includes a demo of Shuffle Sharding solution using Cloudfront and ALB Target groups. The CloudFront distribution (the main entry point to the application) runs CloudFront Function that allocates random key, and returns redirect (302) to the user with the generated key, and the user redirected to one of the Target Groups.
+
 ![](diagram.png)
 
-This project includes a demo of Shuffle Sharding solution using Cloudfront and ALB Target groups. The cloudfront distrubtion (the main entry point to the application) runs CloudFront Function allocates random key , and return 302 to the user with a key, the user, will be redirected to one of the ALB Target groups in the specific key.
+The project is written with CDK. It can be used to deploy a full solution of Shuffle Sharding with ALB and CloudFront Function. The CDK Code allows customization of the instance layout with an algorithm to calculate the Blast Radius of the selected layout. Use the CDK ls command to compare the blast radius with and without Shuffle Sharding, and with a different number of instances.
 
-The project is written with CDK. It can be used to deploy full solution of Shuffle Sharding with ALB and CloudFront Function. The CDK Code allows customization of the instance layout with algorithm to calculate the Blast Radius of the selected layout. Use the `cdk ls` command to compare the blast radius with and without Shuffle Sharding, and with diffent number of instances.
+The CDK will also deploy a front end to illustrate the selected layout.
 
-The CDK will also deploy a front-end to illustrate the selected layout.
 ![](reactfrontend.png)
 
 The front-end runs with the following technologies:
