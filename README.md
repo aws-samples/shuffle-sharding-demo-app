@@ -103,6 +103,8 @@ ShuffleShardingDemoSummit2022.LoadBalancerEndpointWorker3Worker4 = http://Shuff-
 ```bash
 git clone <repo url>
 cd <repo folder name>
+npm install --prefix ./react-app
 npm run build --prefix ./react-app  # will generate files to './flask-server/static/react'
+pip3 install -r flask-server/requirements.txt
 python3 flask-server/main.py # to start the web server
 ```
