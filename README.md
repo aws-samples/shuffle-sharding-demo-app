@@ -110,3 +110,9 @@ npm run build --prefix ./react-app  # will generate files to './flask-server/sta
 pip3 install -r flask-server/requirements.txt
 python3 flask-server/main.py # to start the web server
 ```
+
+### Resource clean up
+
+```
+cdk destroy ShuffleShardingDemoSummit2022
+```
