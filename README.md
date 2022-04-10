@@ -1,6 +1,6 @@
 # Shuffle Sharding Demo for Tel-Aviv Summit 2022
 
-This project includes a demo of Shuffle Sharding solution using Cloudfront and ALB Target groups. The CloudFront distribution (the main entry point to the application) runs CloudFront Function that allocates random key, and returns redirect (302) to the user with the generated key, and the user redirected to one of the Target Groups.
+This project includes a demo of Shuffle Sharding solution using Cloudfront and ALB Target groups. The CloudFront distribution (the main entry point to the application) runs a CloudFront Function that allocates a random key, and returns a redirect (302) response to the user with the generated key, and the user is redirected to one of the Target Groups.
 
 ![](diagram.png)
 
