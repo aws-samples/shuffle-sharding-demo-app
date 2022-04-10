@@ -62,7 +62,9 @@ ShuffleShardingDemoSummit2022
 ```bash
 git clone <repo url>
 cd <repo folder name>
+# Edit <summit2022-demo.ts> with your AWS Account id
 npm install
+cdk bootstrap
 cdk deploy ShuffleShardingDemoSummit2022
 ```
 
