@@ -341,7 +341,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         numberOfGroups += 1;
         const shardName = `ec2-${instance.node.id}`;
         console.log(
-          `New shard #${numberOfGroups}. Shard size: 1. Workers in the shard: '${instance.node.id}'. Shard assigned to the ALB as Target Group at /?${this.stringParameter}=${numberOfGroups}`
+          `Instance '${instance.node.id}' is assigned to the ALB as Target Group at /?${this.stringParameter}=${numberOfGroups}`
         );
         this.addTargetsToALB(
           shardName,
@@ -351,7 +351,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       });
     }
     console.log(
-      `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} shards ♦️`
+      `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} target groups ♦️`
     );
 
     const maxBlastRadius = (100 / numberOfGroups).toFixed(2);

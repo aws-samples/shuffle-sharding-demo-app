@@ -45,7 +45,7 @@ def serve():
         targetgroups = 6
         instance_name = "/Worker1"
         keyname = 'number'
-        value = request.args.get(keyname)
+        value = 1
         workers = 4
     payload = {
         "targetgroupsSize" : targetgroups,

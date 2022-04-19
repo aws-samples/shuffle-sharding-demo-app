@@ -13,7 +13,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <br></br>
+        <Box
+          component="span"
+          style={{ position: 'relative', fontSize: 15, padding: 20 }}
+          sx={{ p: 2, border: `1px dashed white` }}
+        >
+          <SectionDetails></SectionDetails>
+        </Box>
+        <br></br>
+        <br></br>
         <img id="user" src={user}></img>
+        <br></br>
         <br></br>
         <Box
           component="span"
@@ -49,6 +60,30 @@ function App() {
       </header>
     </div>
   );
+}
+
+function SectionDetails() {
+  const [columns, setColumns] = useState([]);
+  let workstation_id = window.token.instance_name.split('/')[1];
+  let number_of_target_groups = window.token.targetgroupsSize;
+  let my_target_group_id = window.token.keyvalue;
+  let number_of_vms = window.token.number_of_vms;
+  let cols = [];
+  useEffect(() => {
+    cols.push(
+      <p>
+        {' '}
+        <b>Hello from {workstation_id} !</b> <br></br>
+        <br></br>
+        You are assigned to virtual target group number {my_target_group_id}
+        <br></br>There are total of {number_of_target_groups} target groups ,
+        running on {number_of_vms} Amazon EC2 Instances
+      </p>
+    );
+    setColumns(cols);
+  });
+  const box = <div>{columns}</div>;
+  return box;
 }
 
 function SectionComponent(props) {
@@ -149,36 +184,6 @@ function SectionComponent(props) {
         <table>
           <tr>{columns}</tr>
         </table>
-        {/* <table>
-          <tr>
-            <td style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 1" />
-            </td>
-            <td style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 2" />
-            </td>
-            <td style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 3" />
-            </td>
-            <td id="tg4" style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 4" />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 1" />
-            </td>
-            <td style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 2" />
-            </td>
-            <td style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 3" />
-            </td>
-            <td id="tg4" style={{ padding: 10 }}>
-              <TargetGroup data={ec2} title="Target Group 4" />
-            </td>
-          </tr>
-        </table> */}
       </div>
     </Box>
   );
