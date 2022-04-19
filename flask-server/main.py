@@ -6,6 +6,13 @@ import base64
 
 app = Flask("__main__")
 
+def get_instance_tag(all_tags, tag_name):
+  for tag in all_tags:
+    if tag_name == tag['Key']:
+      return tag['Value']
+
+  return None
+
 @app.route('/')
 def serve():
     notlocal = False
@@ -58,10 +65,3 @@ def serve():
     return render_template("index.html", flask_token=base64_message)
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
-
-def get_instance_tag(all_tags, tag_name):
-  for tag in all_tags:
-    if tag_name == tag['Key']:
-      return tag['Value']
-
-  return None
