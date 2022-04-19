@@ -7,6 +7,7 @@ import {
   Duration,
   Stack,
   StackProps,
+  Tag,
   Tags,
 } from 'aws-cdk-lib';
 import * as aws_synthetics_alpha from '@aws-cdk/aws-synthetics-alpha';
@@ -78,6 +79,17 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       props.targetGroupOptions
     );
     this.createDist(numberOfGroups);
+
+    instances.forEach((instance) => {
+      Tags.of(instance).add(
+        'mode',
+        props.targetGroupOptions.sharding.shuffle
+          ? '3'
+          : props.targetGroupOptions.sharding.enabled
+          ? '2'
+          : '1'
+      );
+    });
 
     this.cloudwatchDashboard.addWidgets(...this.cloudwatchWidgets);
 

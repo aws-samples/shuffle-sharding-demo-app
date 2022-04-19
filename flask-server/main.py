@@ -28,18 +28,13 @@ def serve():
                     'Values': [
                         instance_id
                     ]
-                },
-                {
-                    'Name': 'key',
-                    'Values': [
-                        'Name'
-                    ]
                 }
             ]
             )
             client = boto3.client('elbv2', region_name=instance_region)
             targetgroups = len(client.describe_target_groups(LoadBalancerArn=client.describe_load_balancers()['LoadBalancers'][0]['LoadBalancerArn'])['TargetGroups'])-1
-            instance_name = instance['Tags'][0]['Value']
+            instance_name = get_instance_tag(instance['Tags'], 'Name')
+            mode = int(get_instance_tag(instance['Tags'], 'mode'))
             value = request.args.get(keyname)
     else:
         targetgroups = 6
@@ -47,12 +42,14 @@ def serve():
         keyname = 'number'
         value = 1
         workers = 4
+        mode = int('3') # mode = 1 , shard disabled, shuffle disabled. mode=2 ., shard enabled. mode3 shuffle enabled 
     payload = {
         "targetgroupsSize" : targetgroups,
         "instance_name": instance_name,
         "keyname": keyname,
         "keyvalue": value,
-        "number_of_vms": workers
+        "number_of_vms": workers,
+        'mode': mode
     }
 
     base64_bytes = base64.b64encode(json.dumps(payload).encode('ascii'))
@@ -61,3 +58,10 @@ def serve():
     return render_template("index.html", flask_token=base64_message)
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
+
+def get_instance_tag(all_tags, tag_name):
+  for tag in all_tags:
+    if tag_name == tag['Key']:
+      return tag['Value']
+
+  return None

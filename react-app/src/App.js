@@ -92,7 +92,7 @@ function SectionComponent(props) {
   useEffect(() => {
     console.log(window.token);
     let workstation_id = window.token.instance_name.split('/')[1];
-    let number_of_target_groups = window.token.targetgroupsSize;
+    let mode = window.token.mode;
     let my_target_group_id = window.token.keyvalue;
     let number_of_vms = window.token.number_of_vms;
     let cols = [];
@@ -103,11 +103,29 @@ function SectionComponent(props) {
     }
     let array_of_tg = [];
 
-    for (let a = 0; a < number_of_vms; a++) {
-      for (let b = a + 1; b < number_of_vms; b++) {
-        console.log('newGroup', a, b);
-        array_of_tg.push([ec2list[a], ec2list[b]]);
-      }
+    switch (mode) {
+      case 1: // no group no shuffle
+        for (let a = 0; a < number_of_vms; a++) {
+          console.log('newGroup', a);
+          array_of_tg.push([ec2list[a]]);
+        }
+        break;
+      case 2: // group enabled
+        for (let a = 0; a < number_of_vms; a = a + 2) {
+          console.log('newGroup', a, a + 1);
+          array_of_tg.push([ec2list[a], ec2list[a + 1]]);
+        }
+        break;
+      case 3: // shuffle enabled
+        for (let a = 0; a < number_of_vms; a++) {
+          for (let b = a + 1; b < number_of_vms; b++) {
+            console.log('newGroup', a, b);
+            array_of_tg.push([ec2list[a], ec2list[b]]);
+          }
+        }
+        break;
+      default:
+        break;
     }
     console.log(array_of_tg);
     array_of_tg.forEach((shard, index) => {
@@ -206,22 +224,24 @@ function TargetGroup(props) {
               <img src={Instance}></img>
               <br></br>
               {props.instance_name == data[0] ? (
-                // <p style="font-size: 18px;font-weight: bold">{data[0]}</p>
                 <b>{data[0]}</b>
               ) : (
                 <>{data[0]}</>
               )}
             </td>
-            <td id={data[1]}>
-              <img src={Instance}></img>
-              <br></br>
-              {props.instance_name == data[1] ? (
-                <b>{data[1]}</b>
-              ) : (
-                // <p style="font-size: 18px;font-weight: bold">{data[1]}</p>
-                <>{data[1]}</>
-              )}
-            </td>
+            {data.length > 1 ? (
+              <td id={data[1]}>
+                <img src={Instance}></img>
+                <br></br>
+                {props.instance_name == data[1] ? (
+                  <b>{data[1]}</b>
+                ) : (
+                  <>{data[1]}</>
+                )}
+              </td>
+            ) : (
+              <p></p>
+            )}
           </tr>
         </table>
       </Box>
@@ -239,11 +259,15 @@ function TargetGroup(props) {
               <br></br>
               {data[0]}
             </td>
-            <td>
-              <img src={Instance}></img>
-              <br></br>
-              {data[1]}
-            </td>
+            {data.length > 1 ? (
+              <td id={data[1]}>
+                <img src={Instance}></img>
+                <br></br>
+                {data[1]}
+              </td>
+            ) : (
+              <p></p>
+            )}
           </tr>
         </table>
       </Box>
