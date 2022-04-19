@@ -17,16 +17,22 @@ The front-end runs with the following technologies:
 
 # How to use the code
 
-1. Edit [bin/summit2022-demo.ts](bin/summit2022-demo.ts) with your AWS Account and region
-2. Edit [lib/summit2022-demo-stack.ts](lib/summit2022-demo-stack.ts) with your instance layout
+Clone the repository and edit the [bin/summit2022-demo.ts](bin/summit2022-demo.ts) file with your AWS Account id (Without deshes) and region and with your instance layout
 
 ## Example layout:
 
 ```typescript
-const instances: aws_ec2.Instance[] = this.createWorkers(4, 't3.medium');
-..
-const numberOfGroups = this.createGroups(instances, {
-  sharding: { enabled: true, shuffle: true },
+new ShuffleShardingDemoSummit2022(app, 'ShuffleShardingDemoSummit2022', {
+  albPort: 80,
+  intanceType: 't3.medium',
+  numberOfInstances: 4,
+  targetGroupOptions: {
+    sharding: {
+      enabled: true,
+      shuffle: true,
+    },
+  },
+  props: { env: { account: '117923233529', region: 'us-east-1' } },
 });
 ```
 
@@ -37,21 +43,21 @@ Now run `cdk ls`
 ```
  cdk ls
 🌎 Creating EC2 Instances in 3 Availability Zones 🌎
-New virtual shard for all VMs assigned to ALB at /
-New group #1 : 'Worker1' and 'Worker2'
-New group #2 : 'Worker1' and 'Worker3'
-New group #3 : 'Worker1' and 'Worker4'
-New group #4 : 'Worker2' and 'Worker3'
-New group #5 : 'Worker2' and 'Worker4'
-New group #6 : 'Worker3' and 'Worker4'
-New virtual shard: Worker1-Worker2 assigned to ALB at /?number=1
-New virtual shard: Worker1-Worker3 assigned to ALB at /?number=2
-New virtual shard: Worker1-Worker4 assigned to ALB at /?number=3
-New virtual shard: Worker2-Worker3 assigned to ALB at /?number=4
-New virtual shard: Worker2-Worker4 assigned to ALB at /?number=5
-New virtual shard: Worker3-Worker4 assigned to ALB at /?number=6
+New default group in size of 4 at "/"
+New shuffle shard #1. Shard size: 2. Workers in the shard: 'Worker1' and 'Worker2'
+New shuffle shard #2. Shard size: 2. Workers in the shard: 'Worker1' and 'Worker3'
+New shuffle shard #3. Shard size: 2. Workers in the shard: 'Worker1' and 'Worker4'
+New shuffle shard #4. Shard size: 2. Workers in the shard: 'Worker2' and 'Worker3'
+New shuffle shard #5. Shard size: 2. Workers in the shard: 'Worker2' and 'Worker4'
+New shuffle shard #6. Shard size: 2. Workers in the shard: 'Worker3' and 'Worker4'
+Shard 'Worker1-Worker2' is now assigned to the ALB as Target Group at /?number=1
+Shard 'Worker1-Worker3' is now assigned to the ALB as Target Group at /?number=2
+Shard 'Worker1-Worker4' is now assigned to the ALB as Target Group at /?number=3
+Shard 'Worker2-Worker3' is now assigned to the ALB as Target Group at /?number=4
+Shard 'Worker2-Worker4' is now assigned to the ALB as Target Group at /?number=5
+Shard 'Worker3-Worker4' is now assigned to the ALB as Target Group at /?number=6
 
-♦️ Total of 4 hosts (t3.medium) and 6 virtual shards ♦️
+♦️ Total of 4 hosts (t3.medium) and 6 shards ♦️
 💥 Blast radius = 16.67% 💥
 
 ShuffleShardingDemoSummit2022
@@ -62,7 +68,6 @@ ShuffleShardingDemoSummit2022
 ```bash
 git clone <repo url>
 cd <repo folder name>
-# Edit <summit2022-demo.ts> with your AWS Account id
 npm install
 cdk bootstrap
 cdk deploy ShuffleShardingDemoSummit2022

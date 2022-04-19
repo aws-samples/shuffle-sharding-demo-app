@@ -35,6 +35,14 @@ import { Effect } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import * as fs from 'fs';
 
+export interface ShuffleShardingDemoSummit2022Props {
+  albPort: number;
+  numberOfInstances: number;
+  intanceType: string;
+  targetGroupOptions: { sharding: { enabled: boolean; shuffle: boolean } };
+  props?: StackProps;
+}
+
 export class ShuffleShardingDemoSummit2022 extends Stack {
   listener: ApplicationListener;
   alb: ApplicationLoadBalancer;
@@ -42,8 +50,12 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   cloudwatchWidgets: aws_cloudwatch.AlarmWidget[];
   readonly vpc: aws_ec2.Vpc;
   readonly stringParameter = 'number';
-  constructor(scope: Construct, id: string, props?: StackProps) {
-    super(scope, id, props);
+  constructor(
+    scope: Construct,
+    id: string,
+    props: ShuffleShardingDemoSummit2022Props
+  ) {
+    super(scope, id, props.props);
 
     this.vpc = new aws_ec2.Vpc(this, 'vpc', { maxAzs: 3 });
 
@@ -52,15 +64,19 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     });
     this.cloudwatchWidgets = [];
 
-    this.createALB(80);
+    this.createALB(props.albPort);
 
-    const instances: aws_ec2.Instance[] = this.createWorkers(4, 't3.medium');
+    const instances: aws_ec2.Instance[] = this.createWorkers(
+      props.numberOfInstances,
+      props.intanceType
+    );
 
     this.defaultRoundRobing(instances);
 
-    const numberOfGroups = this.createGroups(instances, {
-      sharding: { enabled: true, shuffle: true },
-    });
+    const numberOfGroups = this.createGroups(
+      instances,
+      props.targetGroupOptions
+    );
     this.createDist(numberOfGroups);
 
     this.cloudwatchDashboard.addWidgets(...this.cloudwatchWidgets);
@@ -216,7 +232,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     instances.forEach((instance) => {
       targets.push(new InstanceTarget(instance, 80));
     });
-    console.log(`New virtual shard for all VMs assigned to ALB at /`);
+    console.log(`New default group in size of ${instances.length} at "/"`);
     this.addTargetsToALB('RoundRobin', targets, 100, false);
   }
 
@@ -291,7 +307,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
             numberOfGroups += 1;
             shards.push([instances[a], instances[b]]);
             console.log(
-              `New group #${numberOfGroups} : '${instances[a].node.id}' and '${instances[b].node.id}'`
+              `New shuffle shard #${numberOfGroups}. Shard size: 2. Workers in the shard: '${instances[a].node.id}' and '${instances[b].node.id}'`
             );
           }
         }
@@ -300,9 +316,9 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
           numberOfGroups += 1;
           shards.push([instances[a], instances[a + 1]]);
           console.log(
-            `New group #${numberOfGroups} : ${instances[a].node.id} and ${
-              instances[a + 1].node.id
-            }`
+            `New shard #${numberOfGroups}. Shard size: 2. Workers in the shard: '${
+              instances[a].node.id
+            }' and '${instances[a + 1].node.id}'`
           );
         }
       }
@@ -310,7 +326,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       shards.forEach((shard, index) => {
         const shardName = `${shard[0].node.id}-${shard[1].node.id}`;
         console.log(
-          `New virtual shard: ${shardName} assigned to ALB at /?${
+          `Shard '${shardName}' is now assigned to the ALB as Target Group at /?${
             this.stringParameter
           }=${index + 1}`
         );
@@ -325,7 +341,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
         numberOfGroups += 1;
         const shardName = `ec2-${instance.node.id}`;
         console.log(
-          `New virtual shard: ${shardName} assigned to ALB at /?${this.stringParameter}=${numberOfGroups}`
+          `New shard #${numberOfGroups}. Shard size: 1. Workers in the shard: '${instance.node.id}'. Shard assigned to the ALB as Target Group at /?${this.stringParameter}=${numberOfGroups}`
         );
         this.addTargetsToALB(
           shardName,
@@ -335,7 +351,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       });
     }
     console.log(
-      `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} virtual shards ♦️`
+      `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} shards ♦️`
     );
 
     const maxBlastRadius = (100 / numberOfGroups).toFixed(2);
