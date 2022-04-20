@@ -24,6 +24,7 @@ import {
   ApplicationListener,
   ApplicationLoadBalancer,
   ApplicationTargetGroup,
+  HttpCodeTarget,
   IApplicationLoadBalancerTarget,
   ListenerAction,
   ListenerCondition,
@@ -47,7 +48,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   listener: ApplicationListener;
   alb: ApplicationLoadBalancer;
   cloudwatchDashboard: aws_cloudwatch.Dashboard;
-  cloudwatchWidgets: aws_cloudwatch.AlarmWidget[];
+  cloudwatchWidgets: aws_cloudwatch.SingleValueWidget[];
   readonly vpc: aws_ec2.Vpc;
   readonly stringParameter = 'number';
   readonly mode: number;
@@ -179,45 +180,21 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
 
     this.listener = this.alb.addListener('AppMainListener', { port: port });
 
-    const activeConnectionsCount = new aws_cloudwatch.Alarm(
-      this,
-      `activeConnectionsCount`,
-      {
-        evaluationPeriods: 1,
-        datapointsToAlarm: 1,
-        threshold: 10,
-        metric: this.alb.metricActiveConnectionCount(),
-        comparisonOperator:
-          aws_cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
-      }
-    );
-
-    const activeConnectionsCountWidget = new aws_cloudwatch.AlarmWidget({
-      alarm: activeConnectionsCount,
-      title: `activeConnectionsCount`,
+    const activeConnectionsCount = new aws_cloudwatch.SingleValueWidget({
+      metrics: [this.alb.metricActiveConnectionCount()],
+      title: 'The total number of concurrent TCP connections',
+      height: 3,
+      width: 12,
     });
 
-    this.cloudwatchWidgets.push(activeConnectionsCountWidget);
-
-    const totalConnectionsCount = new aws_cloudwatch.Alarm(
-      this,
-      `totalConnectionsCount`,
-      {
-        evaluationPeriods: 1,
-        datapointsToAlarm: 1,
-        threshold: 10,
-        metric: this.alb.metricRequestCount(),
-        comparisonOperator:
-          aws_cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
-      }
-    );
-
-    const totalConnectionsCountWidget = new aws_cloudwatch.AlarmWidget({
-      alarm: totalConnectionsCount,
-      title: `totalConnectionsCount`,
+    const targetgroups = new aws_cloudwatch.SingleValueWidget({
+      metrics: [this.alb.metricRequestCount()],
+      title: 'The number of requests processed over IPv4',
+      height: 3,
+      width: 12,
     });
 
-    this.cloudwatchWidgets.push(totalConnectionsCountWidget);
+    this.cloudwatchWidgets.push(activeConnectionsCount, targetgroups);
   }
 
   createWorkers(number: number, size: string) {
@@ -427,12 +404,63 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       value: url,
     });
 
-    // enable canary for each key only for heavy load testing
-    // this.createCanaryAlarm(
-    //   url,
-    //   `${priority}`,
-    //   `/?${this.stringParameter}=${priority}`
-    // );
+    if (queryStringEnabled) {
+      const textWidget = new aws_cloudwatch.TextWidget({
+        markdown: `# Target group #${priority} [(/?${this.stringParameter}=${priority})](http://${this.alb.loadBalancerDnsName}/?${this.stringParameter}=${priority})`,
+        height: 1,
+        width: 24,
+      });
+      const healthy = new aws_cloudwatch.SingleValueWidget({
+        metrics: [targetGroup.metricHealthyHostCount()],
+        title: 'Healthy host count',
+        height: 3,
+        width: 4,
+      });
+      const unhealthy = new aws_cloudwatch.SingleValueWidget({
+        metrics: [targetGroup.metricUnhealthyHostCount()],
+        title: 'Unhealthy host count',
+        height: 3,
+        width: 4,
+      });
+      const request = new aws_cloudwatch.SingleValueWidget({
+        metrics: [targetGroup.metricRequestCount()],
+        title: 'Request count',
+        height: 3,
+        width: 4,
+      });
+      const metricRequestCountPerTarget = new aws_cloudwatch.SingleValueWidget({
+        metrics: [targetGroup.metricRequestCountPerTarget()],
+        title: 'Request count per target',
+        height: 3,
+        width: 4,
+      });
+      const target200 = new aws_cloudwatch.SingleValueWidget({
+        metrics: [
+          targetGroup.metricHttpCodeTarget(HttpCodeTarget.TARGET_2XX_COUNT),
+        ],
+        title: '2XX HttpCode Count',
+        height: 3,
+        width: 4,
+      });
+      const target500 = new aws_cloudwatch.SingleValueWidget({
+        metrics: [
+          targetGroup.metricHttpCodeTarget(HttpCodeTarget.TARGET_5XX_COUNT),
+        ],
+        title: '5XX HttpCode Count',
+        height: 3,
+        width: 4,
+      });
+
+      this.cloudwatchDashboard.addWidgets(
+        textWidget,
+        healthy,
+        unhealthy,
+        request,
+        metricRequestCountPerTarget,
+        target200,
+        target500
+      );
+    }
   }
 
   primeNumber(i: number) {
@@ -485,8 +513,10 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     const cwWidget = new aws_cloudwatch.AlarmWidget({
       alarm: canaryAlarm,
       title: CWtitle,
+      width: 24,
+      height: 3,
     });
 
-    this.cloudwatchWidgets.push(cwWidget);
+    this.cloudwatchDashboard.addWidgets(cwWidget);
   }
 }
