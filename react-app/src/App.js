@@ -8,6 +8,7 @@ import user from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_General-Icons/Re
 import loadbalancer from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networking-and-Content-Delivery/Res_48_Dark/Res_Elastic-Load-Balancing_Network-Load-Balancer_48_Dark.svg';
 import Cloudfront from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networking-and-Content-Delivery/Res_48_Dark/Res_Amazon-CloudFront_Download-Distribution_48_Dark.svg';
 import Xarrow from 'react-xarrows';
+import { grey } from '@mui/material/colors';
 
 function App() {
   return (
@@ -23,6 +24,22 @@ function App() {
         </Box>
         <br></br>
         <br></br>
+        <button
+          style={{
+            backgroundColor: grey.A700,
+            fontSize: 18,
+            height: 40,
+            color: 'white',
+          }}
+          onClick={() => {
+            window.location = window.location.href.split('?')[0];
+          }}
+        >
+          Click to get new key
+        </button>
+        <br></br>
+        <br></br>
+
         <img id="user" src={user}></img>
         <br></br>
         <br></br>
@@ -73,7 +90,7 @@ function SectionDetails() {
     cols.push(
       <p>
         {' '}
-        <b>Hello from {workstation_id} !</b> <br></br>
+        <h1>Hello from {workstation_id} !</h1> <br></br>
         <br></br>
         You are assigned to virtual target group number {my_target_group_id}
         <br></br>There are total of {number_of_target_groups} target groups ,
@@ -215,7 +232,13 @@ function TargetGroup(props) {
   if (props.selected) {
     tgcell = (
       <Box
-        style={{ position: 'relative', fontSize: 15, padding: 10 }}
+        style={{
+          position: 'relative',
+          fontSize: 15,
+          padding: 10,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
         sx={{ p: 2, border: `1px dashed red` }}
       >
         <table>
@@ -240,7 +263,7 @@ function TargetGroup(props) {
                 )}
               </td>
             ) : (
-              <p></p>
+              <b></b>
             )}
           </tr>
         </table>
@@ -249,7 +272,13 @@ function TargetGroup(props) {
   } else {
     tgcell = (
       <Box
-        style={{ position: 'relative', fontSize: 15, padding: 10 }}
+        style={{
+          position: 'relative',
+          fontSize: 15,
+          padding: 10,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
         sx={{ p: 2, border: `1px dashed white` }}
       >
         <table>
@@ -266,7 +295,7 @@ function TargetGroup(props) {
                 {data[1]}
               </td>
             ) : (
-              <p></p>
+              <b></b>
             )}
           </tr>
         </table>
