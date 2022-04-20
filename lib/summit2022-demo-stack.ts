@@ -413,7 +413,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       this.listener.addAction(name, {
         action: ListenerAction.forward([targetGroup]),
         conditions: [ListenerCondition.queryStrings([queryStrings])],
-        priority: priority * this.mode * 3,
+        priority: priority * this.primeNumber(this.mode),
       });
     } else {
       this.listener.addAction(name, {
@@ -433,6 +433,11 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     //   `${priority}`,
     //   `/?${this.stringParameter}=${priority}`
     // );
+  }
+
+  primeNumber(i: number) {
+    const numbers = [3, 7, 11];
+    return numbers[i - 1];
   }
 
   createCanaryAlarm(url: string, id: string, CWtitle: string) {
