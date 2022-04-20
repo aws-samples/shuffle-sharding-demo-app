@@ -11,9 +11,9 @@ new ShuffleShardingDemoSummit2022(app, 'ShuffleShardingDemoSummit2022', {
   numberOfInstances: 4,
   targetGroupOptions: {
     sharding: {
-      enabled: false,
-      shuffle: false,
+      enabled: true,
+      shuffle: true,
     },
   },
-  props: { env: { account: '<changeme>', region: '<changeme>' } },
+  props: { env: { account: '<changeMe>', region: '<changeMe' } },
 });

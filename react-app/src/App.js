@@ -152,7 +152,7 @@ function SectionComponent(props) {
     cols.push(
       <Xarrow
         start="user"
-        end={workstation_id}
+        end="selectedtg"
         lineColor="Coral"
         headColor="Coral"
         // animateDrawing="10"

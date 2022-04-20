@@ -7,7 +7,6 @@ import {
   Duration,
   Stack,
   StackProps,
-  Tag,
   Tags,
 } from 'aws-cdk-lib';
 import * as aws_synthetics_alpha from '@aws-cdk/aws-synthetics-alpha';
@@ -51,6 +50,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   cloudwatchWidgets: aws_cloudwatch.AlarmWidget[];
   readonly vpc: aws_ec2.Vpc;
   readonly stringParameter = 'number';
+  readonly mode: number;
   constructor(
     scope: Construct,
     id: string,
@@ -58,39 +58,47 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
   ) {
     super(scope, id, props.props);
 
+    // VPC with maximum 3 AZs and default settings
     this.vpc = new aws_ec2.Vpc(this, 'vpc', { maxAzs: 3 });
 
+    // Empty Cloudwatch Dashboard
     this.cloudwatchDashboard = new aws_cloudwatch.Dashboard(this, 'cw', {
       dashboardName: 'ShuffleShardingSummit2022',
     });
     this.cloudwatchWidgets = [];
 
+    // Flag for the demo mode (Shuffle enabled/disabled)
+    this.mode = props.targetGroupOptions.sharding.shuffle
+      ? 3
+      : props.targetGroupOptions.sharding.enabled
+      ? 2
+      : 1;
+
+    // ALB with listener
     this.createALB(props.albPort);
 
+    // Instances with user-data /lib/userdata.sh
     const instances: aws_ec2.Instance[] = this.createWorkers(
       props.numberOfInstances,
       props.intanceType
     );
 
+    // Default path ('/') with all the instances as target group
     this.defaultRoundRobing(instances);
 
+    // Virtual groups based on the demo mode (Shuffle enabled/disabled)
     const numberOfGroups = this.createGroups(
       instances,
       props.targetGroupOptions
     );
     this.createDist(numberOfGroups);
 
+    // Tags to the instances with the demo mode
     instances.forEach((instance) => {
-      Tags.of(instance).add(
-        'mode',
-        props.targetGroupOptions.sharding.shuffle
-          ? '3'
-          : props.targetGroupOptions.sharding.enabled
-          ? '2'
-          : '1'
-      );
+      Tags.of(instance).add('mode', this.mode.toString());
     });
 
+    // Adding all the widgets to the main cloudwatch dashboard
     this.cloudwatchDashboard.addWidgets(...this.cloudwatchWidgets);
 
     new CfnOutput(this, 'Cloudwatch Dashboard URL', {
@@ -405,7 +413,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       this.listener.addAction(name, {
         action: ListenerAction.forward([targetGroup]),
         conditions: [ListenerCondition.queryStrings([queryStrings])],
-        priority: priority,
+        priority: priority * this.mode * 3,
       });
     } else {
       this.listener.addAction(name, {
