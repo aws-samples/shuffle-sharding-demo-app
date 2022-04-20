@@ -10,6 +10,10 @@ The CDK will also deploy a front end to illustrate the selected layout.
 
 ![](reactfrontend.png)
 
+And CloudWatch Dashboard to monitor and understand the impact of Shuffle Sharding
+
+![](cloudwatch.png)
+
 The front-end runs with the following technologies:
 
 2. [Flask Server](flask-server/main.py) (Python Web Server) runs on the EC2 Machines using the [userdata.sh](lib/userdata.sh) script
