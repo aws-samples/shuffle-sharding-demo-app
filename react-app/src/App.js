@@ -1,5 +1,4 @@
 import './App.css';
-import Instance from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Compute/Res_48_Light/Res_Amazon-EC2_Instance_48_Light.svg';
 import React, { useState, useEffect } from 'react';
 // import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
@@ -9,6 +8,22 @@ import loadbalancer from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networki
 import Cloudfront from 'aws-svg-icons/lib/Resource-Icons_07302021/Res_Networking-and-Content-Delivery/Res_48_Dark/Res_Amazon-CloudFront_Download-Distribution_48_Dark.svg';
 import Xarrow from 'react-xarrows';
 import { grey } from '@mui/material/colors';
+import { Grid } from '@mui/material';
+
+function Instance(props) {
+  return (
+    <svg width="48px" height="48px" viewBox="0 0 48 48">
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+          d="M9,39 L39,39 L39,9 L9,9 L9,39 Z M46,13 L46,11 L41,11 L41,8 C41,7.448 40.552,7 40,7 L37,7 L37,2 L35,2 L35,7 L31,7 L31,2 L29,2 L29,7 L25,7 L25,2 L23,2 L23,7 L19,7 L19,2 L17,2 L17,7 L13,7 L13,2 L11,2 L11,7 L8,7 C7.447,7 7,7.448 7,8 L7,11 L2,11 L2,13 L7,13 L7,17 L2,17 L2,19 L7,19 L7,23 L2,23 L2,25 L7,25 L7,29 L2,29 L2,31 L7,31 L7,35 L2,35 L2,37 L7,37 L7,40 C7,40.553 7.447,41 8,41 L11,41 L11,46 L13,46 L13,41 L17,41 L17,46 L19,46 L19,41 L23,41 L23,46 L25,46 L25,41 L29,41 L29,46 L31,46 L31,41 L35,41 L35,46 L37,46 L37,41 L40,41 C40.552,41 41,40.553 41,40 L41,37 L46,37 L46,35 L41,35 L41,31 L46,31 L46,29 L41,29 L41,25 L46,25 L46,23 L41,23 L41,19 L46,19 L46,17 L41,17 L41,13 L46,13 Z"
+          id="Amazon-EC2-Instance_Resource-Icon_light-bg"
+          fill="currentColor"
+          {...props}
+        ></path>
+      </g>
+    </svg>
+  );
+}
 
 function App() {
   return (
@@ -17,6 +32,7 @@ function App() {
         <br></br>
         <Box
           component="span"
+          m={5}
           style={{ position: 'relative', fontSize: 15, padding: 20 }}
           sx={{ p: 2, border: `1px dashed white` }}
         >
@@ -45,6 +61,8 @@ function App() {
         <br></br>
         <Box
           component="span"
+          m={5}
+          p={20}
           style={{ position: 'relative', fontSize: 15, padding: 20 }}
           sx={{ p: 2, border: `1px dashed white` }}
         >
@@ -149,20 +167,28 @@ function SectionComponent(props) {
       let humenIndex = index + 1;
       if (humenIndex == my_target_group_id) {
         cols.push(
-          <td style={{ padding: 10 }}>
+          <Grid
+            item
+            xs={mode == 1 ? 4 : 6} // three boxes in mode 1, two box in mode2,3
+            md={mode == 2 ? 6 : 4} // three boxes in all
+          >
             <TargetGroup
               data={shard}
               title={'Target Group ' + humenIndex}
               selected="true"
               instance_name={workstation_id}
             />
-          </td>
+          </Grid>
         );
       } else {
         cols.push(
-          <td style={{ padding: 10 }}>
+          <Grid
+            item
+            xs={mode == 1 ? 4 : 6} // three boxes in mode 1, two box in mode2,3
+            md={mode == 2 ? 6 : 4} // three boxes in all
+          >
             <TargetGroup data={shard} title={'Target Group ' + humenIndex} />
-          </td>
+          </Grid>
         );
       }
     });
@@ -196,6 +222,7 @@ function SectionComponent(props) {
   }, []);
   const box = (
     <Box
+      m={5}
       component="span"
       style={{ position: 'relative', fontSize: 15, padding: 30 }}
       sx={{ p: 2, border: `1px dashed ${props.color}` }}
@@ -216,13 +243,22 @@ function SectionComponent(props) {
       </div>
       <br></br>
       <div>
-        <table>
-          <tr>{columns}</tr>
-        </table>
+        <Grid container spacing={5} justifyContent="center" alignItems="center">
+          {columns}
+        </Grid>
+        {/* add if to render two lines */}
       </div>
     </Box>
   );
   return box;
+}
+
+function namesToColors(name) {
+  console.log(name);
+  const colors = ['SkyBlue', 'Brown', 'LimeGreen', 'Chocolate'];
+  const number = parseInt(name.split('Worker')[1]);
+  console.log(colors, number);
+  return colors[number - 1];
 }
 
 function TargetGroup(props) {
@@ -243,8 +279,11 @@ function TargetGroup(props) {
       >
         <table>
           <tr id="selectedtg">
-            <td id={data[0]}>
-              <img src={Instance}></img>
+            <td id={data[0]} style={{ padding: 5 }}>
+              <i style={{ color: namesToColors(data[0]) }}>
+                <Instance></Instance>
+              </i>
+
               <br></br>
               {props.instance_name == data[0] ? (
                 <b>{data[0]}</b>
@@ -253,8 +292,10 @@ function TargetGroup(props) {
               )}
             </td>
             {data.length > 1 ? (
-              <td id={data[1]}>
-                <img src={Instance}></img>
+              <td id={data[1]} style={{ padding: 5 }}>
+                <i style={{ color: namesToColors(data[1]) }}>
+                  <Instance></Instance>
+                </i>
                 <br></br>
                 {props.instance_name == data[1] ? (
                   <b>{data[1]}</b>
@@ -283,14 +324,18 @@ function TargetGroup(props) {
       >
         <table>
           <tr>
-            <td>
-              <img src={Instance}></img>
+            <td style={{ padding: 5 }}>
+              <i style={{ color: namesToColors(data[0]) }}>
+                <Instance></Instance>
+              </i>
               <br></br>
               {data[0]}
             </td>
             {data.length > 1 ? (
-              <td id={data[1]}>
-                <img src={Instance}></img>
+              <td id={data[1]} style={{ padding: 5 }}>
+                <i style={{ color: namesToColors(data[1]) }}>
+                  <Instance></Instance>
+                </i>
                 <br></br>
                 {data[1]}
               </td>

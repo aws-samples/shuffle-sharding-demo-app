@@ -58,7 +58,7 @@ def serve():
         keyname = 'number'
         value = 1
         workers = 4
-        mode = int('1') # mode = 1 , shard disabled, shuffle disabled. mode=2 ., shard enabled. mode3 shuffle enabled 
+        mode = int('3') # mode = 1 , shard disabled, shuffle disabled. mode=2 ., shard enabled. mode3 shuffle enabled 
     payload = {
         "targetgroupsSize" : targetgroups,
         "instance_name": instance_name,
