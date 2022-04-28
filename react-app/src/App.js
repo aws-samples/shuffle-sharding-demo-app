@@ -192,32 +192,6 @@ function SectionComponent(props) {
         );
       }
     });
-    cols.push(
-      <Xarrow
-        start="user"
-        end="selectedtg"
-        lineColor="Coral"
-        headColor="Coral"
-        // animateDrawing="10"
-        labels={{
-          middle: (
-            <div
-              style={{
-                fontSize: '15px',
-                fontStyle: 'italic',
-              }}
-            >
-              /?{window.token.keyname}={window.token.keyvalue}
-            </div>
-          ),
-        }}
-        path="straight"
-        headShape={'arrow1'}
-        dashness={{ animation: true, strokeLen: 20, nonStrokeLen: 10 }}
-        headSize="8"
-        showHead="true"
-      />
-    );
     setColumns(cols);
   }, []);
   const box = (
@@ -254,11 +228,23 @@ function SectionComponent(props) {
 }
 
 function namesToColors(name) {
-  console.log(name);
-  const colors = ['SkyBlue', 'Brown', 'LimeGreen', 'Chocolate'];
+  const colors = [
+    'SkyBlue',
+    'Brown',
+    'LimeGreen',
+    'Chocolate',
+    'Violet',
+    'Snow',
+    'SlateBlue',
+    'Red',
+    'RebeccaPurple',
+    'Peru',
+    'MistyRose',
+    'Magenta',
+  ];
   const number = parseInt(name.split('Worker')[1]);
-  console.log(colors, number);
-  return colors[number - 1];
+  if (number > 0 && number < colors.length) return colors[number - 1];
+  else return colors[0];
 }
 
 function TargetGroup(props) {
@@ -281,7 +267,35 @@ function TargetGroup(props) {
           <tr id="selectedtg">
             <td id={data[0]} style={{ padding: 5 }}>
               <i style={{ color: namesToColors(data[0]) }}>
-                <Instance></Instance>
+                <Instance id="selectedInstance"></Instance>
+                <Xarrow
+                  start="user"
+                  end="selectedInstance"
+                  lineColor="Coral"
+                  headColor="Coral"
+                  // animateDrawing="10"
+                  labels={{
+                    middle: (
+                      <div
+                        style={{
+                          fontSize: '15px',
+                          fontStyle: 'italic',
+                        }}
+                      >
+                        /?{window.token.keyname}={window.token.keyvalue}
+                      </div>
+                    ),
+                  }}
+                  path="straight"
+                  headShape={'arrow1'}
+                  dashness={{
+                    animation: true,
+                    strokeLen: 20,
+                    nonStrokeLen: 10,
+                  }}
+                  headSize="8"
+                  showHead="true"
+                />
               </i>
 
               <br></br>

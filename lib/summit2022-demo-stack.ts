@@ -351,12 +351,16 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       `\n♦️ Total of ${instances.length} hosts (${instances[0].instance.instanceType}) and ${numberOfGroups} target groups ♦️`
     );
 
-    const maxBlastRadius = (100 / numberOfGroups).toFixed(2);
-    const minBlastRadius = (100 / instances.length).toFixed(2);
+    var maxBlastRadius = (100 / numberOfGroups).toFixed(2);
+    var minBlastRadius = (100 / instances.length).toFixed(2);
+    if (!options.sharding.shuffle && !options.sharding.enabled) {
+      maxBlastRadius = '100.00';
+    }
+
     console.log(
-      options.sharding.shuffle
-        ? `💥 Blast radius = ${maxBlastRadius}% 💥\n`
-        : `💥 Blast radius = ${minBlastRadius}%-${maxBlastRadius}% (Shuffle disabled) 💥\n`
+      options.sharding.enabled || options.sharding.shuffle
+        ? `💥 Blast radius = ${maxBlastRadius}% (Sharding enabled, DDoS will affect one target group)💥\n`
+        : `💥 Blast radius = ${minBlastRadius}%-${maxBlastRadius}% (Sharding disabled, DDoS will affect all instances) 💥\n`
     );
     return numberOfGroups;
   }

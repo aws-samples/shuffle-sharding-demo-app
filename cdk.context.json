@@ -9,5 +9,10 @@
     "us-east-1d",
     "us-east-1e",
     "us-east-1f"
+  ],
+  "availability-zones:account=117923233529:region=eu-west-1": [
+    "eu-west-1a",
+    "eu-west-1b",
+    "eu-west-1c"
   ]
 }
