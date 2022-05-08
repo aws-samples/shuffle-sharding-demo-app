@@ -8,10 +8,10 @@ const app = new cdk.App();
 new ShuffleShardingDemoSummit2022(app, 'ShuffleShardingDemoSummit2022', {
   albPort: 80,
   intanceType: 't3.medium',
-  numberOfInstances: 4,
+  numberOfInstances: 8,
   targetGroupOptions: {
     sharding: {
-      enabled: false,
+      enabled: true,
       shuffle: false,
     },
   },

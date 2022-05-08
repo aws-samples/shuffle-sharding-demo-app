@@ -357,12 +357,43 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       maxBlastRadius = '100.00';
     }
 
-    console.log(
-      options.sharding.enabled || options.sharding.shuffle
-        ? `💥 Blast radius = ${maxBlastRadius}% (Sharding enabled, DDoS will affect one target group)💥\n`
-        : `💥 Blast radius = ${minBlastRadius}%-${maxBlastRadius}% (Sharding disabled, DDoS will affect all instances) 💥\n`
-    );
+    if (options.sharding.shuffle) {
+      const n = instances.length;
+      const m = 2; // limited support in larger shards
+      console.log('');
+      console.log('Calculate the blast radius of a shuffle shard:');
+      console.log(
+        `With a total of ${n} elements, a randomly chosen shuffleshard of ${m} elements ...`
+      );
+      for (let index = 0; index < m + 1; index++) {
+        console.log(
+          `💥 overlaps by ${index} elements with ${(
+            this.overlap(n, m, index) * 100
+          ).toFixed(2)}% of other shuffleshards`
+        );
+      }
+    } else {
+      console.log(
+        `💥 Blast radius = ${minBlastRadius}%-${maxBlastRadius}% (Sharding disabled, DDoS will affect all instances) 💥\n`
+      );
+    }
     return numberOfGroups;
+  }
+
+  // choose() is the same as computing the number of combinations. (Colm's algorithm https://gist.github.com/colmmacc/4a39a6416d2a58b6c70bc73027bea4dc)
+  // n: The total number of elements
+  // m: The number of elements per shard
+
+  choose(n: number, m: number) {
+    var c = 1;
+    for (let index = m + 1; index < n + 1; index++) {
+      c *= index / (index - m);
+    }
+    return c;
+  }
+
+  overlap(n: number, m: number, o: number) {
+    return (this.choose(m, o) * this.choose(n - m, m - o)) / this.choose(n, m);
   }
 
   addTargetsToALB(
