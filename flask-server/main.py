@@ -53,11 +53,11 @@ def serve():
             value = request.args.get(keyname)
     else:
         print("static response")
-        targetgroups = 6
-        instance_name = "/Worker1"
+        targetgroups = 28
+        instance_name = "/Worker7"
         keyname = 'number'
-        value = 1
-        workers = 4
+        value = 26
+        workers = 8
         mode = int('3') # mode = 1 , shard disabled, shuffle disabled. mode=2 ., shard enabled. mode3 shuffle enabled 
     payload = {
         "targetgroupsSize" : targetgroups,

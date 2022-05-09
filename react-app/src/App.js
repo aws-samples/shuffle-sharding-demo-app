@@ -355,50 +355,11 @@ function TargetGroup(props) {
           <tr id="selectedtg">
             <td id={data[0]} style={{ padding: 5 }}>
               <i style={{ color: namesToColors(data[0]) }}>
-                <Instance id="selectedInstance"></Instance>
-                <Xarrow
-                  start="user"
-                  end="edgelocation"
-                  lineColor={namesToColors(data[0])}
-                  headColor={namesToColors(data[0])}
-                  // animateDrawing="10"
-                  labels={{
-                    middle: (
-                      <div
-                        style={{
-                          fontSize: '15px',
-                          fontStyle: 'italic',
-                        }}
-                      >
-                        /?{window.token.keyname}={window.token.keyvalue}
-                      </div>
-                    ),
-                  }}
-                  path="straight"
-                  headShape={'arrow1'}
-                  dashness={{
-                    animation: true,
-                    strokeLen: 20,
-                    nonStrokeLen: 10,
-                  }}
-                  headSize="8"
-                  showHead="true"
-                />
-                <Xarrow
-                  start="cfd"
-                  end="selectedInstance"
-                  lineColor={namesToColors(data[0])}
-                  headColor={namesToColors(data[0])}
-                  path="straight"
-                  headShape={'arrow1'}
-                  dashness={{
-                    animation: true,
-                    strokeLen: 20,
-                    nonStrokeLen: 10,
-                  }}
-                  headSize="8"
-                  showHead="true"
-                />
+                {props.instance_name == data[0] ? (
+                  <Instance id="selectedInstance"></Instance>
+                ) : (
+                  <Instance></Instance>
+                )}
               </i>
 
               <br></br>
@@ -411,7 +372,11 @@ function TargetGroup(props) {
             {data.length > 1 ? (
               <td id={data[1]} style={{ padding: 5 }}>
                 <i style={{ color: namesToColors(data[1]) }}>
-                  <Instance></Instance>
+                  {props.instance_name == data[1] ? (
+                    <Instance id="selectedInstance"></Instance>
+                  ) : (
+                    <Instance></Instance>
+                  )}
                 </i>
                 <br></br>
                 {props.instance_name == data[1] ? (
@@ -423,6 +388,65 @@ function TargetGroup(props) {
             ) : (
               <b></b>
             )}
+            <Xarrow
+              start="user"
+              end="edgelocation"
+              lineColor={namesToColors(
+                data[
+                  data.length > 1 ? (props.instance_name == data[1] ? 1 : 0) : 0
+                ]
+              )}
+              headColor={namesToColors(
+                data[
+                  data.length > 1 ? (props.instance_name == data[1] ? 1 : 0) : 0
+                ]
+              )}
+              // animateDrawing="10"
+              labels={{
+                middle: (
+                  <div
+                    style={{
+                      fontSize: '15px',
+                      fontStyle: 'italic',
+                    }}
+                  >
+                    /?{window.token.keyname}={window.token.keyvalue}
+                  </div>
+                ),
+              }}
+              path="straight"
+              headShape={'arrow1'}
+              dashness={{
+                animation: true,
+                strokeLen: 20,
+                nonStrokeLen: 10,
+              }}
+              headSize="8"
+              showHead="true"
+            />
+            <Xarrow
+              start="cfd"
+              end="selectedInstance"
+              lineColor={namesToColors(
+                data[
+                  data.length > 1 ? (props.instance_name == data[1] ? 1 : 0) : 0
+                ]
+              )}
+              headColor={namesToColors(
+                data[
+                  data.length > 1 ? (props.instance_name == data[1] ? 1 : 0) : 0
+                ]
+              )}
+              path="straight"
+              headShape={'arrow1'}
+              dashness={{
+                animation: true,
+                strokeLen: 20,
+                nonStrokeLen: 10,
+              }}
+              headSize="8"
+              showHead="true"
+            />
           </tr>
         </table>
       </Box>
