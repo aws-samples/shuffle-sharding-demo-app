@@ -15,5 +15,5 @@ new ShuffleShardingDemoSummit2022(app, 'ShuffleShardingDemoSummit2022', {
       shuffle: false,
     },
   },
-  props: { env: { account: '<changeme>', region: '<changeme>' } }, //Ireland
+  props: { env: { account: '<changeme>', region: '<changeme>' } },
 });
