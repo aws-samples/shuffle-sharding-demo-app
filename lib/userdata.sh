@@ -6,8 +6,8 @@ pip3 install flask
 pip3 install boto3
 pip3 install ec2-metadata
 cd ~
-git clone https://github.com/dudutwizer/ShuffleShardingDemo-Summit2022
-cd ShuffleShardingDemo-Summit2022
+git clone https://github.com/aws-samples/shuffle-sharding-demo-app.git
+cd shuffle-sharding-demo-app
 curl --silent --location https://rpm.nodesource.com/setup_17.x | bash -
 yum -y install nodejs
 npm install typescript -g
