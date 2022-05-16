@@ -16,11 +16,11 @@ def serve():
             notlocal = True
         except Exception as e:
             print("ec2_metadata query issue")
-        if(notlocal):
-            targetgroups = ec2_metadata.tags['totalTG']
-            instance_name = ec2_metadata.tags['Name']
-            mode = int(ec2_metadata.tags['mode'])
-            value = request.args.get(keyname)
+    if(notlocal):
+        targetgroups = ec2_metadata.tags['totalTG']
+        instance_name = ec2_metadata.tags['Name']
+        mode = int(ec2_metadata.tags['mode'])
+        value = request.args.get(keyname)
     else:
         print("static response")
         targetgroups = 28
