@@ -35,6 +35,8 @@ import { InstanceTarget } from 'aws-cdk-lib/aws-elasticloadbalancingv2-targets';
 import { Effect } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import * as fs from 'fs';
+import { LaunchTemplate } from 'aws-cdk-lib/aws-ec2';
+import { version } from 'process';
 
 export interface ShuffleShardingDemoSummit2022Props {
   albPort: number;
@@ -97,6 +99,8 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     // Tags to the instances with the demo mode
     instances.forEach((instance) => {
       Tags.of(instance).add('mode', this.mode.toString());
+      Tags.of(instance).add('totalInstances', instances.length.toString());
+      Tags.of(instance).add('totalTG', numberOfGroups.toString());
     });
 
     // Adding all the widgets to the main cloudwatch dashboard
@@ -209,6 +213,16 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       cpuType: aws_ec2.AmazonLinuxCpuType.X86_64,
     });
 
+    // workaround to get meta data https://github.com/aws/aws-cdk/issues/5137
+    const launchTemplate = new LaunchTemplate(this, 'LaunchTemplate', {});
+    const CfnLaunchTemplate = launchTemplate.node
+      .defaultChild as aws_ec2.CfnLaunchTemplate;
+    CfnLaunchTemplate.launchTemplateData = {
+      metadataOptions: {
+        instanceMetadataTags: 'enabled',
+      },
+    };
+
     const instances = [];
     for (let index = 0; index < number; index++) {
       instances.push(
@@ -217,6 +231,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
           ami,
           size,
           userData,
+          launchTemplate,
           idOfAzs[(index + 1) % idOfAzs.length]
         )
       );
@@ -238,6 +253,7 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
     machineImage: aws_ec2.IMachineImage,
     size: string,
     userdata: string,
+    launchTemplate: aws_ec2.LaunchTemplate,
     azId: number
   ) {
     const instance = new aws_ec2.Instance(this, name, {
@@ -256,6 +272,11 @@ export class ShuffleShardingDemoSummit2022 extends Stack {
       availabilityZone: this.availabilityZones[azId],
       userDataCausesReplacement: true,
     });
+    const CfnInstance = instance.node.defaultChild as aws_ec2.CfnInstance;
+    CfnInstance.launchTemplate = {
+      launchTemplateId: launchTemplate.launchTemplateId,
+      version: launchTemplate.versionNumber,
+    };
     instance.connections.allowFrom(this.alb, aws_ec2.Port.tcp(80));
     instance.role.addManagedPolicy(
       aws_iam.ManagedPolicy.fromAwsManagedPolicyName(

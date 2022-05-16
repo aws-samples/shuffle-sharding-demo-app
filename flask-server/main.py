@@ -1,4 +1,3 @@
-import boto3
 from ec2_metadata import ec2_metadata
 from flask import Flask, render_template, request
 import json
@@ -6,50 +5,21 @@ import base64
 
 app = Flask("__main__")
 
-botoclient = False
-
-try:
-    instance_region = ec2_metadata.region
-    ec2client = boto3.client('ec2', region_name=instance_region)
-    elbclient = boto3.client('elbv2', region_name=instance_region)
-    botoclient = True
-except Exception as e:
-    print("no clients")
-
-def get_instance_tag(all_tags, tag_name):
-  for tag in all_tags:
-    if tag_name == tag['Key']:
-      return tag['Value']
-
-  return None
-
 @app.route('/')
 def serve():
     notlocal = False
-    global botoclient
     keyname = 'number'
     value = request.args.get(keyname)
-    if(value is not None and botoclient):
+    if(value is not None):
         try:
-            workers = len(ec2client.describe_instances(Filters=[{'Name':'tag:Name','Values':['*Worker*']},{'Name': 'instance-state-name', 'Values': ['running']}])['Reservations'])
+            workers = ec2_metadata.tags['totalInstances']
             notlocal = True
         except Exception as e:
-            print("boto query issue")
+            print("ec2_metadata query issue")
         if(notlocal):
-            instance_id = ec2_metadata.instance_id 
-            instance = ec2client.describe_tags(
-            Filters=[
-                {
-                    'Name': 'resource-id',
-                    'Values': [
-                        instance_id
-                    ]
-                }
-            ]
-            )
-            targetgroups = len(elbclient.describe_target_groups(LoadBalancerArn=elbclient.describe_load_balancers()['LoadBalancers'][0]['LoadBalancerArn'])['TargetGroups'])-1
-            instance_name = get_instance_tag(instance['Tags'], 'Name')
-            mode = int(get_instance_tag(instance['Tags'], 'mode'))
+            targetgroups = ec2_metadata.tags['totalTG']
+            instance_name = ec2_metadata.tags['Name']
+            mode = int(ec2_metadata.tags['mode'])
             value = request.args.get(keyname)
     else:
         print("static response")
